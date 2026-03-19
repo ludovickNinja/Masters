@@ -585,44 +585,54 @@
           </div>
 
           <div class="card spec-card">
-            <h3>Weight in Size 10</h3>
-            <p>Finished unit weight requirement for the size 10 sample.</p>
-            <div class="inline">
-              <input type="number" placeholder="0" />
-              <select>
-                <option>g</option>
-                <option>oz</option>
-              </select>
+            <h3>Weight</h3>
+            <p>Enter the ring weight in grams, then select the finger size and karat.</p>
+            <div class="stack">
+              <div class="subfield">
+                <label for="weight-grams">Weight <span class="unit-tag">(g)</span></label>
+                <input id="weight-grams" type="number" placeholder="0.00" />
+              </div>
+              <div class="inline">
+                <div class="subfield">
+                  <label for="finger-size">Finger Size</label>
+                  <select id="finger-size">
+                    <option>Select size</option>
+                    <option>3</option>
+                    <option>3.5</option>
+                    <option>4</option>
+                    <option>4.5</option>
+                    <option>5</option>
+                    <option>5.5</option>
+                    <option>6</option>
+                    <option>6.5</option>
+                    <option>7</option>
+                    <option>7.5</option>
+                    <option>8</option>
+                    <option>8.5</option>
+                    <option>9</option>
+                    <option>9.5</option>
+                    <option>10</option>
+                    <option>10.5</option>
+                    <option>11</option>
+                    <option>11.5</option>
+                    <option>12</option>
+                    <option>12.5</option>
+                    <option>13</option>
+                  </select>
+                </div>
+                <div class="subfield">
+                  <label for="karat">Karat</label>
+                  <select id="karat">
+                    <option>Select karat</option>
+                    <option>10K</option>
+                    <option>14K</option>
+                    <option>18K</option>
+                    <option>22K</option>
+                    <option>24K</option>
+                  </select>
+                </div>
+              </div>
             </div>
-          </div>
-
-          <div class="card spec-card">
-            <h3>Material Content</h3>
-            <p>Primary upper or trim material composition details.</p>
-            <input type="text" placeholder="Example: Full-grain leather / microfiber lining" />
-          </div>
-
-          <div class="card spec-card">
-            <h3>Color / Finish Code</h3>
-            <p>Colorway or finishing identifier tied to the vendor SKU.</p>
-            <input type="text" placeholder="Example: TAN-210 / BRSH" />
-          </div>
-
-          <div class="card spec-card">
-            <h3>Outsole Construction</h3>
-            <p>Bottom construction notes and build method.</p>
-            <select>
-              <option>Cemented</option>
-              <option>Strobel</option>
-              <option>Injected</option>
-              <option>Vulcanized</option>
-            </select>
-          </div>
-
-          <div class="card spec-card">
-            <h3>Special Testing</h3>
-            <p>Any required physical or chemical compliance tests.</p>
-            <input type="text" placeholder="Slip, flex, colorfastness, REACH, etc." />
           </div>
 
           <div class="card spec-card">
