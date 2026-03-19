@@ -3,970 +3,798 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Master Production Template Mockup</title>
+  <title>Master Production Template Library</title>
   <style>
     :root {
-      --bg: #f4f6fb;
-      --panel: #ffffff;
-      --border: #d7deea;
-      --border-strong: #b9c5d8;
-      --text: #20304a;
-      --muted: #66758f;
-      --primary: #2b67f6;
-      --primary-soft: #e9f0ff;
-      --success: #2f855a;
-      --shadow: 0 12px 32px rgba(31, 45, 76, 0.08);
+      --bg: #f3f5f9;
+      --surface: rgba(255, 255, 255, 0.82);
+      --surface-strong: #ffffff;
+      --surface-soft: #f8faff;
+      --border: rgba(148, 163, 184, 0.24);
+      --border-strong: rgba(148, 163, 184, 0.42);
+      --text: #182338;
+      --muted: #6c7890;
+      --primary: #1f6fff;
+      --primary-soft: rgba(31, 111, 255, 0.1);
+      --success: #2c8b5c;
+      --warning: #d68912;
+      --shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+      --shadow-soft: 0 16px 32px rgba(15, 23, 42, 0.06);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --radius-sm: 14px;
     }
 
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(180deg, #eef3fb 0%, var(--bg) 100%);
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(31, 111, 255, 0.12), transparent 28%),
+        radial-gradient(circle at top right, rgba(138, 92, 246, 0.12), transparent 24%),
+        linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
       color: var(--text);
     }
 
     .page {
-      max-width: 1240px;
-      margin: 32px auto;
-      padding: 0 20px 40px;
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 28px 22px 44px;
+    }
+
+    .glass,
+    .master-card,
+    .sidebar-card,
+    .hero,
+    .featured-card {
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
     }
 
     .hero {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
-      padding: 28px;
+      border-radius: var(--radius-xl);
+      padding: 30px;
       margin-bottom: 24px;
-    }
-
-    .hero-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 24px;
-      align-items: flex-start;
-      flex-wrap: wrap;
-    }
-
-    .hero h1 {
-      margin: 0 0 10px;
-      font-size: 30px;
-    }
-
-    .hero p {
-      margin: 0;
-      max-width: 720px;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
-    .actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    button, .button {
-      border: 0;
-      border-radius: 10px;
-      padding: 12px 18px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .primary { background: var(--primary); color: #fff; }
-    .secondary {
-      background: #fff;
-      color: var(--text);
-      border: 1px solid var(--border-strong);
-    }
-
-    .top-meta {
-      margin-top: 24px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-    }
-
-    .field, .card {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-    }
-
-    .field {
-      padding: 16px;
-    }
-
-    .field label,
-    .section-label {
-      display: block;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-      margin-bottom: 8px;
-      font-weight: 700;
-    }
-
-    input[type="text"],
-    input[type="number"],
-    input[type="search"],
-    select,
-    textarea {
-      width: 100%;
-      border: 1px solid var(--border-strong);
-      border-radius: 10px;
-      padding: 11px 12px;
-      font: inherit;
-      color: var(--text);
-      background: #fff;
-    }
-
-    textarea { min-height: 120px; resize: vertical; }
-
-    .tabs-shell {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
       overflow: hidden;
-    }
-
-    .tabs {
-      display: flex;
-      gap: 8px;
-      padding: 16px 16px 0;
-      flex-wrap: wrap;
-      border-bottom: 1px solid var(--border);
-      background: #fbfcff;
-    }
-
-    .tab {
-      padding: 14px 18px;
-      border-radius: 14px 14px 0 0;
-      background: transparent;
-      color: var(--muted);
-      border: 1px solid transparent;
-      margin-bottom: -1px;
-    }
-
-    .tab.active {
-      background: #fff;
-      color: var(--primary);
-      border-color: var(--border);
-      border-bottom-color: #fff;
-    }
-
-    .tab-panel {
-      display: none;
-      padding: 24px;
-    }
-
-    .tab-panel.active { display: block; }
-
-    .panel-intro {
-      margin-bottom: 24px;
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .panel-intro h2 {
-      margin: 0 0 6px;
-      font-size: 24px;
-    }
-
-    .panel-intro p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.45;
-    }
-
-    .spec-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-    }
-
-    .spec-card {
-      padding: 18px;
-    }
-
-    .spec-card h3 {
-      margin: 0 0 4px;
-      font-size: 15px;
-    }
-
-    .spec-card p {
-      margin: 0 0 14px;
-      color: var(--muted);
-      font-size: 13px;
-      min-height: 34px;
-    }
-
-    .spec-card .inline {
-      display: flex;
-      gap: 10px;
-    }
-
-    .spec-card .inline > * { flex: 1; }
-
-    .multi-select {
       position: relative;
     }
 
-    .multi-select-toggle {
-      width: 100%;
-      border: 1px solid var(--border-strong);
-      border-radius: 10px;
-      padding: 11px 44px 11px 12px;
-      font: inherit;
-      color: var(--text);
-      background: #fff;
-      text-align: left;
-      position: relative;
-      font-weight: 400;
-    }
-
-    .multi-select-toggle::after {
-      content: "▾";
+    .hero::after {
+      content: "";
       position: absolute;
-      right: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--muted);
-      font-size: 14px;
+      inset: auto -90px -110px auto;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(31, 111, 255, 0.2), transparent 70%);
       pointer-events: none;
     }
 
-    .multi-select.open .multi-select-toggle {
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-
-    .multi-select-menu {
-      display: none;
-      position: absolute;
-      top: calc(100% - 1px);
-      left: 0;
-      right: 0;
-      background: #fff;
-      border: 1px solid var(--border-strong);
-      border-top: 0;
-      border-bottom-left-radius: 10px;
-      border-bottom-right-radius: 10px;
-      max-height: 260px;
-      overflow-y: auto;
-      z-index: 20;
-      box-shadow: var(--shadow);
-      padding: 6px 0;
-    }
-
-    .multi-select.open .multi-select-menu {
-      display: block;
-    }
-
-    .multi-select-option {
+    .hero-top,
+    .content-grid,
+    .toolbar,
+    .featured-grid,
+    .card-footer,
+    .meta-row,
+    .section-head,
+    .title-row {
       display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 12px;
-      cursor: pointer;
-      color: var(--text);
-      font-size: 14px;
+      gap: 16px;
+      flex-wrap: wrap;
     }
 
-    .multi-select-option:hover {
-      background: #f7f9ff;
+    .hero-top,
+    .toolbar,
+    .featured-grid,
+    .section-head,
+    .title-row {
+      justify-content: space-between;
+      align-items: flex-start;
     }
 
-    .multi-select-option input {
-      width: 16px;
-      height: 16px;
-      margin: 0;
-      accent-color: var(--primary);
-    }
+    h1, h2, h3, h4, p { margin: 0; }
 
-    .stack {
-      display: grid;
-      gap: 12px;
-    }
-
-    .subfield {
-      display: grid;
-      gap: 6px;
-    }
-
-    .subfield label {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .unit-tag {
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 400;
-    }
-
-    .tooltip {
+    .eyebrow {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      border: 1px solid var(--border-strong);
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid var(--border);
       color: var(--primary);
       font-size: 12px;
-      line-height: 1;
-      cursor: help;
-      background: var(--primary-soft);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
     }
 
-    .suppliers-layout {
-      display: grid;
-      grid-template-columns: minmax(260px, 320px) 1fr;
-      gap: 20px;
+    .hero-copy {
+      max-width: 760px;
     }
 
-    .supplier-list,
-    .supplier-detail,
-    .instructions-grid > .card,
-    .info-banner {
-      padding: 20px;
+    .hero h1 {
+      font-size: clamp(2rem, 3vw, 3rem);
+      letter-spacing: -0.04em;
+      margin-bottom: 12px;
     }
 
-    .supplier-row {
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 14px;
-      margin-top: 12px;
-      background: #fbfcff;
-    }
-
-    .supplier-row.active {
-      border-color: var(--primary);
-      background: var(--primary-soft);
-    }
-
-    .supplier-row h3,
-    .supplier-row p,
-    .upload-row p,
-    .checklist li,
-    .instruction-box p {
-      margin: 0;
-    }
-
-    .supplier-row h3 { font-size: 16px; margin-bottom: 6px; }
-    .supplier-row p { color: var(--muted); font-size: 13px; }
-
-    .upload-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 14px;
-      margin-top: 18px;
-    }
-
-    .upload-box {
-      border: 1px dashed var(--border-strong);
-      border-radius: 14px;
-      padding: 18px;
-      background: #fbfcff;
-    }
-
-    .upload-box strong {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 14px;
-    }
-
-    .upload-box span,
-    .upload-hint,
+    .hero p,
+    .section-copy,
+    .metric-label,
+    .detail-copy,
+    .suggestion-list li,
+    .master-card p,
     .meta-note {
       color: var(--muted);
-      font-size: 13px;
-      line-height: 1.45;
+      line-height: 1.55;
     }
 
-    .upload-box input[type="file"] {
-      margin-top: 12px;
-      width: 100%;
-    }
-
-    .factory-meta {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 14px;
-      margin-top: 18px;
-    }
-
-    .pill-row {
+    .hero-actions,
+    .toolbar-actions,
+    .segmented,
+    .chip-row,
+    .status-row,
+    .card-actions,
+    .template-tags,
+    .suggestion-list {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
-      margin-top: 10px;
+    }
+
+    button,
+    .pill,
+    .chip,
+    .status-badge {
+      border: 0;
+      border-radius: 999px;
+      font: inherit;
+    }
+
+    button {
+      padding: 12px 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+
+    button:hover { transform: translateY(-1px); }
+
+    .primary {
+      background: linear-gradient(135deg, #3b82f6 0%, var(--primary) 100%);
+      color: #fff;
+      box-shadow: 0 14px 24px rgba(31, 111, 255, 0.22);
+    }
+
+    .secondary {
+      background: rgba(255, 255, 255, 0.82);
+      color: var(--text);
+      border: 1px solid var(--border-strong);
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .metric {
+      padding: 18px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .metric-value {
+      display: block;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      margin-bottom: 6px;
+    }
+
+    .content-grid {
+      align-items: start;
+      gap: 24px;
+    }
+
+    .main-column {
+      flex: 1 1 900px;
+      min-width: 0;
+    }
+
+    .sidebar {
+      width: min(100%, 320px);
+      display: grid;
+      gap: 18px;
+    }
+
+    .toolbar,
+    .featured-card,
+    .sidebar-card,
+    .master-card {
+      border-radius: var(--radius-lg);
+    }
+
+    .toolbar {
+      padding: 20px;
+      margin-bottom: 20px;
+      align-items: center;
+    }
+
+    .search-shell {
+      flex: 1 1 320px;
+      position: relative;
+    }
+
+    .search-shell input {
+      width: 100%;
+      padding: 14px 16px 14px 46px;
+      border-radius: 16px;
+      border: 1px solid var(--border-strong);
+      background: rgba(255, 255, 255, 0.84);
+      color: var(--text);
+      font: inherit;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    }
+
+    .search-shell::before {
+      content: "⌕";
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-52%);
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .segmented {
+      padding: 6px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--border);
+    }
+
+    .chip {
+      padding: 10px 14px;
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid transparent;
+      font-weight: 700;
+    }
+
+    .chip.active {
+      background: var(--text);
+      color: #fff;
+      box-shadow: 0 10px 18px rgba(24, 35, 56, 0.15);
+    }
+
+    .featured-card {
+      padding: 24px;
+      margin-bottom: 20px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(246, 249, 255, 0.88));
+    }
+
+    .featured-grid {
+      align-items: stretch;
+      gap: 22px;
+    }
+
+    .featured-visual {
+      flex: 0 0 220px;
+      min-height: 220px;
+      border-radius: 28px;
+      padding: 22px;
+      background: linear-gradient(160deg, #12203d 0%, #264d9b 56%, #6ea8ff 100%);
+      color: #fff;
+      display: grid;
+      align-content: space-between;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.24);
+    }
+
+    .template-mark {
+      width: 68px;
+      height: 68px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.18);
+      display: grid;
+      place-items: center;
+      font-size: 28px;
+    }
+
+    .featured-details {
+      flex: 1 1 520px;
+      display: grid;
+      gap: 18px;
     }
 
     .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 14px;
       background: var(--primary-soft);
       color: var(--primary);
-      border-radius: 999px;
-      padding: 8px 12px;
       font-size: 13px;
       font-weight: 700;
     }
 
-    .instructions-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 20px;
-    }
-
-    .instruction-box {
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 16px;
-      margin-top: 14px;
-      min-height: 120px;
-      background: #fbfcff;
-    }
-
-    .instruction-box h3 {
-      margin: 0 0 8px;
-      font-size: 15px;
-    }
-
-    .checklist {
-      padding-left: 20px;
-      color: var(--muted);
-      line-height: 1.6;
-      margin: 12px 0 0;
-    }
-
-    .info-banner {
-      background: linear-gradient(135deg, #243b6b 0%, #2b67f6 100%);
-      color: #fff;
-      margin-bottom: 20px;
-    }
-
-    .info-banner p,
-    .info-banner .meta-note { color: rgba(255,255,255,0.85); }
-
-    .footer-actions {
-      display: flex;
-      justify-content: flex-end;
+    .meta-row {
       gap: 12px;
-      margin-top: 24px;
-      flex-wrap: wrap;
     }
 
-    @media (max-width: 960px) {
-      .suppliers-layout,
-      .instructions-grid {
-        grid-template-columns: 1fr;
-      }
+    .meta-card {
+      flex: 1 1 160px;
+      padding: 16px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.84);
+      border: 1px solid var(--border);
     }
 
-    @media (max-width: 640px) {
-      .page { padding: 0 12px 28px; margin-top: 16px; }
-      .hero, .tab-panel { padding: 18px; }
-      .tabs { padding: 12px 12px 0; }
-      .tab { width: 100%; border-radius: 12px; }
-      .tab.active { border-bottom-color: var(--border); }
+    .meta-label {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .meta-value {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .template-tags .pill { background: rgba(24, 35, 56, 0.08); color: var(--text); }
+
+    .master-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 18px;
+    }
+
+    .master-card {
+      padding: 20px;
+      display: grid;
+      gap: 16px;
+      background: rgba(255,255,255,0.86);
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    }
+
+    .master-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 26px 52px rgba(15, 23, 42, 0.12);
+      border-color: rgba(31, 111, 255, 0.28);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .card-id {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+
+    .status-badge {
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+
+    .status-in-use { background: rgba(44, 139, 92, 0.14); color: var(--success); }
+    .status-review { background: rgba(214, 137, 18, 0.14); color: var(--warning); }
+    .status-draft { background: rgba(31, 111, 255, 0.1); color: var(--primary); }
+
+    .card-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .stat-box {
+      padding: 12px;
+      border-radius: 16px;
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+    }
+
+    .stat-box strong {
+      display: block;
+      font-size: 16px;
+      margin-bottom: 3px;
+    }
+
+    .stat-box span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .card-footer {
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-actions button {
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-size: 14px;
+    }
+
+    .text-button {
+      background: rgba(24, 35, 56, 0.06);
+      color: var(--text);
+    }
+
+    .section-head {
+      margin: 6px 0 18px;
+    }
+
+    .section-head h2 {
+      font-size: 26px;
+      letter-spacing: -0.04em;
+      margin-bottom: 6px;
+    }
+
+    .sidebar-card {
+      padding: 20px;
+      background: rgba(255,255,255,0.88);
+    }
+
+    .sidebar-card h3 {
+      margin-bottom: 8px;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+    }
+
+    .sidebar-card ul {
+      margin: 14px 0 0;
+      padding-left: 18px;
+    }
+
+    .sidebar-card li + li { margin-top: 10px; }
+
+    .quick-actions {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .quick-button {
+      width: 100%;
+      justify-content: space-between;
+      display: flex;
+      align-items: center;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(248, 250, 255, 0.95);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .quick-button span:last-child {
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .suggestion-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .suggestion-list li {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+    }
+
+    @media (max-width: 1040px) {
+      .content-grid { flex-direction: column; }
+      .sidebar { width: 100%; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    }
+
+    @media (max-width: 720px) {
+      .page { padding: 18px 14px 32px; }
+      .hero,
+      .toolbar,
+      .featured-card,
+      .master-card,
+      .sidebar-card { padding: 18px; }
+      .featured-visual { flex-basis: 100%; min-height: 180px; }
+      .card-stats { grid-template-columns: 1fr; }
+      .segmented { width: 100%; overflow-x: auto; }
     }
   </style>
 </head>
 <body>
   <main class="page">
-    <section class="hero">
+    <section class="hero glass">
       <div class="hero-top">
-        <div>
-          <h1>Master Production Template</h1>
+        <div class="hero-copy">
+          <span class="eyebrow">Master library · Apple-inspired detail view</span>
+          <h1>Master Production Templates</h1>
           <p>
-            Mockup for a cleaner production template layout with dedicated tabs for core specifications,
-            supplier-level documents, and production instructions.
+            Reframed as a polished card-based library so every saved master feels like a premium record: easy to scan,
+            easy to search, and detailed enough to understand status, supplier readiness, and last updates without opening each one.
           </p>
         </div>
-        <div class="actions">
-          <button class="secondary" type="button">Export to Excel</button>
-          <button class="primary" type="button">Save Template</button>
+        <div class="hero-actions">
+          <button class="secondary" type="button">Import Existing Masters</button>
+          <button class="primary" type="button">Add New Master</button>
         </div>
       </div>
 
-      <div class="top-meta">
-        <div class="field">
-          <label for="template-id">Template ID</label>
-          <input id="template-id" type="text" value="CUSTOM" />
+      <div class="metric-grid">
+        <div class="metric">
+          <span class="metric-value">128</span>
+          <span class="metric-label">Saved masters across engagement, wedding, and core programs.</span>
         </div>
-        <div class="field">
-          <label for="product-family">Product Family</label>
-          <select id="product-family">
-            <option>Head Style</option>
-            <option>Low Top</option>
-            <option>Boot</option>
-          </select>
+        <div class="metric">
+          <span class="metric-value">18</span>
+          <span class="metric-label">Templates updated in the last 30 days.</span>
         </div>
-        <div class="field">
-          <label for="job-message">Display message on Job Bag picture</label>
-          <input id="job-message" type="text" placeholder="Some message here..." />
+        <div class="metric">
+          <span class="metric-value">9</span>
+          <span class="metric-label">Masters currently marked in use for active production.</span>
         </div>
-        <div class="field">
-          <label for="season">Season / Program</label>
-          <input id="season" type="text" placeholder="Fall 2026 inline" />
+        <div class="metric">
+          <span class="metric-value">4</span>
+          <span class="metric-label">Supplier reviews waiting on technical confirmation.</span>
         </div>
       </div>
     </section>
 
-    <section class="tabs-shell">
-      <div class="tabs" role="tablist" aria-label="Master Production Template Tabs">
-        <button class="tab active" role="tab" aria-selected="true" aria-controls="specifications" id="tab-specifications" data-tab="specifications">Specifications</button>
-        <button class="tab" role="tab" aria-selected="false" aria-controls="suppliers" id="tab-suppliers" data-tab="suppliers">Suppliers</button>
-        <button class="tab" role="tab" aria-selected="false" aria-controls="instructions" id="tab-instructions" data-tab="instructions">Instructions</button>
-      </div>
+    <div class="content-grid">
+      <section class="main-column">
+        <div class="toolbar glass">
+          <div class="search-shell">
+            <input type="search" placeholder="Search by template ID, collection, supplier, or product family" aria-label="Search templates" />
+          </div>
+          <div class="toolbar-actions">
+            <div class="segmented" aria-label="Filter templates">
+              <button class="chip active" type="button">All Masters</button>
+              <button class="chip" type="button">In Use</button>
+              <button class="chip" type="button">Review</button>
+              <button class="chip" type="button">Drafts</button>
+            </div>
+            <button class="secondary" type="button">Sort: Recently Updated</button>
+          </div>
+        </div>
 
-      <section class="tab-panel active" id="specifications" role="tabpanel" aria-labelledby="tab-specifications">
-        <div class="panel-intro">
+        <section class="featured-card glass">
+          <div class="featured-grid">
+            <div class="featured-visual">
+              <div class="template-mark">✦</div>
+              <div>
+                <span class="pill">Featured master</span>
+                <h2 style="margin-top:12px; font-size: 30px; letter-spacing: -0.05em;">CUSTOM-001</h2>
+                <p style="margin-top:8px; color: rgba(255,255,255,0.82);">Signature solitaire engagement template with halo-ready options and approved BNZ supplier spec sheet.</p>
+              </div>
+            </div>
+
+            <div class="featured-details">
+              <div class="title-row">
+                <div>
+                  <span class="eyebrow" style="margin-bottom:10px;">Detailed card preview</span>
+                  <h2 style="font-size: 28px; letter-spacing: -0.04em;">A single card now carries the right production context.</h2>
+                </div>
+                <div class="status-row">
+                  <span class="status-badge status-in-use">In Use</span>
+                  <span class="pill">Last updated Mar 18, 2026</span>
+                </div>
+              </div>
+
+              <p class="detail-copy">
+                Instead of a bare row with only Template ID and actions, this detail card highlights collection placement, supplier count,
+                revision ownership, readiness, and quick actions. It keeps the premium Apple-like spacing and softness while making the module much more operational.
+              </p>
+
+              <div class="meta-row">
+                <div class="meta-card">
+                  <span class="meta-label">Product Family</span>
+                  <span class="meta-value">Engagement · Head Style</span>
+                </div>
+                <div class="meta-card">
+                  <span class="meta-label">Primary Supplier</span>
+                  <span class="meta-value">BNZ Factory</span>
+                </div>
+                <div class="meta-card">
+                  <span class="meta-label">Revision</span>
+                  <span class="meta-value">v12 · Approved</span>
+                </div>
+                <div class="meta-card">
+                  <span class="meta-label">Linked Assets</span>
+                  <span class="meta-value">Spec sheet, BOM, images</span>
+                </div>
+              </div>
+
+              <div class="template-tags">
+                <span class="pill">Halo compatible</span>
+                <span class="pill">Wedding band match</span>
+                <span class="pill">14K / 18K</span>
+                <span class="pill">Supplier-ready</span>
+              </div>
+
+              <div class="card-actions">
+                <button class="primary" type="button">Open Master</button>
+                <button class="secondary" type="button">Duplicate</button>
+                <button class="text-button" type="button">View history</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="section-head">
           <div>
-            <h2>Core Specifications</h2>
-            <p>Capture the product construction details first, including measurements, materials, finishing, and key size/weight callouts.</p>
+            <h2>Saved master cards</h2>
+            <p class="section-copy">Each template is now easier to compare at a glance, with status, suppliers, and production readiness built into the card.</p>
           </div>
-          <span class="pill">Tab 1 · Product Specs</span>
+          <span class="pill">12 shown of 128 total</span>
         </div>
 
-        <div class="spec-grid">
-          <div class="card spec-card">
-            <h3>Width</h3>
-            <p>Capture both visible width references in millimeters.</p>
-            <div class="stack">
-              <div class="subfield">
-                <label for="widest-visible-width">Widest Visible Width <span class="unit-tag">(mm)</span></label>
-                <input id="widest-visible-width" type="number" placeholder="0.00" />
+        <section class="master-grid" aria-label="Saved master production templates">
+          <article class="master-card glass">
+            <div class="card-header">
+              <div>
+                <div class="card-id">Template ID · CUSTOM-001</div>
+                <h3>Signature Solitaire</h3>
               </div>
-              <div class="subfield">
-                <label for="bottom-width">Bottom Width <span class="unit-tag">(mm)</span></label>
-                <input id="bottom-width" type="number" placeholder="0.00" />
+              <span class="status-badge status-in-use">In Use</span>
+            </div>
+            <p>Core engagement template with hidden halo option, approved weights, and complete supplier documents.</p>
+            <div class="card-stats">
+              <div class="stat-box"><strong>3</strong><span>Suppliers linked</span></div>
+              <div class="stat-box"><strong>v12</strong><span>Current revision</span></div>
+              <div class="stat-box"><strong>Mar 18</strong><span>Last updated</span></div>
+            </div>
+            <div class="card-footer">
+              <div class="template-tags">
+                <span class="pill">Engagement</span>
+                <span class="pill">BNZ</span>
+              </div>
+              <div class="card-actions">
+                <button class="text-button" type="button">Edit</button>
+                <button class="secondary" type="button">Open</button>
               </div>
             </div>
-          </div>
+          </article>
 
-          <div class="card spec-card">
-            <h3>Thickness</h3>
-            <p>Capture both top and bottom thicknesses in millimeters.</p>
-            <div class="stack">
-              <div class="subfield">
-                <label for="top-thickness">Top Thickness <span class="unit-tag">(mm)</span> <span class="tooltip" tabindex="0" title="For engagement rings, top thickness is measured from the finger to the center stone table using the stock center stone size.">?</span></label>
-                <input id="top-thickness" type="number" placeholder="0.00" />
+          <article class="master-card glass">
+            <div class="card-header">
+              <div>
+                <div class="card-id">Template ID · CUSTOM-014</div>
+                <h3>Oval Halo Petite</h3>
               </div>
-              <div class="subfield">
-                <label for="bottom-thickness">Bottom Thickness <span class="unit-tag">(mm)</span></label>
-                <input id="bottom-thickness" type="number" placeholder="0.00" />
+              <span class="status-badge status-review">Review</span>
+            </div>
+            <p>Awaiting thickness confirmation from PSX and final upload of the revised factory spec sheet.</p>
+            <div class="card-stats">
+              <div class="stat-box"><strong>2</strong><span>Suppliers linked</span></div>
+              <div class="stat-box"><strong>v07</strong><span>Current revision</span></div>
+              <div class="stat-box"><strong>Mar 16</strong><span>Last updated</span></div>
+            </div>
+            <div class="card-footer">
+              <div class="template-tags">
+                <span class="pill">Halo</span>
+                <span class="pill">PSX</span>
+              </div>
+              <div class="card-actions">
+                <button class="text-button" type="button">Review</button>
+                <button class="secondary" type="button">Open</button>
               </div>
             </div>
-          </div>
+          </article>
 
-          <div class="card spec-card">
-            <h3>Finishing</h3>
-            <p>Surface treatment, polish, wash, or coating notes.</p>
-            <select>
-              <option>Matte</option>
-              <option>Gloss</option>
-              <option>Brushed</option>
-              <option>Burnished</option>
-            </select>
-          </div>
-
-          <div class="card spec-card">
-            <h3>Weight</h3>
-            <p>Enter the ring weight in grams, specify whether it is estimated or confirmed, then select the finger size and karat.</p>
-            <div class="stack">
-              <div class="inline">
-                <div class="subfield">
-                  <label for="weight-grams">Weight <span class="unit-tag">(g)</span></label>
-                  <input id="weight-grams" type="number" placeholder="0.00" />
-                </div>
-                <div class="subfield">
-                  <label for="weight-status">Weight Type</label>
-                  <select id="weight-status">
-                    <option>Select type</option>
-                    <option>Estimated Weight</option>
-                    <option>Confirmed Weight</option>
-                  </select>
-                </div>
+          <article class="master-card glass">
+            <div class="card-header">
+              <div>
+                <div class="card-id">Template ID · CUSTOM-022</div>
+                <h3>Classic Comfort Band</h3>
               </div>
-              <div class="inline">
-                <div class="subfield">
-                  <label for="finger-size">Finger Size</label>
-                  <select id="finger-size">
-                    <option>Select size</option>
-                    <option>3</option>
-                    <option>3.5</option>
-                    <option>4</option>
-                    <option>4.5</option>
-                    <option>5</option>
-                    <option>5.5</option>
-                    <option>6</option>
-                    <option>6.5</option>
-                    <option>7</option>
-                    <option>7.5</option>
-                    <option>8</option>
-                    <option>8.5</option>
-                    <option>9</option>
-                    <option>9.5</option>
-                    <option>10</option>
-                    <option>10.5</option>
-                    <option>11</option>
-                    <option>11.5</option>
-                    <option>12</option>
-                    <option>12.5</option>
-                    <option>13</option>
-                  </select>
-                </div>
-                <div class="subfield">
-                  <label for="karat">Karat</label>
-                  <select id="karat">
-                    <option>Select karat</option>
-                    <option>10K</option>
-                    <option>14K</option>
-                    <option>18K</option>
-                    <option>22K</option>
-                    <option>24K</option>
-                  </select>
-                </div>
+              <span class="status-badge status-draft">Draft</span>
+            </div>
+            <p>Wedding band master in draft with sizing complete and finishing notes ready for costing alignment.</p>
+            <div class="card-stats">
+              <div class="stat-box"><strong>1</strong><span>Supplier linked</span></div>
+              <div class="stat-box"><strong>v03</strong><span>Current revision</span></div>
+              <div class="stat-box"><strong>Mar 12</strong><span>Last updated</span></div>
+            </div>
+            <div class="card-footer">
+              <div class="template-tags">
+                <span class="pill">Wedding</span>
+                <span class="pill">Plain band</span>
+              </div>
+              <div class="card-actions">
+                <button class="text-button" type="button">Continue</button>
+                <button class="secondary" type="button">Open</button>
               </div>
             </div>
-          </div>
+          </article>
 
-          <div class="card spec-card">
-            <h3>Head Style</h3>
-            <p>Select one or more head design features to include in the specification.</p>
-            <div class="multi-select" data-placeholder="Select head styles">
-              <button class="multi-select-toggle" type="button" aria-expanded="false">Select head styles</button>
-              <div class="multi-select-menu">
-                <label class="multi-select-option"><input type="checkbox" value="None" /> <span>None</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Bezel" /> <span>Bezel</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Cluster" /> <span>Cluster</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Cushion Halo" /> <span>Cushion Halo</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Diamond Crown" /> <span>Diamond Crown</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Diamond Gallery" /> <span>Diamond Gallery</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Double Prong" /> <span>Double Prong</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Four Prong" /> <span>Four Prong</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Halo" /> <span>Halo</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Hidden Halo" /> <span>Hidden Halo</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Kite Set" /> <span>Kite Set</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Milgrain" /> <span>Milgrain</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="N/A" /> <span>N/A</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Six Prong" /> <span>Six Prong</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Three Stone" /> <span>Three Stone</span></label>
+          <article class="master-card glass">
+            <div class="card-header">
+              <div>
+                <div class="card-id">Template ID · CUSTOM-037</div>
+                <h3>Three Stone Cathedral</h3>
+              </div>
+              <span class="status-badge status-in-use">In Use</span>
+            </div>
+            <p>Production-approved cathedral ring with matched wedding band guidance and uploaded QA imagery.</p>
+            <div class="card-stats">
+              <div class="stat-box"><strong>4</strong><span>Suppliers linked</span></div>
+              <div class="stat-box"><strong>v09</strong><span>Current revision</span></div>
+              <div class="stat-box"><strong>Mar 10</strong><span>Last updated</span></div>
+            </div>
+            <div class="card-footer">
+              <div class="template-tags">
+                <span class="pill">Three stone</span>
+                <span class="pill">Kutez</span>
+              </div>
+              <div class="card-actions">
+                <button class="text-button" type="button">Edit</button>
+                <button class="secondary" type="button">Open</button>
               </div>
             </div>
-          </div>
-
-          <div class="card spec-card">
-            <h3>Shank Style</h3>
-            <p>Capture the shank design details used for the ring construction.</p>
-            <div class="multi-select" data-placeholder="Select shank styles">
-              <button class="multi-select-toggle" type="button" aria-expanded="false">Select shank styles</button>
-              <div class="multi-select-menu">
-                <label class="multi-select-option"><input type="checkbox" value="None" /> <span>None</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Beaded" /> <span>Beaded</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Bezel" /> <span>Bezel</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Channel" /> <span>Channel</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Chevron" /> <span>Chevron</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Diamond" /> <span>Diamond</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Engraved" /> <span>Engraved</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Fitted" /> <span>Fitted</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Floral" /> <span>Floral</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Knife Edge" /> <span>Knife Edge</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Milgrain" /> <span>Milgrain</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Pavé" /> <span>Pavé</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Plain" /> <span>Plain</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Prong" /> <span>Prong</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Scallop" /> <span>Scallop</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Split" /> <span>Split</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Thin" /> <span>Thin</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Twist" /> <span>Twist</span></label>
-              </div>
-            </div>
-          </div>
-
-          <div class="card spec-card">
-            <h3>Prong Type</h3>
-            <p>Document the prong treatment options required for the setting.</p>
-            <div class="multi-select" data-placeholder="Select prong types">
-              <button class="multi-select-toggle" type="button" aria-expanded="false">Select prong types</button>
-              <div class="multi-select-menu">
-                <label class="multi-select-option"><input type="checkbox" value="None" /> <span>None</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Bezel" /> <span>Bezel</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Diamond Tip" /> <span>Diamond Tip</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Eagle Claw" /> <span>Eagle Claw</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Milgrain" /> <span>Milgrain</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Prong" /> <span>Prong</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Round" /> <span>Round</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="V-Tip" /> <span>V-Tip</span></label>
-              </div>
-            </div>
-          </div>
-
-          <div class="card spec-card">
-            <h3>Wedding Band Style</h3>
-            <p>Add matching wedding band construction details when applicable.</p>
-            <div class="multi-select" data-placeholder="Select wedding band styles">
-              <button class="multi-select-toggle" type="button" aria-expanded="false">Select wedding band styles</button>
-              <div class="multi-select-menu">
-                <label class="multi-select-option"><input type="checkbox" value="None" /> <span>None</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Bezel" /> <span>Bezel</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Channel" /> <span>Channel</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Chevron" /> <span>Chevron</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Engraved" /> <span>Engraved</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Fitted" /> <span>Fitted</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Floral" /> <span>Floral</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Knife Edge" /> <span>Knife Edge</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Milgrain" /> <span>Milgrain</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Pavé" /> <span>Pavé</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Plain" /> <span>Plain</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Prong" /> <span>Prong</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Scallop" /> <span>Scallop</span></label>
-                <label class="multi-select-option"><input type="checkbox" value="Twist" /> <span>Twist</span></label>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="footer-actions">
-          <button class="secondary" type="button">Cancel</button>
-          <button class="primary" type="button">Save Specifications</button>
-        </div>
+          </article>
+        </section>
       </section>
 
-      <section class="tab-panel" id="suppliers" role="tabpanel" aria-labelledby="tab-suppliers">
-        <div class="panel-intro">
-          <div>
-            <h2>Suppliers & Spec Sheets</h2>
-            <p>Track each factory and vendor SKU, plus upload factory-specific spec sheets or supporting files in one place.</p>
+      <aside class="sidebar">
+        <section class="sidebar-card glass">
+          <h3>Why this works better</h3>
+          <p class="meta-note">The module feels less like an admin table and more like a curated library. Important production signals stay visible without losing elegance.</p>
+          <ul>
+            <li>Template status is readable immediately.</li>
+            <li>Suppliers, revisions, and linked assets are visible before opening.</li>
+            <li>Apple-like spacing, soft borders, and glassy surfaces keep it premium.</li>
+          </ul>
+        </section>
+
+        <section class="sidebar-card glass">
+          <h3>Suggested next enhancements</h3>
+          <ul class="suggestion-list">
+            <li><strong>Add thumbnail previews.</strong><br />A ring or CAD thumbnail in each card would make the library even faster to scan.</li>
+            <li><strong>Use expandable detail drawers.</strong><br />Open supplier notes, instruction summaries, and revision history without leaving the grid.</li>
+            <li><strong>Add collection filters.</strong><br />For example: Engagement, Wedding, Fashion, Custom, and Archived.</li>
+          </ul>
+        </section>
+
+        <section class="sidebar-card glass">
+          <h3>Quick actions</h3>
+          <p class="meta-note">These fit naturally with the card-library layout and keep the module action-oriented.</p>
+          <div class="quick-actions">
+            <button class="quick-button" type="button"><span>Create from blank</span><span>New</span></button>
+            <button class="quick-button" type="button"><span>Duplicate best seller</span><span>Fast</span></button>
+            <button class="quick-button" type="button"><span>Review inactive masters</span><span>4 pending</span></button>
           </div>
-          <span class="pill">Tab 2 · Supplier Setup</span>
-        </div>
-
-        <div class="suppliers-layout">
-          <aside class="card supplier-list">
-            <label class="section-label" for="supplier-search">Factories / Vendors</label>
-            <input id="supplier-search" type="search" placeholder="Search supplier or vendor SKU" />
-
-            <div class="supplier-row active">
-              <h3>BNZ Factory</h3>
-              <p>Vendor SKU: BNZ-45821 · Inline Program</p>
-            </div>
-            <div class="supplier-row">
-              <h3>PSX Factory</h3>
-              <p>Vendor SKU: PSX-99204 · Costing Stage</p>
-            </div>
-            <div class="supplier-row">
-              <h3>5@ Work</h3>
-              <p>Vendor SKU: 5WK-20118 · Wear Test</p>
-            </div>
-            <div class="supplier-row">
-              <h3>Kutez</h3>
-              <p>Vendor SKU: KTZ-78100 · Pre-production</p>
-            </div>
-          </aside>
-
-          <section class="card supplier-detail">
-            <label class="section-label">Selected Supplier</label>
-            <h3 style="margin:0; font-size: 24px;">BNZ Factory</h3>
-            <p class="meta-note" style="margin-top:6px;">Use this area to store the supplier-specific master data and a spec sheet upload for the selected factory + vendor SKU combination.</p>
-
-            <div class="factory-meta">
-              <div>
-                <label class="section-label" for="vendor-sku">Vendor SKU</label>
-                <input id="vendor-sku" type="text" value="BNZ-45821" />
-              </div>
-              <div>
-                <label class="section-label" for="factory-contact">Factory Contact</label>
-                <input id="factory-contact" type="text" placeholder="Production manager" />
-              </div>
-              <div>
-                <label class="section-label" for="factory-region">Region</label>
-                <select id="factory-region">
-                  <option>Vietnam</option>
-                  <option>China</option>
-                  <option>India</option>
-                  <option>Portugal</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="upload-row">
-              <div class="upload-box">
-                <strong>Factory Spec Sheet</strong>
-                <span>Upload the primary technical spec sheet provided by the factory for this vendor SKU.</span>
-                <input type="file" />
-              </div>
-              <div class="upload-box">
-                <strong>Supporting Documents</strong>
-                <span>Add BOMs, tolerance charts, testing reports, or material callout PDFs.</span>
-                <input type="file" multiple />
-              </div>
-            </div>
-
-            <div class="pill-row">
-              <span class="pill">Last upload: Mar 18, 2026</span>
-              <span class="pill">2 attachments</span>
-              <span class="pill">Status: Ready for review</span>
-            </div>
-
-            <div style="margin-top: 20px;">
-              <label class="section-label" for="supplier-notes">Supplier Notes</label>
-              <textarea id="supplier-notes" placeholder="Capture supplier-specific comments, deviations, or approvals here."></textarea>
-            </div>
-
-            <div class="footer-actions">
-              <button class="secondary" type="button">Add Supplier</button>
-              <button class="primary" type="button">Save Supplier Record</button>
-            </div>
-          </section>
-        </div>
-      </section>
-
-      <section class="tab-panel" id="instructions" role="tabpanel" aria-labelledby="tab-instructions">
-        <div class="panel-intro">
-          <div>
-            <h2>Instructions</h2>
-            <p>This tab modernizes the current long-text instruction areas into grouped production callouts with space for each factory or workflow bucket.</p>
-          </div>
-          <span class="pill">Tab 3 · Production Notes</span>
-        </div>
-
-        <div class="info-banner card">
-          <h3 style="margin:0 0 8px; font-size: 22px;">Instruction Tab Mockup</h3>
-          <p style="margin:0; line-height:1.55;">This section mirrors your example but presents each instruction area in a clearer card layout, while keeping enough room for long production notes and special info.</p>
-        </div>
-
-        <div class="instructions-grid">
-          <div class="card">
-            <label class="section-label" for="special-message">Display message on Job Bag picture</label>
-            <input id="special-message" type="text" placeholder="Some message here..." />
-
-            <div class="instruction-box">
-              <h3>BNZ</h3>
-              <p>Factory-specific notes, packaging instructions, or special build comments for BNZ.</p>
-            </div>
-            <div class="instruction-box">
-              <h3>PSX</h3>
-              <p>Instruction block for PSX to document assembly, material substitutions, or quality expectations.</p>
-            </div>
-            <div class="instruction-box">
-              <h3>5 @ Work</h3>
-              <p>Use this for wear-test or trial production notes that need to stay visible during development.</p>
-            </div>
-            <div class="instruction-box">
-              <h3>Kutez</h3>
-              <p>Vendor or agent notes tied to Kutez can be stored here.</p>
-            </div>
-            <div class="instruction-box">
-              <h3>Special Info</h3>
-              <p>Reserve for compliance, labeling, packaging, or exception handling information that applies across factories.</p>
-            </div>
-          </div>
-
-          <aside>
-            <div class="card" style="padding:20px; margin-bottom:20px;">
-              <label class="section-label">Attachments</label>
-              <div class="upload-box" style="margin-top: 0;">
-                <strong>Reference Images / Head Style Files</strong>
-                <span>Upload visuals or documents that should appear with the instruction package.</span>
-                <input type="file" multiple />
-              </div>
-            </div>
-
-            <div class="card" style="padding:20px;">
-              <label class="section-label">Suggested Content</label>
-              <ul class="checklist">
-                <li>Include stitch callouts and construction exceptions.</li>
-                <li>Flag any supplier-specific deviations from the core specs.</li>
-                <li>Document packaging requirements and carton labeling.</li>
-                <li>Reference uploaded images, tech packs, or spec sheets.</li>
-              </ul>
-            </div>
-          </aside>
-        </div>
-
-        <div class="footer-actions">
-          <button class="secondary" type="button">Cancel</button>
-          <button class="primary" type="button">Save Instructions</button>
-        </div>
-      </section>
-    </section>
+        </section>
+      </aside>
+    </div>
   </main>
-
-  <script>
-    const tabs = document.querySelectorAll('[data-tab]');
-    const panels = document.querySelectorAll('.tab-panel');
-    const multiSelects = document.querySelectorAll('.multi-select');
-
-    tabs.forEach((tab) => {
-      tab.addEventListener('click', () => {
-        const target = tab.dataset.tab;
-
-        tabs.forEach((item) => {
-          item.classList.toggle('active', item === tab);
-          item.setAttribute('aria-selected', item === tab ? 'true' : 'false');
-        });
-
-        panels.forEach((panel) => {
-          panel.classList.toggle('active', panel.id === target);
-        });
-      });
-    });
-
-    const updateMultiSelectLabel = (multiSelect) => {
-      const toggle = multiSelect.querySelector('.multi-select-toggle');
-      const selected = [...multiSelect.querySelectorAll('input:checked')].map((input) => input.value);
-      const placeholder = multiSelect.dataset.placeholder || 'Select options';
-
-      toggle.textContent = selected.length ? selected.join(', ') : placeholder;
-    };
-
-    multiSelects.forEach((multiSelect) => {
-      const toggle = multiSelect.querySelector('.multi-select-toggle');
-      const checkboxes = multiSelect.querySelectorAll('input[type="checkbox"]');
-
-      updateMultiSelectLabel(multiSelect);
-
-      toggle.addEventListener('click', (event) => {
-        event.stopPropagation();
-        const isOpen = multiSelect.classList.toggle('open');
-        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-
-        multiSelects.forEach((item) => {
-          if (item !== multiSelect) {
-            item.classList.remove('open');
-            item.querySelector('.multi-select-toggle').setAttribute('aria-expanded', 'false');
-          }
-        });
-      });
-
-      checkboxes.forEach((checkbox) => {
-        checkbox.addEventListener('change', () => updateMultiSelectLabel(multiSelect));
-      });
-    });
-
-    document.addEventListener('click', (event) => {
-      multiSelects.forEach((multiSelect) => {
-        if (!multiSelect.contains(event.target)) {
-          multiSelect.classList.remove('open');
-          multiSelect.querySelector('.multi-select-toggle').setAttribute('aria-expanded', 'false');
-        }
-      });
-    });
-  </script>
 </body>
 </html>
