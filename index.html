@@ -586,11 +586,21 @@
 
           <div class="card spec-card">
             <h3>Weight</h3>
-            <p>Enter the ring weight in grams, then select the finger size and karat.</p>
+            <p>Enter the ring weight in grams, specify whether it is estimated or confirmed, then select the finger size and karat.</p>
             <div class="stack">
-              <div class="subfield">
-                <label for="weight-grams">Weight <span class="unit-tag">(g)</span></label>
-                <input id="weight-grams" type="number" placeholder="0.00" />
+              <div class="inline">
+                <div class="subfield">
+                  <label for="weight-grams">Weight <span class="unit-tag">(g)</span></label>
+                  <input id="weight-grams" type="number" placeholder="0.00" />
+                </div>
+                <div class="subfield">
+                  <label for="weight-status">Weight Type</label>
+                  <select id="weight-status">
+                    <option>Select type</option>
+                    <option>Estimated Weight</option>
+                    <option>Confirmed Weight</option>
+                  </select>
+                </div>
               </div>
               <div class="inline">
                 <div class="subfield">
