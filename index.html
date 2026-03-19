@@ -216,6 +216,46 @@
 
     .spec-card .inline > * { flex: 1; }
 
+    .stack {
+      display: grid;
+      gap: 12px;
+    }
+
+    .subfield {
+      display: grid;
+      gap: 6px;
+    }
+
+    .subfield label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .unit-tag {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 400;
+    }
+
+    .tooltip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 1px solid var(--border-strong);
+      color: var(--primary);
+      font-size: 12px;
+      line-height: 1;
+      cursor: help;
+      background: var(--primary-soft);
+    }
+
     .suppliers-layout {
       display: grid;
       grid-template-columns: minmax(260px, 320px) 1fr;
@@ -429,26 +469,31 @@
         <div class="spec-grid">
           <div class="card spec-card">
             <h3>Width</h3>
-            <p>Overall upper width and any tolerance guidance.</p>
-            <div class="inline">
-              <input type="number" placeholder="0.00" />
-              <select>
-                <option>mm</option>
-                <option>cm</option>
-                <option>in</option>
-              </select>
+            <p>Capture both visible width references in millimeters.</p>
+            <div class="stack">
+              <div class="subfield">
+                <label for="widest-visible-width">Widest Visible Width <span class="unit-tag">(mm)</span></label>
+                <input id="widest-visible-width" type="number" placeholder="0.00" />
+              </div>
+              <div class="subfield">
+                <label for="bottom-width">Bottom Width <span class="unit-tag">(mm)</span></label>
+                <input id="bottom-width" type="number" placeholder="0.00" />
+              </div>
             </div>
           </div>
 
           <div class="card spec-card">
             <h3>Thickness</h3>
-            <p>Material or component thickness requirement.</p>
-            <div class="inline">
-              <input type="number" placeholder="0.00" />
-              <select>
-                <option>mm</option>
-                <option>oz</option>
-              </select>
+            <p>Capture both top and bottom thicknesses in millimeters.</p>
+            <div class="stack">
+              <div class="subfield">
+                <label for="top-thickness">Top Thickness <span class="unit-tag">(mm)</span> <span class="tooltip" tabindex="0" title="For engagement rings, top thickness is measured from the finger to the center stone table using the stock center stone size.">?</span></label>
+                <input id="top-thickness" type="number" placeholder="0.00" />
+              </div>
+              <div class="subfield">
+                <label for="bottom-thickness">Bottom Thickness <span class="unit-tag">(mm)</span></label>
+                <input id="bottom-thickness" type="number" placeholder="0.00" />
+              </div>
             </div>
           </div>
 
