@@ -216,6 +216,82 @@
 
     .spec-card .inline > * { flex: 1; }
 
+    .multi-select {
+      position: relative;
+    }
+
+    .multi-select-toggle {
+      width: 100%;
+      border: 1px solid var(--border-strong);
+      border-radius: 10px;
+      padding: 11px 44px 11px 12px;
+      font: inherit;
+      color: var(--text);
+      background: #fff;
+      text-align: left;
+      position: relative;
+      font-weight: 400;
+    }
+
+    .multi-select-toggle::after {
+      content: "▾";
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-size: 14px;
+      pointer-events: none;
+    }
+
+    .multi-select.open .multi-select-toggle {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .multi-select-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% - 1px);
+      left: 0;
+      right: 0;
+      background: #fff;
+      border: 1px solid var(--border-strong);
+      border-top: 0;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      max-height: 260px;
+      overflow-y: auto;
+      z-index: 20;
+      box-shadow: var(--shadow);
+      padding: 6px 0;
+    }
+
+    .multi-select.open .multi-select-menu {
+      display: block;
+    }
+
+    .multi-select-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      cursor: pointer;
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    .multi-select-option:hover {
+      background: #f7f9ff;
+    }
+
+    .multi-select-option input {
+      width: 16px;
+      height: 16px;
+      margin: 0;
+      accent-color: var(--primary);
+    }
+
     .stack {
       display: grid;
       gap: 12px;
@@ -548,6 +624,101 @@
             <p>Any required physical or chemical compliance tests.</p>
             <input type="text" placeholder="Slip, flex, colorfastness, REACH, etc." />
           </div>
+
+          <div class="card spec-card">
+            <h3>Head Style</h3>
+            <p>Select one or more head design features to include in the specification.</p>
+            <div class="multi-select" data-placeholder="Select head styles">
+              <button class="multi-select-toggle" type="button" aria-expanded="false">Select head styles</button>
+              <div class="multi-select-menu">
+                <label class="multi-select-option"><input type="checkbox" value="None" /> <span>None</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Bezel" /> <span>Bezel</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Cluster" /> <span>Cluster</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Cushion Halo" /> <span>Cushion Halo</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Diamond Crown" /> <span>Diamond Crown</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Diamond Gallery" /> <span>Diamond Gallery</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Double Prong" /> <span>Double Prong</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Four Prong" /> <span>Four Prong</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Halo" /> <span>Halo</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Hidden Halo" /> <span>Hidden Halo</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Kite Set" /> <span>Kite Set</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Milgrain" /> <span>Milgrain</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="N/A" /> <span>N/A</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Six Prong" /> <span>Six Prong</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Three Stone" /> <span>Three Stone</span></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="card spec-card">
+            <h3>Shank Style</h3>
+            <p>Capture the shank design details used for the ring construction.</p>
+            <div class="multi-select" data-placeholder="Select shank styles">
+              <button class="multi-select-toggle" type="button" aria-expanded="false">Select shank styles</button>
+              <div class="multi-select-menu">
+                <label class="multi-select-option"><input type="checkbox" value="None" /> <span>None</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Beaded" /> <span>Beaded</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Bezel" /> <span>Bezel</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Channel" /> <span>Channel</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Chevron" /> <span>Chevron</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Diamond" /> <span>Diamond</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Engraved" /> <span>Engraved</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Fitted" /> <span>Fitted</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Floral" /> <span>Floral</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Knife Edge" /> <span>Knife Edge</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Milgrain" /> <span>Milgrain</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Pavé" /> <span>Pavé</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Plain" /> <span>Plain</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Prong" /> <span>Prong</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Scallop" /> <span>Scallop</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Split" /> <span>Split</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Thin" /> <span>Thin</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Twist" /> <span>Twist</span></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="card spec-card">
+            <h3>Prong Type</h3>
+            <p>Document the prong treatment options required for the setting.</p>
+            <div class="multi-select" data-placeholder="Select prong types">
+              <button class="multi-select-toggle" type="button" aria-expanded="false">Select prong types</button>
+              <div class="multi-select-menu">
+                <label class="multi-select-option"><input type="checkbox" value="None" /> <span>None</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Bezel" /> <span>Bezel</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Diamond Tip" /> <span>Diamond Tip</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Eagle Claw" /> <span>Eagle Claw</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Milgrain" /> <span>Milgrain</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Prong" /> <span>Prong</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Round" /> <span>Round</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="V-Tip" /> <span>V-Tip</span></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="card spec-card">
+            <h3>Wedding Band Style</h3>
+            <p>Add matching wedding band construction details when applicable.</p>
+            <div class="multi-select" data-placeholder="Select wedding band styles">
+              <button class="multi-select-toggle" type="button" aria-expanded="false">Select wedding band styles</button>
+              <div class="multi-select-menu">
+                <label class="multi-select-option"><input type="checkbox" value="None" /> <span>None</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Bezel" /> <span>Bezel</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Channel" /> <span>Channel</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Chevron" /> <span>Chevron</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Engraved" /> <span>Engraved</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Fitted" /> <span>Fitted</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Floral" /> <span>Floral</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Knife Edge" /> <span>Knife Edge</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Milgrain" /> <span>Milgrain</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Pavé" /> <span>Pavé</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Plain" /> <span>Plain</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Prong" /> <span>Prong</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Scallop" /> <span>Scallop</span></label>
+                <label class="multi-select-option"><input type="checkbox" value="Twist" /> <span>Twist</span></label>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="footer-actions">
@@ -719,6 +890,7 @@
   <script>
     const tabs = document.querySelectorAll('[data-tab]');
     const panels = document.querySelectorAll('.tab-panel');
+    const multiSelects = document.querySelectorAll('.multi-select');
 
     tabs.forEach((tab) => {
       tab.addEventListener('click', () => {
@@ -732,6 +904,47 @@
         panels.forEach((panel) => {
           panel.classList.toggle('active', panel.id === target);
         });
+      });
+    });
+
+    const updateMultiSelectLabel = (multiSelect) => {
+      const toggle = multiSelect.querySelector('.multi-select-toggle');
+      const selected = [...multiSelect.querySelectorAll('input:checked')].map((input) => input.value);
+      const placeholder = multiSelect.dataset.placeholder || 'Select options';
+
+      toggle.textContent = selected.length ? selected.join(', ') : placeholder;
+    };
+
+    multiSelects.forEach((multiSelect) => {
+      const toggle = multiSelect.querySelector('.multi-select-toggle');
+      const checkboxes = multiSelect.querySelectorAll('input[type="checkbox"]');
+
+      updateMultiSelectLabel(multiSelect);
+
+      toggle.addEventListener('click', (event) => {
+        event.stopPropagation();
+        const isOpen = multiSelect.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+
+        multiSelects.forEach((item) => {
+          if (item !== multiSelect) {
+            item.classList.remove('open');
+            item.querySelector('.multi-select-toggle').setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+
+      checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener('change', () => updateMultiSelectLabel(multiSelect));
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      multiSelects.forEach((multiSelect) => {
+        if (!multiSelect.contains(event.target)) {
+          multiSelect.classList.remove('open');
+          multiSelect.querySelector('.multi-select-toggle').setAttribute('aria-expanded', 'false');
+        }
       });
     });
   </script>
