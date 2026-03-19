@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Master Production Template Mockup</title>
+  <style>
+    :root {
+      --bg: #f4f6fb;
+      --panel: #ffffff;
+      --border: #d7deea;
+      --border-strong: #b9c5d8;
+      --text: #20304a;
+      --muted: #66758f;
+      --primary: #2b67f6;
+      --primary-soft: #e9f0ff;
+      --success: #2f855a;
+      --shadow: 0 12px 32px rgba(31, 45, 76, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #eef3fb 0%, var(--bg) 100%);
+      color: var(--text);
+    }
+
+    .page {
+      max-width: 1240px;
+      margin: 32px auto;
+      padding: 0 20px 40px;
+    }
+
+    .hero {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 30px;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 720px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    button, .button {
+      border: 0;
+      border-radius: 10px;
+      padding: 12px 18px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .primary { background: var(--primary); color: #fff; }
+    .secondary {
+      background: #fff;
+      color: var(--text);
+      border: 1px solid var(--border-strong);
+    }
+
+    .top-meta {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .field, .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .field {
+      padding: 16px;
+    }
+
+    .field label,
+    .section-label {
+      display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="search"],
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--border-strong);
+      border-radius: 10px;
+      padding: 11px 12px;
+      font: inherit;
+      color: var(--text);
+      background: #fff;
+    }
+
+    textarea { min-height: 120px; resize: vertical; }
+
+    .tabs-shell {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      padding: 16px 16px 0;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+      background: #fbfcff;
+    }
+
+    .tab {
+      padding: 14px 18px;
+      border-radius: 14px 14px 0 0;
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid transparent;
+      margin-bottom: -1px;
+    }
+
+    .tab.active {
+      background: #fff;
+      color: var(--primary);
+      border-color: var(--border);
+      border-bottom-color: #fff;
+    }
+
+    .tab-panel {
+      display: none;
+      padding: 24px;
+    }
+
+    .tab-panel.active { display: block; }
+
+    .panel-intro {
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .panel-intro h2 {
+      margin: 0 0 6px;
+      font-size: 24px;
+    }
+
+    .panel-intro p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .spec-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .spec-card {
+      padding: 18px;
+    }
+
+    .spec-card h3 {
+      margin: 0 0 4px;
+      font-size: 15px;
+    }
+
+    .spec-card p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 13px;
+      min-height: 34px;
+    }
+
+    .spec-card .inline {
+      display: flex;
+      gap: 10px;
+    }
+
+    .spec-card .inline > * { flex: 1; }
+
+    .suppliers-layout {
+      display: grid;
+      grid-template-columns: minmax(260px, 320px) 1fr;
+      gap: 20px;
+    }
+
+    .supplier-list,
+    .supplier-detail,
+    .instructions-grid > .card,
+    .info-banner {
+      padding: 20px;
+    }
+
+    .supplier-row {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      margin-top: 12px;
+      background: #fbfcff;
+    }
+
+    .supplier-row.active {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    .supplier-row h3,
+    .supplier-row p,
+    .upload-row p,
+    .checklist li,
+    .instruction-box p {
+      margin: 0;
+    }
+
+    .supplier-row h3 { font-size: 16px; margin-bottom: 6px; }
+    .supplier-row p { color: var(--muted); font-size: 13px; }
+
+    .upload-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .upload-box {
+      border: 1px dashed var(--border-strong);
+      border-radius: 14px;
+      padding: 18px;
+      background: #fbfcff;
+    }
+
+    .upload-box strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    .upload-box span,
+    .upload-hint,
+    .meta-note {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .upload-box input[type="file"] {
+      margin-top: 12px;
+      width: 100%;
+    }
+
+    .factory-meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .pill-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .pill {
+      background: var(--primary-soft);
+      color: var(--primary);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .instructions-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 20px;
+    }
+
+    .instruction-box {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      margin-top: 14px;
+      min-height: 120px;
+      background: #fbfcff;
+    }
+
+    .instruction-box h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+    }
+
+    .checklist {
+      padding-left: 20px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 12px 0 0;
+    }
+
+    .info-banner {
+      background: linear-gradient(135deg, #243b6b 0%, #2b67f6 100%);
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .info-banner p,
+    .info-banner .meta-note { color: rgba(255,255,255,0.85); }
+
+    .footer-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 960px) {
+      .suppliers-layout,
+      .instructions-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page { padding: 0 12px 28px; margin-top: 16px; }
+      .hero, .tab-panel { padding: 18px; }
+      .tabs { padding: 12px 12px 0; }
+      .tab { width: 100%; border-radius: 12px; }
+      .tab.active { border-bottom-color: var(--border); }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="hero-top">
+        <div>
+          <h1>Master Production Template</h1>
+          <p>
+            Mockup for a cleaner production template layout with dedicated tabs for core specifications,
+            supplier-level documents, and production instructions.
+          </p>
+        </div>
+        <div class="actions">
+          <button class="secondary" type="button">Export to Excel</button>
+          <button class="primary" type="button">Save Template</button>
+        </div>
+      </div>
+
+      <div class="top-meta">
+        <div class="field">
+          <label for="template-id">Template ID</label>
+          <input id="template-id" type="text" value="CUSTOM" />
+        </div>
+        <div class="field">
+          <label for="product-family">Product Family</label>
+          <select id="product-family">
+            <option>Head Style</option>
+            <option>Low Top</option>
+            <option>Boot</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="job-message">Display message on Job Bag picture</label>
+          <input id="job-message" type="text" placeholder="Some message here..." />
+        </div>
+        <div class="field">
+          <label for="season">Season / Program</label>
+          <input id="season" type="text" placeholder="Fall 2026 inline" />
+        </div>
+      </div>
+    </section>
+
+    <section class="tabs-shell">
+      <div class="tabs" role="tablist" aria-label="Master Production Template Tabs">
+        <button class="tab active" role="tab" aria-selected="true" aria-controls="specifications" id="tab-specifications" data-tab="specifications">Specifications</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="suppliers" id="tab-suppliers" data-tab="suppliers">Suppliers</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="instructions" id="tab-instructions" data-tab="instructions">Instructions</button>
+      </div>
+
+      <section class="tab-panel active" id="specifications" role="tabpanel" aria-labelledby="tab-specifications">
+        <div class="panel-intro">
+          <div>
+            <h2>Core Specifications</h2>
+            <p>Capture the product construction details first, including measurements, materials, finishing, and key size/weight callouts.</p>
+          </div>
+          <span class="pill">Tab 1 · Product Specs</span>
+        </div>
+
+        <div class="spec-grid">
+          <div class="card spec-card">
+            <h3>Width</h3>
+            <p>Overall upper width and any tolerance guidance.</p>
+            <div class="inline">
+              <input type="number" placeholder="0.00" />
+              <select>
+                <option>mm</option>
+                <option>cm</option>
+                <option>in</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="card spec-card">
+            <h3>Thickness</h3>
+            <p>Material or component thickness requirement.</p>
+            <div class="inline">
+              <input type="number" placeholder="0.00" />
+              <select>
+                <option>mm</option>
+                <option>oz</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="card spec-card">
+            <h3>Finishing</h3>
+            <p>Surface treatment, polish, wash, or coating notes.</p>
+            <select>
+              <option>Matte</option>
+              <option>Gloss</option>
+              <option>Brushed</option>
+              <option>Burnished</option>
+            </select>
+          </div>
+
+          <div class="card spec-card">
+            <h3>Weight in Size 10</h3>
+            <p>Finished unit weight requirement for the size 10 sample.</p>
+            <div class="inline">
+              <input type="number" placeholder="0" />
+              <select>
+                <option>g</option>
+                <option>oz</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="card spec-card">
+            <h3>Material Content</h3>
+            <p>Primary upper or trim material composition details.</p>
+            <input type="text" placeholder="Example: Full-grain leather / microfiber lining" />
+          </div>
+
+          <div class="card spec-card">
+            <h3>Color / Finish Code</h3>
+            <p>Colorway or finishing identifier tied to the vendor SKU.</p>
+            <input type="text" placeholder="Example: TAN-210 / BRSH" />
+          </div>
+
+          <div class="card spec-card">
+            <h3>Outsole Construction</h3>
+            <p>Bottom construction notes and build method.</p>
+            <select>
+              <option>Cemented</option>
+              <option>Strobel</option>
+              <option>Injected</option>
+              <option>Vulcanized</option>
+            </select>
+          </div>
+
+          <div class="card spec-card">
+            <h3>Special Testing</h3>
+            <p>Any required physical or chemical compliance tests.</p>
+            <input type="text" placeholder="Slip, flex, colorfastness, REACH, etc." />
+          </div>
+        </div>
+
+        <div class="footer-actions">
+          <button class="secondary" type="button">Cancel</button>
+          <button class="primary" type="button">Save Specifications</button>
+        </div>
+      </section>
+
+      <section class="tab-panel" id="suppliers" role="tabpanel" aria-labelledby="tab-suppliers">
+        <div class="panel-intro">
+          <div>
+            <h2>Suppliers & Spec Sheets</h2>
+            <p>Track each factory and vendor SKU, plus upload factory-specific spec sheets or supporting files in one place.</p>
+          </div>
+          <span class="pill">Tab 2 · Supplier Setup</span>
+        </div>
+
+        <div class="suppliers-layout">
+          <aside class="card supplier-list">
+            <label class="section-label" for="supplier-search">Factories / Vendors</label>
+            <input id="supplier-search" type="search" placeholder="Search supplier or vendor SKU" />
+
+            <div class="supplier-row active">
+              <h3>BNZ Factory</h3>
+              <p>Vendor SKU: BNZ-45821 · Inline Program</p>
+            </div>
+            <div class="supplier-row">
+              <h3>PSX Factory</h3>
+              <p>Vendor SKU: PSX-99204 · Costing Stage</p>
+            </div>
+            <div class="supplier-row">
+              <h3>5@ Work</h3>
+              <p>Vendor SKU: 5WK-20118 · Wear Test</p>
+            </div>
+            <div class="supplier-row">
+              <h3>Kutez</h3>
+              <p>Vendor SKU: KTZ-78100 · Pre-production</p>
+            </div>
+          </aside>
+
+          <section class="card supplier-detail">
+            <label class="section-label">Selected Supplier</label>
+            <h3 style="margin:0; font-size: 24px;">BNZ Factory</h3>
+            <p class="meta-note" style="margin-top:6px;">Use this area to store the supplier-specific master data and a spec sheet upload for the selected factory + vendor SKU combination.</p>
+
+            <div class="factory-meta">
+              <div>
+                <label class="section-label" for="vendor-sku">Vendor SKU</label>
+                <input id="vendor-sku" type="text" value="BNZ-45821" />
+              </div>
+              <div>
+                <label class="section-label" for="factory-contact">Factory Contact</label>
+                <input id="factory-contact" type="text" placeholder="Production manager" />
+              </div>
+              <div>
+                <label class="section-label" for="factory-region">Region</label>
+                <select id="factory-region">
+                  <option>Vietnam</option>
+                  <option>China</option>
+                  <option>India</option>
+                  <option>Portugal</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="upload-row">
+              <div class="upload-box">
+                <strong>Factory Spec Sheet</strong>
+                <span>Upload the primary technical spec sheet provided by the factory for this vendor SKU.</span>
+                <input type="file" />
+              </div>
+              <div class="upload-box">
+                <strong>Supporting Documents</strong>
+                <span>Add BOMs, tolerance charts, testing reports, or material callout PDFs.</span>
+                <input type="file" multiple />
+              </div>
+            </div>
+
+            <div class="pill-row">
+              <span class="pill">Last upload: Mar 18, 2026</span>
+              <span class="pill">2 attachments</span>
+              <span class="pill">Status: Ready for review</span>
+            </div>
+
+            <div style="margin-top: 20px;">
+              <label class="section-label" for="supplier-notes">Supplier Notes</label>
+              <textarea id="supplier-notes" placeholder="Capture supplier-specific comments, deviations, or approvals here."></textarea>
+            </div>
+
+            <div class="footer-actions">
+              <button class="secondary" type="button">Add Supplier</button>
+              <button class="primary" type="button">Save Supplier Record</button>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="tab-panel" id="instructions" role="tabpanel" aria-labelledby="tab-instructions">
+        <div class="panel-intro">
+          <div>
+            <h2>Instructions</h2>
+            <p>This tab modernizes the current long-text instruction areas into grouped production callouts with space for each factory or workflow bucket.</p>
+          </div>
+          <span class="pill">Tab 3 · Production Notes</span>
+        </div>
+
+        <div class="info-banner card">
+          <h3 style="margin:0 0 8px; font-size: 22px;">Instruction Tab Mockup</h3>
+          <p style="margin:0; line-height:1.55;">This section mirrors your example but presents each instruction area in a clearer card layout, while keeping enough room for long production notes and special info.</p>
+        </div>
+
+        <div class="instructions-grid">
+          <div class="card">
+            <label class="section-label" for="special-message">Display message on Job Bag picture</label>
+            <input id="special-message" type="text" placeholder="Some message here..." />
+
+            <div class="instruction-box">
+              <h3>BNZ</h3>
+              <p>Factory-specific notes, packaging instructions, or special build comments for BNZ.</p>
+            </div>
+            <div class="instruction-box">
+              <h3>PSX</h3>
+              <p>Instruction block for PSX to document assembly, material substitutions, or quality expectations.</p>
+            </div>
+            <div class="instruction-box">
+              <h3>5 @ Work</h3>
+              <p>Use this for wear-test or trial production notes that need to stay visible during development.</p>
+            </div>
+            <div class="instruction-box">
+              <h3>Kutez</h3>
+              <p>Vendor or agent notes tied to Kutez can be stored here.</p>
+            </div>
+            <div class="instruction-box">
+              <h3>Special Info</h3>
+              <p>Reserve for compliance, labeling, packaging, or exception handling information that applies across factories.</p>
+            </div>
+          </div>
+
+          <aside>
+            <div class="card" style="padding:20px; margin-bottom:20px;">
+              <label class="section-label">Attachments</label>
+              <div class="upload-box" style="margin-top: 0;">
+                <strong>Reference Images / Head Style Files</strong>
+                <span>Upload visuals or documents that should appear with the instruction package.</span>
+                <input type="file" multiple />
+              </div>
+            </div>
+
+            <div class="card" style="padding:20px;">
+              <label class="section-label">Suggested Content</label>
+              <ul class="checklist">
+                <li>Include stitch callouts and construction exceptions.</li>
+                <li>Flag any supplier-specific deviations from the core specs.</li>
+                <li>Document packaging requirements and carton labeling.</li>
+                <li>Reference uploaded images, tech packs, or spec sheets.</li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+
+        <div class="footer-actions">
+          <button class="secondary" type="button">Cancel</button>
+          <button class="primary" type="button">Save Instructions</button>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    const tabs = document.querySelectorAll('[data-tab]');
+    const panels = document.querySelectorAll('.tab-panel');
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.tab;
+
+        tabs.forEach((item) => {
+          item.classList.toggle('active', item === tab);
+          item.setAttribute('aria-selected', item === tab ? 'true' : 'false');
+        });
+
+        panels.forEach((panel) => {
+          panel.classList.toggle('active', panel.id === target);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
