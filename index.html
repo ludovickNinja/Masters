@@ -28,6 +28,8 @@
 
     * { box-sizing: border-box; }
 
+    [hidden] { display: none !important; }
+
     body {
       margin: 0;
       font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -48,7 +50,10 @@
     .master-card,
     .sidebar-card,
     .hero,
-    .featured-card {
+    .featured-card,
+    .detail-panel,
+    .detail-side-card,
+    .empty-state {
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
       background: var(--surface);
@@ -82,7 +87,14 @@
     .card-footer,
     .meta-row,
     .section-head,
-    .title-row {
+    .title-row,
+    .detail-head,
+    .detail-layout,
+    .detail-summary,
+    .detail-grid,
+    .detail-stat-grid,
+    .detail-toolbar,
+    .detail-topbar {
       display: flex;
       gap: 16px;
       flex-wrap: wrap;
@@ -92,7 +104,10 @@
     .toolbar,
     .featured-grid,
     .section-head,
-    .title-row {
+    .title-row,
+    .detail-head,
+    .detail-toolbar,
+    .detail-topbar {
       justify-content: space-between;
       align-items: flex-start;
     }
@@ -115,7 +130,8 @@
       margin-bottom: 14px;
     }
 
-    .hero-copy {
+    .hero-copy,
+    .detail-copy-wrap {
       max-width: 760px;
     }
 
@@ -131,7 +147,11 @@
     .detail-copy,
     .suggestion-list li,
     .master-card p,
-    .meta-note {
+    .meta-note,
+    .detail-note,
+    .detail-list li,
+    .detail-tab-panel p,
+    .empty-state p {
       color: var(--muted);
       line-height: 1.55;
     }
@@ -143,7 +163,9 @@
     .status-row,
     .card-actions,
     .template-tags,
-    .suggestion-list {
+    .suggestion-list,
+    .detail-tabs,
+    .detail-badges {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
@@ -166,6 +188,15 @@
     }
 
     button:hover { transform: translateY(-1px); }
+
+    button:focus-visible,
+    .master-card:focus-visible,
+    .detail-tab:focus-visible,
+    .chip:focus-visible,
+    .sort-button:focus-visible {
+      outline: 3px solid rgba(31, 111, 255, 0.2);
+      outline-offset: 3px;
+    }
 
     .primary {
       background: linear-gradient(135deg, #3b82f6 0%, var(--primary) 100%);
@@ -221,7 +252,10 @@
     .toolbar,
     .featured-card,
     .sidebar-card,
-    .master-card {
+    .master-card,
+    .detail-panel,
+    .detail-side-card,
+    .empty-state {
       border-radius: var(--radius-lg);
     }
 
@@ -257,14 +291,16 @@
       font-size: 18px;
     }
 
-    .segmented {
+    .segmented,
+    .detail-tabs {
       padding: 6px;
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.82);
       border: 1px solid var(--border);
     }
 
-    .chip {
+    .chip,
+    .detail-tab {
       padding: 10px 14px;
       background: transparent;
       color: var(--muted);
@@ -272,11 +308,14 @@
       font-weight: 700;
     }
 
-    .chip.active {
+    .chip.active,
+    .detail-tab.active {
       background: var(--text);
       color: #fff;
       box-shadow: 0 10px 18px rgba(24, 35, 56, 0.15);
     }
+
+    .sort-button { min-width: 210px; text-align: left; }
 
     .featured-card {
       padding: 24px;
@@ -333,7 +372,9 @@
       gap: 12px;
     }
 
-    .meta-card {
+    .meta-card,
+    .detail-stat,
+    .detail-info-card {
       flex: 1 1 160px;
       padding: 16px;
       border-radius: var(--radius-md);
@@ -341,7 +382,8 @@
       border: 1px solid var(--border);
     }
 
-    .meta-label {
+    .meta-label,
+    .detail-label {
       display: block;
       color: var(--muted);
       font-size: 12px;
@@ -351,7 +393,8 @@
       font-weight: 700;
     }
 
-    .meta-value {
+    .meta-value,
+    .detail-value {
       font-size: 16px;
       font-weight: 700;
     }
@@ -370,12 +413,19 @@
       gap: 16px;
       background: rgba(255,255,255,0.86);
       transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+      text-align: left;
+      width: 100%;
     }
 
     .master-card:hover {
       transform: translateY(-3px);
       box-shadow: 0 26px 52px rgba(15, 23, 42, 0.12);
       border-color: rgba(31, 111, 255, 0.28);
+    }
+
+    .master-card[aria-pressed="true"] {
+      border-color: rgba(31, 111, 255, 0.5);
+      box-shadow: 0 26px 52px rgba(15, 23, 42, 0.14);
     }
 
     .card-header {
@@ -405,26 +455,33 @@
     .status-review { background: rgba(214, 137, 18, 0.14); color: var(--warning); }
     .status-draft { background: rgba(31, 111, 255, 0.1); color: var(--primary); }
 
-    .card-stats {
+    .card-stats,
+    .detail-stat-grid,
+    .detail-info-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 10px;
     }
 
-    .stat-box {
+    .stat-box,
+    .detail-stat,
+    .detail-info-card {
       padding: 12px;
       border-radius: 16px;
       background: var(--surface-soft);
       border: 1px solid var(--border);
     }
 
-    .stat-box strong {
+    .stat-box strong,
+    .detail-stat strong,
+    .detail-list strong {
       display: block;
       font-size: 16px;
       margin-bottom: 3px;
     }
 
-    .stat-box span {
+    .stat-box span,
+    .detail-stat span {
       color: var(--muted);
       font-size: 12px;
       line-height: 1.4;
@@ -450,29 +507,37 @@
       margin: 6px 0 18px;
     }
 
-    .section-head h2 {
+    .section-head h2,
+    .detail-title {
       font-size: 26px;
       letter-spacing: -0.04em;
       margin-bottom: 6px;
     }
 
-    .sidebar-card {
+    .sidebar-card,
+    .detail-panel,
+    .detail-side-card,
+    .empty-state {
       padding: 20px;
       background: rgba(255,255,255,0.88);
     }
 
-    .sidebar-card h3 {
+    .sidebar-card h3,
+    .detail-panel h3,
+    .detail-side-card h3 {
       margin-bottom: 8px;
       font-size: 18px;
       letter-spacing: -0.02em;
     }
 
-    .sidebar-card ul {
+    .sidebar-card ul,
+    .detail-list {
       margin: 14px 0 0;
       padding-left: 18px;
     }
 
-    .sidebar-card li + li { margin-top: 10px; }
+    .sidebar-card li + li,
+    .detail-list li + li { margin-top: 10px; }
 
     .quick-actions {
       display: grid;
@@ -513,9 +578,72 @@
       border: 1px solid var(--border);
     }
 
+    .detail-stack {
+      display: grid;
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .detail-panel {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(246, 249, 255, 0.9));
+    }
+
+    .detail-layout {
+      align-items: start;
+    }
+
+    .detail-main {
+      flex: 1 1 660px;
+      display: grid;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .detail-side {
+      flex: 0 0 300px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .detail-copy-wrap h2 { margin-bottom: 8px; }
+
+    .detail-tab-panel {
+      padding: 20px;
+      border-radius: var(--radius-md);
+      background: rgba(248, 250, 255, 0.88);
+      border: 1px solid var(--border);
+    }
+
+    .detail-tab-panel[hidden] { display: none !important; }
+
+    .detail-info-grid {
+      margin-top: 16px;
+    }
+
+    .detail-note {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(31, 111, 255, 0.08);
+      border: 1px solid rgba(31, 111, 255, 0.12);
+    }
+
+    .empty-state {
+      text-align: center;
+      margin-top: 18px;
+    }
+
+    .empty-state strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
     @media (max-width: 1040px) {
-      .content-grid { flex-direction: column; }
-      .sidebar { width: 100%; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+      .content-grid,
+      .detail-layout { flex-direction: column; }
+      .sidebar,
+      .detail-side { width: 100%; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+      .detail-side { display: grid; }
     }
 
     @media (max-width: 720px) {
@@ -524,10 +652,17 @@
       .toolbar,
       .featured-card,
       .master-card,
-      .sidebar-card { padding: 18px; }
+      .sidebar-card,
+      .detail-panel,
+      .detail-side-card,
+      .empty-state { padding: 18px; }
       .featured-visual { flex-basis: 100%; min-height: 180px; }
-      .card-stats { grid-template-columns: 1fr; }
-      .segmented { width: 100%; overflow-x: auto; }
+      .card-stats,
+      .detail-stat-grid,
+      .detail-info-grid { grid-template-columns: 1fr; }
+      .segmented,
+      .detail-tabs { width: 100%; overflow-x: auto; }
+      .sort-button { width: 100%; }
     }
   </style>
 </head>
@@ -540,7 +675,7 @@
           <h1>Master Production Templates</h1>
           <p>
             Reframed as a polished card-based library so every saved master feels like a premium record: easy to scan,
-            easy to search, and detailed enough to understand status, supplier readiness, and last updates without opening each one.
+            easy to search, and now openable into the full detail workspace with specifications, supplier notes, and all supporting tabs.
           </p>
         </div>
         <div class="hero-actions">
@@ -573,16 +708,16 @@
       <section class="main-column">
         <div class="toolbar glass">
           <div class="search-shell">
-            <input type="search" placeholder="Search by template ID, collection, supplier, or product family" aria-label="Search templates" />
+            <input id="searchInput" type="search" placeholder="Search by template ID, collection, supplier, or product family" aria-label="Search templates" />
           </div>
           <div class="toolbar-actions">
-            <div class="segmented" aria-label="Filter templates">
-              <button class="chip active" type="button">All Masters</button>
-              <button class="chip" type="button">In Use</button>
-              <button class="chip" type="button">Review</button>
-              <button class="chip" type="button">Drafts</button>
+            <div id="statusFilters" class="segmented" aria-label="Filter templates">
+              <button class="chip active" type="button" data-filter="all">All Masters</button>
+              <button class="chip" type="button" data-filter="in-use">In Use</button>
+              <button class="chip" type="button" data-filter="review">Review</button>
+              <button class="chip" type="button" data-filter="draft">Drafts</button>
             </div>
-            <button class="secondary" type="button">Sort: Recently Updated</button>
+            <button id="sortButton" class="secondary sort-button" type="button">Sort: Recently Updated</button>
           </div>
         </div>
 
@@ -592,8 +727,8 @@
               <div class="template-mark">✦</div>
               <div>
                 <span class="pill">Featured master</span>
-                <h2 style="margin-top:12px; font-size: 30px; letter-spacing: -0.05em;">CUSTOM-001</h2>
-                <p style="margin-top:8px; color: rgba(255,255,255,0.82);">Signature solitaire engagement template with halo-ready options and approved BNZ supplier spec sheet.</p>
+                <h2 id="featuredId" style="margin-top:12px; font-size: 30px; letter-spacing: -0.05em;">CUSTOM-001</h2>
+                <p id="featuredSummary" style="margin-top:8px; color: rgba(255,255,255,0.82);">Signature solitaire engagement template with halo-ready options and approved BNZ supplier spec sheet.</p>
               </div>
             </div>
 
@@ -601,47 +736,25 @@
               <div class="title-row">
                 <div>
                   <span class="eyebrow" style="margin-bottom:10px;">Detailed card preview</span>
-                  <h2 style="font-size: 28px; letter-spacing: -0.04em;">A single card now carries the right production context.</h2>
+                  <h2 style="font-size: 28px; letter-spacing: -0.04em;">A single card now opens into the full production detail view.</h2>
                 </div>
                 <div class="status-row">
-                  <span class="status-badge status-in-use">In Use</span>
-                  <span class="pill">Last updated Mar 18, 2026</span>
+                  <span id="featuredStatus" class="status-badge status-in-use">In Use</span>
+                  <span id="featuredUpdated" class="pill">Last updated Mar 18, 2026</span>
                 </div>
               </div>
 
               <p class="detail-copy">
-                Instead of a bare row with only Template ID and actions, this detail card highlights collection placement, supplier count,
-                revision ownership, readiness, and quick actions. It keeps the premium Apple-like spacing and softness while making the module much more operational.
+                The card grid now connects directly to the detailed master workspace below, so the team can jump from browse mode into
+                specifications, supplier notes, linked assets, and revision history without losing the current filters or search context.
               </p>
 
-              <div class="meta-row">
-                <div class="meta-card">
-                  <span class="meta-label">Product Family</span>
-                  <span class="meta-value">Engagement · Head Style</span>
-                </div>
-                <div class="meta-card">
-                  <span class="meta-label">Primary Supplier</span>
-                  <span class="meta-value">BNZ Factory</span>
-                </div>
-                <div class="meta-card">
-                  <span class="meta-label">Revision</span>
-                  <span class="meta-value">v12 · Approved</span>
-                </div>
-                <div class="meta-card">
-                  <span class="meta-label">Linked Assets</span>
-                  <span class="meta-value">Spec sheet, BOM, images</span>
-                </div>
-              </div>
+              <div id="featuredMeta" class="meta-row"></div>
 
-              <div class="template-tags">
-                <span class="pill">Halo compatible</span>
-                <span class="pill">Wedding band match</span>
-                <span class="pill">14K / 18K</span>
-                <span class="pill">Supplier-ready</span>
-              </div>
+              <div id="featuredTags" class="template-tags"></div>
 
               <div class="card-actions">
-                <button class="primary" type="button">Open Master</button>
+                <button id="featuredOpenButton" class="primary" type="button">Open Master</button>
                 <button class="secondary" type="button">Duplicate</button>
                 <button class="text-button" type="button">View history</button>
               </div>
@@ -652,116 +765,19 @@
         <div class="section-head">
           <div>
             <h2>Saved master cards</h2>
-            <p class="section-copy">Each template is now easier to compare at a glance, with status, suppliers, and production readiness built into the card.</p>
+            <p class="section-copy">Search and status filters keep working while each card opens the restored tabbed detail experience.</p>
           </div>
-          <span class="pill">12 shown of 128 total</span>
+          <span id="resultsSummary" class="pill">0 shown</span>
         </div>
 
-        <section class="master-grid" aria-label="Saved master production templates">
-          <article class="master-card glass">
-            <div class="card-header">
-              <div>
-                <div class="card-id">Template ID · CUSTOM-001</div>
-                <h3>Signature Solitaire</h3>
-              </div>
-              <span class="status-badge status-in-use">In Use</span>
-            </div>
-            <p>Core engagement template with hidden halo option, approved weights, and complete supplier documents.</p>
-            <div class="card-stats">
-              <div class="stat-box"><strong>3</strong><span>Suppliers linked</span></div>
-              <div class="stat-box"><strong>v12</strong><span>Current revision</span></div>
-              <div class="stat-box"><strong>Mar 18</strong><span>Last updated</span></div>
-            </div>
-            <div class="card-footer">
-              <div class="template-tags">
-                <span class="pill">Engagement</span>
-                <span class="pill">BNZ</span>
-              </div>
-              <div class="card-actions">
-                <button class="text-button" type="button">Edit</button>
-                <button class="secondary" type="button">Open</button>
-              </div>
-            </div>
-          </article>
+        <section id="masterGrid" class="master-grid" aria-label="Saved master production templates"></section>
 
-          <article class="master-card glass">
-            <div class="card-header">
-              <div>
-                <div class="card-id">Template ID · CUSTOM-014</div>
-                <h3>Oval Halo Petite</h3>
-              </div>
-              <span class="status-badge status-review">Review</span>
-            </div>
-            <p>Awaiting thickness confirmation from PSX and final upload of the revised factory spec sheet.</p>
-            <div class="card-stats">
-              <div class="stat-box"><strong>2</strong><span>Suppliers linked</span></div>
-              <div class="stat-box"><strong>v07</strong><span>Current revision</span></div>
-              <div class="stat-box"><strong>Mar 16</strong><span>Last updated</span></div>
-            </div>
-            <div class="card-footer">
-              <div class="template-tags">
-                <span class="pill">Halo</span>
-                <span class="pill">PSX</span>
-              </div>
-              <div class="card-actions">
-                <button class="text-button" type="button">Review</button>
-                <button class="secondary" type="button">Open</button>
-              </div>
-            </div>
-          </article>
-
-          <article class="master-card glass">
-            <div class="card-header">
-              <div>
-                <div class="card-id">Template ID · CUSTOM-022</div>
-                <h3>Classic Comfort Band</h3>
-              </div>
-              <span class="status-badge status-draft">Draft</span>
-            </div>
-            <p>Wedding band master in draft with sizing complete and finishing notes ready for costing alignment.</p>
-            <div class="card-stats">
-              <div class="stat-box"><strong>1</strong><span>Supplier linked</span></div>
-              <div class="stat-box"><strong>v03</strong><span>Current revision</span></div>
-              <div class="stat-box"><strong>Mar 12</strong><span>Last updated</span></div>
-            </div>
-            <div class="card-footer">
-              <div class="template-tags">
-                <span class="pill">Wedding</span>
-                <span class="pill">Plain band</span>
-              </div>
-              <div class="card-actions">
-                <button class="text-button" type="button">Continue</button>
-                <button class="secondary" type="button">Open</button>
-              </div>
-            </div>
-          </article>
-
-          <article class="master-card glass">
-            <div class="card-header">
-              <div>
-                <div class="card-id">Template ID · CUSTOM-037</div>
-                <h3>Three Stone Cathedral</h3>
-              </div>
-              <span class="status-badge status-in-use">In Use</span>
-            </div>
-            <p>Production-approved cathedral ring with matched wedding band guidance and uploaded QA imagery.</p>
-            <div class="card-stats">
-              <div class="stat-box"><strong>4</strong><span>Suppliers linked</span></div>
-              <div class="stat-box"><strong>v09</strong><span>Current revision</span></div>
-              <div class="stat-box"><strong>Mar 10</strong><span>Last updated</span></div>
-            </div>
-            <div class="card-footer">
-              <div class="template-tags">
-                <span class="pill">Three stone</span>
-                <span class="pill">Kutez</span>
-              </div>
-              <div class="card-actions">
-                <button class="text-button" type="button">Edit</button>
-                <button class="secondary" type="button">Open</button>
-              </div>
-            </div>
-          </article>
+        <section id="emptyState" class="empty-state" hidden>
+          <strong>No masters match this filter.</strong>
+          <p>Adjust the search or status chips to bring templates back into view.</p>
         </section>
+
+        <section id="detailView" class="detail-stack" aria-label="Master detail view"></section>
       </section>
 
       <aside class="sidebar">
@@ -769,9 +785,9 @@
           <h3>Why this works better</h3>
           <p class="meta-note">The module feels less like an admin table and more like a curated library. Important production signals stay visible without losing elegance.</p>
           <ul>
-            <li>Template status is readable immediately.</li>
-            <li>Suppliers, revisions, and linked assets are visible before opening.</li>
-            <li>Apple-like spacing, soft borders, and glassy surfaces keep it premium.</li>
+            <li>Cards can now be opened directly into the full master detail experience.</li>
+            <li>Status chips and search continue to control what is visible in the card library.</li>
+            <li>Specifications, assets, supplier notes, and history remain available as separate tabs.</li>
           </ul>
         </section>
 
@@ -779,7 +795,7 @@
           <h3>Suggested next enhancements</h3>
           <ul class="suggestion-list">
             <li><strong>Add thumbnail previews.</strong><br />A ring or CAD thumbnail in each card would make the library even faster to scan.</li>
-            <li><strong>Use expandable detail drawers.</strong><br />Open supplier notes, instruction summaries, and revision history without leaving the grid.</li>
+            <li><strong>Persist the open master in the URL.</strong><br />That would let the detail workspace deep-link directly from notifications or tasks.</li>
             <li><strong>Add collection filters.</strong><br />For example: Engagement, Wedding, Fashion, Custom, and Archived.</li>
           </ul>
         </section>
@@ -796,5 +812,574 @@
       </aside>
     </div>
   </main>
+
+  <script>
+    const masters = [
+      {
+        id: 'CUSTOM-001',
+        name: 'Signature Solitaire',
+        status: 'in-use',
+        statusLabel: 'In Use',
+        statusClass: 'status-in-use',
+        family: 'Engagement · Head Style',
+        collection: 'Signature Engagement',
+        supplier: 'BNZ Factory',
+        supplierCount: 3,
+        revision: 'v12',
+        updatedLabel: 'Mar 18, 2026',
+        updatedSort: '2026-03-18',
+        summary: 'Core engagement template with hidden halo option, approved weights, and complete supplier documents.',
+        tags: ['Engagement', 'BNZ', 'Halo compatible', 'Supplier-ready'],
+        metrics: [
+          { value: '3', label: 'Suppliers linked' },
+          { value: 'v12', label: 'Current revision' },
+          { value: 'Mar 18', label: 'Last updated' }
+        ],
+        meta: [
+          { label: 'Product Family', value: 'Engagement · Head Style' },
+          { label: 'Primary Supplier', value: 'BNZ Factory' },
+          { label: 'Revision', value: 'v12 · Approved' },
+          { label: 'Linked Assets', value: 'Spec sheet, BOM, images' }
+        ],
+        detail: {
+          subtitle: 'Signature solitaire engagement template with halo-ready options and approved BNZ supplier spec sheet.',
+          badges: ['Approved for production', 'Wedding band match', '14K / 18K'],
+          stats: [
+            { value: '1.82ct', label: 'Center stone guide' },
+            { value: '2.05mm', label: 'Shank width' },
+            { value: '6 days', label: 'Avg supplier lead time' }
+          ],
+          tabs: {
+            specifications: {
+              title: 'Specifications',
+              copy: 'Production-approved dimensions, tolerances, and finishing standards for the core solitaire master.',
+              cards: [
+                { label: 'Head options', value: '4-prong standard, hidden halo approved' },
+                { label: 'Metal support', value: '14K, 18K, platinum-ready' },
+                { label: 'Sizing rule', value: 'US 4–9 with quarter sizes' }
+              ],
+              notes: ['Minimum shoulder thickness: 1.85mm after polish.', 'Cathedral rise stays locked for matching band alignment.']
+            },
+            suppliers: {
+              title: 'Supplier notes',
+              copy: 'Primary supplier is fully approved and alternates have current CAD and BOM alignment.',
+              cards: [
+                { label: 'Primary', value: 'BNZ Factory · approved' },
+                { label: 'Secondary', value: 'Kutez · casting backup' },
+                { label: 'Documents', value: 'BOM, QA imagery, tolerance sheet' }
+              ],
+              notes: ['BNZ approved revision v12 on March 18, 2026.', 'Backup supplier only needed for rush platinum orders.']
+            },
+            assets: {
+              title: 'Linked assets',
+              copy: 'All core production files are attached and ready for handoff.',
+              cards: [
+                { label: 'Spec sheet', value: 'Approved PDF' },
+                { label: 'CAD package', value: '3DM + STL' },
+                { label: 'Reference imagery', value: 'Studio + QC photos' }
+              ],
+              notes: ['Last asset sync completed 2 hours ago.', 'Image set includes halo and no-halo variants.']
+            },
+            history: {
+              title: 'Revision history',
+              copy: 'Recent revisions focused on halo tolerance and shoulder weight cleanup.',
+              cards: [
+                { label: 'v12', value: 'Approved hidden halo tolerances' },
+                { label: 'v11', value: 'Adjusted shoulder taper' },
+                { label: 'v10', value: 'Updated polish and finish notes' }
+              ],
+              notes: ['Revision owner: Mia Chen.', 'No open blockers on current release.']
+            }
+          },
+          side: {
+            readiness: ['Production ready', 'BOM confirmed', 'QC imagery attached'],
+            nextSteps: ['Duplicate for cathedral variation', 'Publish to engagement collection', 'Notify supplier success team']
+          }
+        }
+      },
+      {
+        id: 'CUSTOM-014',
+        name: 'Oval Halo Petite',
+        status: 'review',
+        statusLabel: 'Review',
+        statusClass: 'status-review',
+        family: 'Engagement · Halo',
+        collection: 'Petite Halo',
+        supplier: 'PSX',
+        supplierCount: 2,
+        revision: 'v07',
+        updatedLabel: 'Mar 16, 2026',
+        updatedSort: '2026-03-16',
+        summary: 'Awaiting thickness confirmation from PSX and final upload of the revised factory spec sheet.',
+        tags: ['Halo', 'PSX', 'Needs review', 'Oval'],
+        metrics: [
+          { value: '2', label: 'Suppliers linked' },
+          { value: 'v07', label: 'Current revision' },
+          { value: 'Mar 16', label: 'Last updated' }
+        ],
+        meta: [
+          { label: 'Product Family', value: 'Engagement · Halo' },
+          { label: 'Primary Supplier', value: 'PSX' },
+          { label: 'Revision', value: 'v07 · Pending review' },
+          { label: 'Linked Assets', value: 'Spec draft, CAD, images' }
+        ],
+        detail: {
+          subtitle: 'Oval halo template with petite shoulders and pending PSX thickness signoff.',
+          badges: ['Review required', 'Center oval only', 'Wedding band pairing'],
+          stats: [
+            { value: '1.65mm', label: 'Current shoulder thickness' },
+            { value: '2', label: 'Suppliers engaged' },
+            { value: '1 blocker', label: 'Approval blockers' }
+          ],
+          tabs: {
+            specifications: {
+              title: 'Specifications',
+              copy: 'The petite halo master is nearly complete but still waiting on final manufacturing thickness confirmation.',
+              cards: [
+                { label: 'Center shape', value: 'Oval 7x5 and 8x6' },
+                { label: 'Halo style', value: 'Micro halo with shared prongs' },
+                { label: 'Sizing rule', value: 'US 4–8.5 standard' }
+              ],
+              notes: ['PSX needs to confirm post-polish shoulder minimum of 1.7mm.', 'Gallery rail height already approved.']
+            },
+            suppliers: {
+              title: 'Supplier notes',
+              copy: 'PSX is primary and requires one more technical review; alternate supplier already aligned.',
+              cards: [
+                { label: 'Primary', value: 'PSX · awaiting thickness check' },
+                { label: 'Secondary', value: 'BNZ · reviewed CAD' },
+                { label: 'Escalation', value: 'Supplier engineering review' }
+              ],
+              notes: ['PSX due date is March 21, 2026.', 'BNZ can start once final spec PDF is uploaded.']
+            },
+            assets: {
+              title: 'Linked assets',
+              copy: 'The draft packet is present, but the final supplier-ready specification file is still missing.',
+              cards: [
+                { label: 'Spec sheet', value: 'Draft only' },
+                { label: 'CAD package', value: 'Current review set' },
+                { label: 'Reference imagery', value: 'Render set approved' }
+              ],
+              notes: ['Upload final spec after PSX confirms thickness.', 'Current renders are already customer-facing quality.']
+            },
+            history: {
+              title: 'Revision history',
+              copy: 'Recent changes tightened the halo seat and reduced gallery weight.',
+              cards: [
+                { label: 'v07', value: 'Pending thickness confirmation' },
+                { label: 'v06', value: 'Updated halo spacing' },
+                { label: 'v05', value: 'Reduced gallery weight' }
+              ],
+              notes: ['Owner: Ava Patel.', 'Review blockers limited to supplier confirmation.']
+            }
+          },
+          side: {
+            readiness: ['Waiting on supplier confirmation', 'Draft spec attached', 'Review workflow active'],
+            nextSteps: ['Collect PSX signoff', 'Upload final PDF', 'Promote to in-use once approved']
+          }
+        }
+      },
+      {
+        id: 'CUSTOM-022',
+        name: 'Classic Comfort Band',
+        status: 'draft',
+        statusLabel: 'Draft',
+        statusClass: 'status-draft',
+        family: 'Wedding · Plain Band',
+        collection: 'Core Wedding',
+        supplier: 'House Design',
+        supplierCount: 1,
+        revision: 'v03',
+        updatedLabel: 'Mar 12, 2026',
+        updatedSort: '2026-03-12',
+        summary: 'Wedding band master in draft with sizing complete and finishing notes ready for costing alignment.',
+        tags: ['Wedding', 'Plain band', 'Draft', 'Comfort fit'],
+        metrics: [
+          { value: '1', label: 'Supplier linked' },
+          { value: 'v03', label: 'Current revision' },
+          { value: 'Mar 12', label: 'Last updated' }
+        ],
+        meta: [
+          { label: 'Product Family', value: 'Wedding · Plain Band' },
+          { label: 'Primary Supplier', value: 'House Design' },
+          { label: 'Revision', value: 'v03 · Draft' },
+          { label: 'Linked Assets', value: 'Sizing notes, finish chart' }
+        ],
+        detail: {
+          subtitle: 'Comfort-fit wedding band master still in drafting before supplier costing and release.',
+          badges: ['Draft only', 'Sizing complete', 'Awaiting costing'],
+          stats: [
+            { value: '4mm', label: 'Primary width' },
+            { value: '3 finishes', label: 'Supported finishes' },
+            { value: '2 tasks', label: 'Remaining setup tasks' }
+          ],
+          tabs: {
+            specifications: {
+              title: 'Specifications',
+              copy: 'The foundational comfort band setup is complete and ready for supplier costing and material mapping.',
+              cards: [
+                { label: 'Profile', value: 'Comfort fit half-round' },
+                { label: 'Widths', value: '3mm, 4mm, 5mm' },
+                { label: 'Finish options', value: 'High polish, satin, brushed' }
+              ],
+              notes: ['Need final inside-edge comfort radius confirmation.', 'Weight targets still need supplier benchmark.']
+            },
+            suppliers: {
+              title: 'Supplier notes',
+              copy: 'Supplier assignment has not moved past internal drafting yet.',
+              cards: [
+                { label: 'Primary', value: 'House Design · internal prep' },
+                { label: 'Costing', value: 'Pending external quote' },
+                { label: 'Files ready', value: 'Sizing and finish notes' }
+              ],
+              notes: ['Assign final factory after costing review.', 'No external supplier documents shared yet.']
+            },
+            assets: {
+              title: 'Linked assets',
+              copy: 'Early-stage files exist for drafting and internal review.',
+              cards: [
+                { label: 'Sizing matrix', value: 'Complete' },
+                { label: 'Finish chart', value: 'Internal draft' },
+                { label: 'Costing worksheet', value: 'Needed' }
+              ],
+              notes: ['Add cost worksheet before sending to suppliers.', 'No photography is required at this stage.']
+            },
+            history: {
+              title: 'Revision history',
+              copy: 'Changes so far have focused on sizing and finish standardization.',
+              cards: [
+                { label: 'v03', value: 'Added finish chart' },
+                { label: 'v02', value: 'Completed size matrix' },
+                { label: 'v01', value: 'Initial comfort-fit base' }
+              ],
+              notes: ['Owner: Noah Evans.', 'Still pre-supplier workflow.']
+            }
+          },
+          side: {
+            readiness: ['Draft setup only', 'Awaiting costing worksheet', 'Not yet supplier-ready'],
+            nextSteps: ['Prepare costing worksheet', 'Assign external supplier', 'Finalize weight benchmarks']
+          }
+        }
+      },
+      {
+        id: 'CUSTOM-037',
+        name: 'Three Stone Cathedral',
+        status: 'in-use',
+        statusLabel: 'In Use',
+        statusClass: 'status-in-use',
+        family: 'Engagement · Three Stone',
+        collection: 'Cathedral Collection',
+        supplier: 'Kutez',
+        supplierCount: 4,
+        revision: 'v09',
+        updatedLabel: 'Mar 10, 2026',
+        updatedSort: '2026-03-10',
+        summary: 'Production-approved cathedral ring with matched wedding band guidance and uploaded QA imagery.',
+        tags: ['Three stone', 'Kutez', 'Cathedral', 'Approved'],
+        metrics: [
+          { value: '4', label: 'Suppliers linked' },
+          { value: 'v09', label: 'Current revision' },
+          { value: 'Mar 10', label: 'Last updated' }
+        ],
+        meta: [
+          { label: 'Product Family', value: 'Engagement · Three Stone' },
+          { label: 'Primary Supplier', value: 'Kutez' },
+          { label: 'Revision', value: 'v09 · Approved' },
+          { label: 'Linked Assets', value: 'QA images, BOM, CAD' }
+        ],
+        detail: {
+          subtitle: 'Cathedral three-stone master with production-approved QA imagery and matched band guidance.',
+          badges: ['Production ready', 'Three-stone', 'QA locked'],
+          stats: [
+            { value: '4.8mm', label: 'Head spread' },
+            { value: '4', label: 'Suppliers linked' },
+            { value: '0 blockers', label: 'Approval blockers' }
+          ],
+          tabs: {
+            specifications: {
+              title: 'Specifications',
+              copy: 'This master is fully approved with dimensions and wedding band fit standards already confirmed.',
+              cards: [
+                { label: 'Stone layout', value: 'Round center with tapered side stones' },
+                { label: 'Band fit', value: 'Matched flush band guidance included' },
+                { label: 'Metal support', value: '14K, 18K, platinum' }
+              ],
+              notes: ['Shoulder rise locked for cathedral symmetry.', 'Band match tolerance approved in QA.']
+            },
+            suppliers: {
+              title: 'Supplier notes',
+              copy: 'Kutez is the primary supplier and alternates have the same approved BOM packet.',
+              cards: [
+                { label: 'Primary', value: 'Kutez · approved' },
+                { label: 'Alternates', value: '3 additional backups' },
+                { label: 'Documents', value: 'BOM, QA imagery, assembly notes' }
+              ],
+              notes: ['Rush orders can rotate to backup suppliers without CAD changes.', 'All suppliers aligned to revision v09.']
+            },
+            assets: {
+              title: 'Linked assets',
+              copy: 'The template includes complete QA, production, and sales-support assets.',
+              cards: [
+                { label: 'QA imagery', value: 'Uploaded and approved' },
+                { label: 'CAD package', value: 'Current production set' },
+                { label: 'Reference guide', value: 'Wedding band fit PDF' }
+              ],
+              notes: ['Asset set covers customer-facing and manufacturing needs.', 'No missing files detected.']
+            },
+            history: {
+              title: 'Revision history',
+              copy: 'Recent updates focused on side-stone seat cleanup and supplier packet consistency.',
+              cards: [
+                { label: 'v09', value: 'Aligned all supplier packets' },
+                { label: 'v08', value: 'Updated side-stone seats' },
+                { label: 'v07', value: 'Added band-fit guide' }
+              ],
+              notes: ['Owner: Elise Warren.', 'Stable production release.']
+            }
+          },
+          side: {
+            readiness: ['Supplier-ready', 'QA complete', 'Band guide attached'],
+            nextSteps: ['Monitor high-volume orders', 'Duplicate for cushion variant', 'Audit backups monthly']
+          }
+        }
+      }
+    ];
+
+    const state = {
+      filter: 'all',
+      search: '',
+      sort: 'recent',
+      selectedId: masters[0].id,
+      activeTab: 'specifications'
+    };
+
+    const masterGrid = document.getElementById('masterGrid');
+    const detailView = document.getElementById('detailView');
+    const emptyState = document.getElementById('emptyState');
+    const resultsSummary = document.getElementById('resultsSummary');
+    const searchInput = document.getElementById('searchInput');
+    const sortButton = document.getElementById('sortButton');
+    const statusFilters = document.getElementById('statusFilters');
+    const featuredOpenButton = document.getElementById('featuredOpenButton');
+
+    function getFilteredMasters() {
+      return masters
+        .filter((master) => state.filter === 'all' || master.status === state.filter)
+        .filter((master) => {
+          const haystack = [master.id, master.name, master.collection, master.supplier, master.family, master.summary, ...master.tags]
+            .join(' ')
+            .toLowerCase();
+          return haystack.includes(state.search.toLowerCase());
+        })
+        .sort((a, b) => state.sort === 'recent'
+          ? b.updatedSort.localeCompare(a.updatedSort)
+          : a.name.localeCompare(b.name));
+    }
+
+    function ensureSelectedMaster(filtered) {
+      if (!filtered.some((master) => master.id === state.selectedId)) {
+        state.selectedId = filtered[0]?.id || null;
+        state.activeTab = 'specifications';
+      }
+    }
+
+    function renderFeatured(master) {
+      document.getElementById('featuredId').textContent = master.id;
+      document.getElementById('featuredSummary').textContent = master.detail.subtitle;
+      document.getElementById('featuredStatus').className = `status-badge ${master.statusClass}`;
+      document.getElementById('featuredStatus').textContent = master.statusLabel;
+      document.getElementById('featuredUpdated').textContent = `Last updated ${master.updatedLabel}`;
+      document.getElementById('featuredMeta').innerHTML = master.meta.map((item) => `
+        <div class="meta-card">
+          <span class="meta-label">${item.label}</span>
+          <span class="meta-value">${item.value}</span>
+        </div>
+      `).join('');
+      document.getElementById('featuredTags').innerHTML = master.tags.map((tag) => `<span class="pill">${tag}</span>`).join('');
+      featuredOpenButton.onclick = () => {
+        state.selectedId = master.id;
+        state.activeTab = 'specifications';
+        renderApp();
+        detailView.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      };
+    }
+
+    function renderCards(filtered) {
+      masterGrid.innerHTML = filtered.map((master) => `
+        <button class="master-card glass" type="button" data-id="${master.id}" aria-pressed="${master.id === state.selectedId}">
+          <div class="card-header">
+            <div>
+              <div class="card-id">Template ID · ${master.id}</div>
+              <h3>${master.name}</h3>
+            </div>
+            <span class="status-badge ${master.statusClass}">${master.statusLabel}</span>
+          </div>
+          <p>${master.summary}</p>
+          <div class="card-stats">
+            ${master.metrics.map((metric) => `<div class="stat-box"><strong>${metric.value}</strong><span>${metric.label}</span></div>`).join('')}
+          </div>
+          <div class="card-footer">
+            <div class="template-tags">
+              ${master.tags.slice(0, 2).map((tag) => `<span class="pill">${tag}</span>`).join('')}
+            </div>
+            <div class="card-actions">
+              <span class="secondary" style="display:inline-flex; align-items:center;">Open detail</span>
+            </div>
+          </div>
+        </button>
+      `).join('');
+
+      masterGrid.querySelectorAll('.master-card').forEach((card) => {
+        card.addEventListener('click', () => {
+          state.selectedId = card.dataset.id;
+          state.activeTab = 'specifications';
+          renderApp();
+          detailView.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+    }
+
+    function renderDetail(selected) {
+      if (!selected) {
+        detailView.innerHTML = '';
+        return;
+      }
+
+      const tabEntries = Object.entries(selected.detail.tabs);
+      if (!selected.detail.tabs[state.activeTab]) {
+        state.activeTab = tabEntries[0][0];
+      }
+
+      detailView.innerHTML = `
+        <section class="detail-panel glass">
+          <div class="detail-topbar">
+            <span class="eyebrow" style="margin-bottom:0;">Open master detail</span>
+            <div class="detail-badges">
+              ${selected.detail.badges.map((badge) => `<span class="pill">${badge}</span>`).join('')}
+            </div>
+          </div>
+
+          <div class="detail-layout">
+            <div class="detail-main">
+              <div class="detail-head">
+                <div class="detail-copy-wrap">
+                  <div class="card-id">${selected.id} · ${selected.collection}</div>
+                  <h2 class="detail-title">${selected.name}</h2>
+                  <p class="detail-copy">${selected.detail.subtitle}</p>
+                </div>
+                <div class="status-row">
+                  <span class="status-badge ${selected.statusClass}">${selected.statusLabel}</span>
+                  <span class="pill">${selected.revision}</span>
+                </div>
+              </div>
+
+              <div class="detail-stat-grid">
+                ${selected.detail.stats.map((stat) => `<div class="detail-stat"><strong>${stat.value}</strong><span>${stat.label}</span></div>`).join('')}
+              </div>
+
+              <div class="detail-toolbar">
+                <div class="detail-tabs" role="tablist" aria-label="Master detail tabs">
+                  ${tabEntries.map(([key, tab]) => `
+                    <button class="detail-tab ${key === state.activeTab ? 'active' : ''}" type="button" role="tab" aria-selected="${key === state.activeTab}" data-tab="${key}">${tab.title}</button>
+                  `).join('')}
+                </div>
+                <div class="card-actions">
+                  <button class="primary" type="button">Edit Master</button>
+                  <button class="secondary" type="button">Duplicate</button>
+                </div>
+              </div>
+
+              ${tabEntries.map(([key, tab]) => `
+                <section class="detail-tab-panel" ${key === state.activeTab ? '' : 'hidden'}>
+                  <h3>${tab.title}</h3>
+                  <p>${tab.copy}</p>
+                  <div class="detail-info-grid">
+                    ${tab.cards.map((card) => `
+                      <div class="detail-info-card">
+                        <span class="detail-label">${card.label}</span>
+                        <span class="detail-value">${card.value}</span>
+                      </div>
+                    `).join('')}
+                  </div>
+                  <ul class="detail-list">
+                    ${tab.notes.map((note) => `<li>${note}</li>`).join('')}
+                  </ul>
+                </section>
+              `).join('')}
+            </div>
+
+            <aside class="detail-side">
+              <section class="detail-side-card glass">
+                <h3>Master summary</h3>
+                <div class="detail-info-grid" style="margin-top:0;">
+                  ${selected.meta.map((item) => `
+                    <div class="detail-info-card">
+                      <span class="detail-label">${item.label}</span>
+                      <span class="detail-value">${item.value}</span>
+                    </div>
+                  `).join('')}
+                </div>
+              </section>
+
+              <section class="detail-side-card glass">
+                <h3>Readiness</h3>
+                <p class="detail-note">This side rail keeps the operational checklist visible while switching between tabs.</p>
+                <ul class="detail-list">
+                  ${selected.detail.side.readiness.map((item) => `<li>${item}</li>`).join('')}
+                </ul>
+              </section>
+
+              <section class="detail-side-card glass">
+                <h3>Next steps</h3>
+                <ul class="detail-list">
+                  ${selected.detail.side.nextSteps.map((item) => `<li>${item}</li>`).join('')}
+                </ul>
+              </section>
+            </aside>
+          </div>
+        </section>
+      `;
+
+      detailView.querySelectorAll('.detail-tab').forEach((tabButton) => {
+        tabButton.addEventListener('click', () => {
+          state.activeTab = tabButton.dataset.tab;
+          renderDetail(selected);
+        });
+      });
+    }
+
+    function renderApp() {
+      const filtered = getFilteredMasters();
+      ensureSelectedMaster(filtered);
+      resultsSummary.textContent = `${filtered.length} shown of ${masters.length} total`;
+      emptyState.hidden = filtered.length > 0;
+      renderCards(filtered);
+      const featuredMaster = masters.find((master) => master.id === 'CUSTOM-001') || masters[0];
+      renderFeatured(featuredMaster);
+      const selected = masters.find((master) => master.id === state.selectedId) || filtered[0] || null;
+      renderDetail(selected);
+    }
+
+    searchInput.addEventListener('input', (event) => {
+      state.search = event.target.value.trim();
+      renderApp();
+    });
+
+    statusFilters.querySelectorAll('.chip').forEach((chip) => {
+      chip.addEventListener('click', () => {
+        state.filter = chip.dataset.filter;
+        statusFilters.querySelectorAll('.chip').forEach((button) => button.classList.toggle('active', button === chip));
+        renderApp();
+      });
+    });
+
+    sortButton.addEventListener('click', () => {
+      state.sort = state.sort === 'recent' ? 'name' : 'recent';
+      sortButton.textContent = state.sort === 'recent' ? 'Sort: Recently Updated' : 'Sort: Name A–Z';
+      renderApp();
+    });
+
+    renderApp();
+  </script>
 </body>
 </html>
