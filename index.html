@@ -638,6 +638,204 @@
       font-size: 18px;
     }
 
+    .detail-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.56);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      z-index: 40;
+    }
+
+    .detail-modal {
+      width: min(1180px, 100%);
+      max-height: calc(100vh - 56px);
+      overflow: auto;
+      border-radius: 30px;
+      padding: 24px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid var(--border);
+      box-shadow: 0 32px 80px rgba(15, 23, 42, 0.24);
+    }
+
+    .detail-modal-header,
+    .legacy-meta,
+    .legacy-width-grid,
+    .legacy-inline,
+    .legacy-suppliers-layout,
+    .legacy-instructions-grid,
+    .legacy-upload-row,
+    .legacy-factory-meta,
+    .legacy-footer-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .detail-modal-header,
+    .legacy-meta,
+    .legacy-footer-actions {
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .detail-modal-header {
+      margin-bottom: 20px;
+    }
+
+    .detail-modal-copy {
+      max-width: 760px;
+    }
+
+    .detail-modal-copy h2 {
+      margin: 10px 0 8px;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      letter-spacing: -0.04em;
+    }
+
+    .detail-modal-shell {
+      border-radius: 28px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      background: rgba(248, 250, 255, 0.92);
+    }
+
+    .legacy-tabs {
+      display: flex;
+      gap: 8px;
+      padding: 16px 16px 0;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .legacy-tab-panel {
+      display: none;
+      padding: 24px;
+    }
+
+    .legacy-tab-panel.active { display: block; }
+
+    .legacy-panel-intro {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .legacy-spec-grid,
+    .legacy-upload-row,
+    .legacy-factory-meta {
+      display: grid;
+      gap: 16px;
+    }
+
+    .legacy-spec-grid {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .legacy-card,
+    .legacy-supplier-list,
+    .legacy-supplier-detail,
+    .legacy-side-card,
+    .legacy-info-banner {
+      border-radius: 20px;
+      padding: 20px;
+      background: rgba(255,255,255,0.84);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .legacy-card h3,
+    .legacy-side-card h3,
+    .legacy-info-banner h3 {
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    .legacy-stack,
+    .legacy-subfield {
+      display: grid;
+      gap: 10px;
+    }
+
+    .legacy-subfield label,
+    .legacy-section-label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .legacy-inline {
+      gap: 12px;
+    }
+
+    .legacy-inline > * { flex: 1; }
+
+    .legacy-width-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .legacy-chip-select {
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--border-strong);
+      background: rgba(248, 250, 255, 0.92);
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .legacy-pill-row,
+    .legacy-checklist {
+      display: grid;
+      gap: 10px;
+    }
+
+    .legacy-suppliers-layout,
+    .legacy-instructions-grid {
+      align-items: start;
+    }
+
+    .legacy-supplier-list { flex: 0 0 290px; }
+    .legacy-supplier-detail,
+    .legacy-main-instructions { flex: 1 1 420px; }
+    .legacy-side-column { flex: 0 0 280px; display: grid; gap: 16px; }
+
+    .legacy-supplier-row,
+    .legacy-instruction-box,
+    .legacy-upload-box {
+      border-radius: 16px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      background: rgba(248, 250, 255, 0.88);
+      margin-top: 12px;
+    }
+
+    .legacy-supplier-row.active {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    .legacy-info-banner {
+      background: linear-gradient(135deg, #243b6b 0%, #2b67f6 100%);
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .legacy-info-banner p { color: rgba(255,255,255,0.84); }
+
     @media (max-width: 1040px) {
       .content-grid,
       .detail-layout { flex-direction: column; }
@@ -777,7 +975,8 @@
           <p>Adjust the search or status chips to bring templates back into view.</p>
         </section>
 
-        <section id="detailView" class="detail-stack" aria-label="Master detail view"></section>
+        <section id="detailView" class="detail-stack" aria-label="Master detail view" hidden></section>
+        <div id="detailOverlay" class="detail-overlay" hidden></div>
       </section>
 
       <aside class="sidebar">
@@ -1150,11 +1349,13 @@
       search: '',
       sort: 'recent',
       selectedId: masters[0].id,
-      activeTab: 'specifications'
+      activeTab: 'specifications',
+      isOverlayOpen: false
     };
 
     const masterGrid = document.getElementById('masterGrid');
     const detailView = document.getElementById('detailView');
+    const detailOverlay = document.getElementById('detailOverlay');
     const emptyState = document.getElementById('emptyState');
     const resultsSummary = document.getElementById('resultsSummary');
     const searchInput = document.getElementById('searchInput');
@@ -1199,8 +1400,8 @@
       featuredOpenButton.onclick = () => {
         state.selectedId = master.id;
         state.activeTab = 'specifications';
+        state.isOverlayOpen = true;
         renderApp();
-        detailView.scrollIntoView({ behavior: 'smooth', block: 'start' });
       };
     }
 
@@ -1233,15 +1434,16 @@
         card.addEventListener('click', () => {
           state.selectedId = card.dataset.id;
           state.activeTab = 'specifications';
+          state.isOverlayOpen = true;
           renderApp();
-          detailView.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
       });
     }
 
     function renderDetail(selected) {
-      if (!selected) {
-        detailView.innerHTML = '';
+      if (!selected || !state.isOverlayOpen) {
+        detailOverlay.hidden = true;
+        detailOverlay.innerHTML = '';
         return;
       }
 
@@ -1250,102 +1452,91 @@
         state.activeTab = tabEntries[0][0];
       }
 
-      detailView.innerHTML = `
-        <section class="detail-panel glass">
-          <div class="detail-topbar">
-            <span class="eyebrow" style="margin-bottom:0;">Open master detail</span>
-            <div class="detail-badges">
-              ${selected.detail.badges.map((badge) => `<span class="pill">${badge}</span>`).join('')}
+      const legacyPanels = {
+        specifications: `
+          <section class="legacy-tab-panel ${state.activeTab === 'specifications' ? 'active' : ''}" id="detail-specifications" role="tabpanel">
+            <div class="legacy-panel-intro">
+              <div>
+                <h3>Core Specifications</h3>
+                <p class="detail-copy">Capture the product construction details first, including measurements, materials, finishing, and key size and weight callouts.</p>
+              </div>
+              <span class="pill">Tab 1 · Product Specs</span>
             </div>
-          </div>
-
-          <div class="detail-layout">
-            <div class="detail-main">
-              <div class="detail-head">
-                <div class="detail-copy-wrap">
-                  <div class="card-id">${selected.id} · ${selected.collection}</div>
-                  <h2 class="detail-title">${selected.name}</h2>
-                  <p class="detail-copy">${selected.detail.subtitle}</p>
-                </div>
-                <div class="status-row">
-                  <span class="status-badge ${selected.statusClass}">${selected.statusLabel}</span>
-                  <span class="pill">${selected.revision}</span>
-                </div>
-              </div>
-
-              <div class="detail-stat-grid">
-                ${selected.detail.stats.map((stat) => `<div class="detail-stat"><strong>${stat.value}</strong><span>${stat.label}</span></div>`).join('')}
-              </div>
-
-              <div class="detail-toolbar">
-                <div class="detail-tabs" role="tablist" aria-label="Master detail tabs">
-                  ${tabEntries.map(([key, tab]) => `
-                    <button class="detail-tab ${key === state.activeTab ? 'active' : ''}" type="button" role="tab" aria-selected="${key === state.activeTab}" data-tab="${key}">${tab.title}</button>
-                  `).join('')}
-                </div>
-                <div class="card-actions">
-                  <button class="primary" type="button">Edit Master</button>
-                  <button class="secondary" type="button">Duplicate</button>
-                </div>
-              </div>
-
-              ${tabEntries.map(([key, tab]) => `
-                <section class="detail-tab-panel" ${key === state.activeTab ? '' : 'hidden'}>
-                  <h3>${tab.title}</h3>
-                  <p>${tab.copy}</p>
-                  <div class="detail-info-grid">
-                    ${tab.cards.map((card) => `
-                      <div class="detail-info-card">
-                        <span class="detail-label">${card.label}</span>
-                        <span class="detail-value">${card.value}</span>
-                      </div>
-                    `).join('')}
-                  </div>
-                  <ul class="detail-list">
-                    ${tab.notes.map((note) => `<li>${note}</li>`).join('')}
-                  </ul>
-                </section>
-              `).join('')}
+            <div class="legacy-spec-grid">
+              <div class="legacy-card"><h3>Width</h3><p class="detail-copy">Capture both visible width references in millimeters.</p><div class="legacy-stack"><div class="legacy-subfield"><label>Widest Visible Width (mm)</label><input type="number" value="${selected.detail.stats[1]?.value === '2' ? '2.20' : '2.05'}" /></div><div class="legacy-subfield"><label>Bottom Width (mm)</label><input type="number" value="2.00" /></div></div></div>
+              <div class="legacy-card"><h3>Thickness</h3><p class="detail-copy">Capture both top and bottom thicknesses in millimeters.</p><div class="legacy-stack"><div class="legacy-subfield"><label>Top Thickness (mm)</label><input type="number" value="1.82" /></div><div class="legacy-subfield"><label>Bottom Thickness (mm)</label><input type="number" value="1.85" /></div></div></div>
+              <div class="legacy-card"><h3>Finishing</h3><p class="detail-copy">Surface treatment, polish, wash, or coating notes.</p><select><option>High polish</option><option>Satin</option><option>Brushed</option></select></div>
+              <div class="legacy-card"><h3>Weight</h3><p class="detail-copy">Enter the ring weight in grams, specify whether it is estimated or confirmed, then select the finger size and karat.</p><div class="legacy-stack"><div class="legacy-inline"><div class="legacy-subfield"><label>Weight (g)</label><input type="number" value="5.80" /></div><div class="legacy-subfield"><label>Weight Type</label><select><option>Confirmed Weight</option><option>Estimated Weight</option></select></div></div><div class="legacy-inline"><div class="legacy-subfield"><label>Finger Size</label><select><option>6.5</option></select></div><div class="legacy-subfield"><label>Karat</label><select><option>14K</option><option>18K</option></select></div></div></div></div>
+              <div class="legacy-card"><h3>Head Style</h3><p class="detail-copy">Select one or more head design features to include in the specification.</p><div class="legacy-pill-row"><span class="legacy-chip-select">${selected.tags[0] || 'Halo'}</span><span class="legacy-chip-select">Hidden Halo</span><span class="legacy-chip-select">Four Prong</span></div></div>
+              <div class="legacy-card"><h3>Shank Style</h3><p class="detail-copy">Capture the shank design details used for the ring construction.</p><div class="legacy-pill-row"><span class="legacy-chip-select">Plain</span><span class="legacy-chip-select">Cathedral</span><span class="legacy-chip-select">Comfort fit</span></div></div>
+              <div class="legacy-card"><h3>Prong Type</h3><p class="detail-copy">Document the prong treatment options required for the setting.</p><div class="legacy-pill-row"><span class="legacy-chip-select">Eagle Claw</span><span class="legacy-chip-select">Round</span></div></div>
+              <div class="legacy-card"><h3>Wedding Band Style</h3><p class="detail-copy">Add matching wedding band construction details when applicable.</p><div class="legacy-pill-row"><span class="legacy-chip-select">Fitted</span><span class="legacy-chip-select">Plain</span><span class="legacy-chip-select">Pavé</span></div></div>
             </div>
+            <div class="legacy-footer-actions"><button class="secondary" type="button">Cancel</button><button class="primary" type="button">Save Specifications</button></div>
+          </section>`,
+        suppliers: `
+          <section class="legacy-tab-panel ${state.activeTab === 'suppliers' ? 'active' : ''}" id="detail-suppliers" role="tabpanel">
+            <div class="legacy-panel-intro"><div><h3>Suppliers & Spec Sheets</h3><p class="detail-copy">Track each factory and vendor SKU, plus upload factory-specific spec sheets or supporting files in one place.</p></div><span class="pill">Tab 2 · Supplier Setup</span></div>
+            <div class="legacy-suppliers-layout"><aside class="legacy-supplier-list"><label class="legacy-section-label">Factories / Vendors</label><input type="search" value="${selected.supplier}" />${[selected.supplier,'PSX Factory','5@ Work','Kutez'].map((supplier, index)=>`<div class="legacy-supplier-row ${index===0?'active':''}"><h3>${supplier}</h3><p class="detail-copy">Vendor SKU: ${selected.id}-${index+1} · ${index===0?'Inline Program':'Review stage'}</p></div>`).join('')}</aside><section class="legacy-supplier-detail"><label class="legacy-section-label">Selected Supplier</label><h3>${selected.supplier}</h3><p class="detail-copy">Use this area to store the supplier-specific master data and a spec sheet upload for the selected factory and vendor SKU combination.</p><div class="legacy-factory-meta"><div><label class="legacy-section-label">Vendor SKU</label><input type="text" value="${selected.id}-${selected.supplier.slice(0,3).toUpperCase()}" /></div><div><label class="legacy-section-label">Factory Contact</label><input type="text" value="Production manager" /></div><div><label class="legacy-section-label">Region</label><select><option>Vietnam</option><option>China</option><option>India</option></select></div></div><div class="legacy-upload-row"><div class="legacy-upload-box"><strong>Factory Spec Sheet</strong><p class="detail-copy">Upload the primary technical spec sheet provided by the factory for this vendor SKU.</p><input type="file" /></div><div class="legacy-upload-box"><strong>Supporting Documents</strong><p class="detail-copy">Add BOMs, tolerance charts, testing reports, or material callout PDFs.</p><input type="file" multiple /></div></div><div class="template-tags" style="margin-top:16px;"><span class="pill">Last upload: ${selected.updatedLabel}</span><span class="pill">${selected.supplierCount} attachments</span><span class="pill">Status: ${selected.statusLabel}</span></div><div style="margin-top:20px;"><label class="legacy-section-label">Supplier Notes</label><textarea>${selected.detail.tabs.suppliers.notes.join(' ')}</textarea></div><div class="legacy-footer-actions"><button class="secondary" type="button">Add Supplier</button><button class="primary" type="button">Save Supplier Record</button></div></section></div>
+          </section>`,
+        history: `
+          <section class="legacy-tab-panel ${state.activeTab === 'history' ? 'active' : ''}" id="detail-instructions" role="tabpanel">
+            <div class="legacy-panel-intro"><div><h3>Instructions</h3><p class="detail-copy">This tab mirrors the detailed workflow from the earlier layout, grouping production callouts and special info into clearer cards.</p></div><span class="pill">Tab 3 · Production Notes</span></div>
+            <div class="legacy-info-banner"><h3>Instruction Tab Mockup</h3><p>This section keeps room for long production notes and special info while making the content easier to scan in an overlay.</p></div>
+            <div class="legacy-instructions-grid"><div class="legacy-main-instructions legacy-card"><label class="legacy-section-label">Display message on Job Bag picture</label><input type="text" value="${selected.name} · ${selected.collection}" />${['BNZ','PSX','5 @ Work','Kutez','Special Info'].map((title, index)=>`<div class="legacy-instruction-box"><h3>${title}</h3><p class="detail-copy">${selected.detail.tabs.history.notes[index % selected.detail.tabs.history.notes.length] || selected.summary}</p></div>`).join('')}</div><aside class="legacy-side-column"><div class="legacy-side-card"><label class="legacy-section-label">Attachments</label><div class="legacy-upload-box" style="margin-top:0;"><strong>Reference Images / Head Style Files</strong><p class="detail-copy">Upload visuals or documents that should appear with the instruction package.</p><input type="file" multiple /></div></div><div class="legacy-side-card"><label class="legacy-section-label">Suggested Content</label><ul class="detail-list">${selected.detail.side.nextSteps.map((item)=>`<li>${item}</li>`).join('')}</ul></div></aside></div>
+            <div class="legacy-footer-actions"><button class="secondary" type="button">Cancel</button><button class="primary" type="button">Save Instructions</button></div>
+          </section>`
+      };
 
-            <aside class="detail-side">
-              <section class="detail-side-card glass">
-                <h3>Master summary</h3>
-                <div class="detail-info-grid" style="margin-top:0;">
-                  ${selected.meta.map((item) => `
-                    <div class="detail-info-card">
-                      <span class="detail-label">${item.label}</span>
-                      <span class="detail-value">${item.value}</span>
-                    </div>
-                  `).join('')}
-                </div>
-              </section>
-
-              <section class="detail-side-card glass">
-                <h3>Readiness</h3>
-                <p class="detail-note">This side rail keeps the operational checklist visible while switching between tabs.</p>
-                <ul class="detail-list">
-                  ${selected.detail.side.readiness.map((item) => `<li>${item}</li>`).join('')}
-                </ul>
-              </section>
-
-              <section class="detail-side-card glass">
-                <h3>Next steps</h3>
-                <ul class="detail-list">
-                  ${selected.detail.side.nextSteps.map((item) => `<li>${item}</li>`).join('')}
-                </ul>
-              </section>
-            </aside>
+      detailOverlay.hidden = false;
+      detailOverlay.innerHTML = `
+        <div class="detail-modal glass" role="dialog" aria-modal="true" aria-label="${selected.name} detail overlay">
+          <div class="detail-modal-header">
+            <div class="detail-modal-copy">
+              <span class="eyebrow" style="margin-bottom:0;">Open master detail overlay</span>
+              <h2>${selected.name}</h2>
+              <p class="detail-copy">${selected.detail.subtitle}</p>
+              <div class="legacy-meta" style="margin-top:16px;">
+                <span class="status-badge ${selected.statusClass}">${selected.statusLabel}</span>
+                <span class="pill">${selected.id}</span>
+                <span class="pill">${selected.collection}</span>
+                <span class="pill">Updated ${selected.updatedLabel}</span>
+              </div>
+            </div>
+            <button id="closeDetailOverlay" class="secondary" type="button" aria-label="Close detail overlay">Close</button>
           </div>
-        </section>
-      `;
+          <div class="detail-modal-shell">
+            <div class="legacy-tabs" role="tablist" aria-label="Master production template tabs">
+              <button class="detail-tab ${state.activeTab === 'specifications' ? 'active' : ''}" type="button" data-tab="specifications">Specifications</button>
+              <button class="detail-tab ${state.activeTab === 'suppliers' ? 'active' : ''}" type="button" data-tab="suppliers">Suppliers</button>
+              <button class="detail-tab ${state.activeTab === 'history' ? 'active' : ''}" type="button" data-tab="history">Instructions</button>
+            </div>
+            ${legacyPanels.specifications}
+            ${legacyPanels.suppliers}
+            ${legacyPanels.history}
+          </div>
+        </div>`;
 
-      detailView.querySelectorAll('.detail-tab').forEach((tabButton) => {
+      detailOverlay.querySelector('#closeDetailOverlay').addEventListener('click', closeDetailOverlay);
+      detailOverlay.addEventListener('click', (event) => {
+        if (event.target === detailOverlay) {
+          closeDetailOverlay();
+        }
+      }, { once: true });
+      detailOverlay.querySelectorAll('.detail-tab').forEach((tabButton) => {
         tabButton.addEventListener('click', () => {
           state.activeTab = tabButton.dataset.tab;
-          renderDetail(selected);
+          detailView.hidden = true;
+      renderDetail(selected);
         });
       });
+    }
+
+    function closeDetailOverlay() {
+      state.isOverlayOpen = false;
+      detailOverlay.hidden = true;
+      detailOverlay.innerHTML = '';
+      renderCards(getFilteredMasters());
     }
 
     function renderApp() {
@@ -1357,6 +1548,7 @@
       const featuredMaster = masters.find((master) => master.id === 'CUSTOM-001') || masters[0];
       renderFeatured(featuredMaster);
       const selected = masters.find((master) => master.id === state.selectedId) || filtered[0] || null;
+      detailView.hidden = true;
       renderDetail(selected);
     }
 
@@ -1377,6 +1569,12 @@
       state.sort = state.sort === 'recent' ? 'name' : 'recent';
       sortButton.textContent = state.sort === 'recent' ? 'Sort: Recently Updated' : 'Sort: Name A–Z';
       renderApp();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && state.isOverlayOpen) {
+        closeDetailOverlay();
+      }
     });
 
     renderApp();
