@@ -1353,6 +1353,8 @@
       isOverlayOpen: false
     };
 
+    const draftMasters = new Map();
+
     const masterGrid = document.getElementById('masterGrid');
     const detailView = document.getElementById('detailView');
     const detailOverlay = document.getElementById('detailOverlay');
@@ -1362,6 +1364,37 @@
     const sortButton = document.getElementById('sortButton');
     const statusFilters = document.getElementById('statusFilters');
     const featuredOpenButton = document.getElementById('featuredOpenButton');
+
+    function escapeHtml(value) {
+      return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function getSelectedMaster() {
+      return masters.find((master) => master.id === state.selectedId) || null;
+    }
+
+    function getEditableMaster(masterId = state.selectedId) {
+      const source = masters.find((master) => master.id === masterId);
+      if (!source) return null;
+      if (!draftMasters.has(masterId)) {
+        draftMasters.set(masterId, structuredClone(source));
+      }
+      return draftMasters.get(masterId);
+    }
+
+    function renderEditableList(items) {
+      return items.map((item, index) => `
+        <div class="legacy-subfield">
+          <label>Item ${index + 1}</label>
+          <input type="text" data-field="list-item" data-index="${index}" value="${escapeHtml(item)}" />
+        </div>
+      `).join('');
+    }
 
     function getFilteredMasters() {
       return masters
@@ -1447,8 +1480,9 @@
         return;
       }
 
-      const tabEntries = Object.entries(selected.detail.tabs);
-      if (!selected.detail.tabs[state.activeTab]) {
+      const editable = getEditableMaster(selected.id);
+      const tabEntries = Object.entries(editable.detail.tabs);
+      if (!editable.detail.tabs[state.activeTab]) {
         state.activeTab = tabEntries[0][0];
       }
 
@@ -1457,50 +1491,50 @@
           <section class="legacy-tab-panel ${state.activeTab === 'specifications' ? 'active' : ''}" id="detail-specifications" role="tabpanel">
             <div class="legacy-panel-intro">
               <div>
-                <h3>Core Specifications</h3>
-                <p class="detail-copy">Capture the product construction details first, including measurements, materials, finishing, and key size and weight callouts.</p>
+                <h3 contenteditable="true" data-field="specs-title">Core Specifications</h3>
+                <p class="detail-copy"><textarea data-field="specs-intro">Capture the product construction details first, including measurements, materials, finishing, and key size and weight callouts.</textarea></p>
               </div>
               <span class="pill">Tab 1 · Product Specs</span>
             </div>
             <div class="legacy-spec-grid">
-              <div class="legacy-card"><h3>Width</h3><p class="detail-copy">Capture both visible width references in millimeters.</p><div class="legacy-stack"><div class="legacy-subfield"><label>Widest Visible Width (mm)</label><input type="number" value="${selected.detail.stats[1]?.value === '2' ? '2.20' : '2.05'}" /></div><div class="legacy-subfield"><label>Bottom Width (mm)</label><input type="number" value="2.00" /></div></div></div>
-              <div class="legacy-card"><h3>Thickness</h3><p class="detail-copy">Capture both top and bottom thicknesses in millimeters.</p><div class="legacy-stack"><div class="legacy-subfield"><label>Top Thickness (mm)</label><input type="number" value="1.82" /></div><div class="legacy-subfield"><label>Bottom Thickness (mm)</label><input type="number" value="1.85" /></div></div></div>
-              <div class="legacy-card"><h3>Finishing</h3><p class="detail-copy">Surface treatment, polish, wash, or coating notes.</p><select><option>High polish</option><option>Satin</option><option>Brushed</option></select></div>
-              <div class="legacy-card"><h3>Weight</h3><p class="detail-copy">Enter the ring weight in grams, specify whether it is estimated or confirmed, then select the finger size and karat.</p><div class="legacy-stack"><div class="legacy-inline"><div class="legacy-subfield"><label>Weight (g)</label><input type="number" value="5.80" /></div><div class="legacy-subfield"><label>Weight Type</label><select><option>Confirmed Weight</option><option>Estimated Weight</option></select></div></div><div class="legacy-inline"><div class="legacy-subfield"><label>Finger Size</label><select><option>6.5</option></select></div><div class="legacy-subfield"><label>Karat</label><select><option>14K</option><option>18K</option></select></div></div></div></div>
-              <div class="legacy-card"><h3>Head Style</h3><p class="detail-copy">Select one or more head design features to include in the specification.</p><div class="legacy-pill-row"><span class="legacy-chip-select">${selected.tags[0] || 'Halo'}</span><span class="legacy-chip-select">Hidden Halo</span><span class="legacy-chip-select">Four Prong</span></div></div>
-              <div class="legacy-card"><h3>Shank Style</h3><p class="detail-copy">Capture the shank design details used for the ring construction.</p><div class="legacy-pill-row"><span class="legacy-chip-select">Plain</span><span class="legacy-chip-select">Cathedral</span><span class="legacy-chip-select">Comfort fit</span></div></div>
-              <div class="legacy-card"><h3>Prong Type</h3><p class="detail-copy">Document the prong treatment options required for the setting.</p><div class="legacy-pill-row"><span class="legacy-chip-select">Eagle Claw</span><span class="legacy-chip-select">Round</span></div></div>
-              <div class="legacy-card"><h3>Wedding Band Style</h3><p class="detail-copy">Add matching wedding band construction details when applicable.</p><div class="legacy-pill-row"><span class="legacy-chip-select">Fitted</span><span class="legacy-chip-select">Plain</span><span class="legacy-chip-select">Pavé</span></div></div>
+              <div class="legacy-card"><h3 contenteditable="true" data-field="spec-width-title">Width</h3><p class="detail-copy"><textarea data-field="spec-width-copy">Capture both visible width references in millimeters.</textarea></p><div class="legacy-stack"><div class="legacy-subfield"><label>Widest Visible Width (mm)</label><input type="number" step="0.01" data-field="stat-1-value" value="${escapeHtml(editable.detail.stats[1]?.value === '2' ? '2.20' : editable.detail.stats[1]?.value || '2.05')}" /></div><div class="legacy-subfield"><label>Bottom Width (mm)</label><input type="number" step="0.01" data-field="spec-bottom-width" value="2.00" /></div></div></div>
+              <div class="legacy-card"><h3 contenteditable="true" data-field="spec-thickness-title">Thickness</h3><p class="detail-copy"><textarea data-field="spec-thickness-copy">Capture both top and bottom thicknesses in millimeters.</textarea></p><div class="legacy-stack"><div class="legacy-subfield"><label>Top Thickness (mm)</label><input type="number" step="0.01" data-field="stat-0-value" value="${escapeHtml(editable.detail.stats[0]?.value || '1.82ct')}" /></div><div class="legacy-subfield"><label>Bottom Thickness (mm)</label><input type="number" step="0.01" data-field="spec-bottom-thickness" value="1.85" /></div></div></div>
+              <div class="legacy-card"><h3 contenteditable="true" data-field="spec-finish-title">Finishing</h3><p class="detail-copy"><textarea data-field="spec-finish-copy">Surface treatment, polish, wash, or coating notes.</textarea></p><input type="text" data-field="spec-finishing" value="High polish" /></div>
+              <div class="legacy-card"><h3 contenteditable="true" data-field="spec-weight-title">Weight</h3><p class="detail-copy"><textarea data-field="spec-weight-copy">Enter the ring weight in grams, specify whether it is estimated or confirmed, then select the finger size and karat.</textarea></p><div class="legacy-stack"><div class="legacy-inline"><div class="legacy-subfield"><label>Weight (g)</label><input type="number" step="0.01" data-field="spec-weight-value" value="5.80" /></div><div class="legacy-subfield"><label>Weight Type</label><input type="text" data-field="spec-weight-type" value="Confirmed Weight" /></div></div><div class="legacy-inline"><div class="legacy-subfield"><label>Finger Size</label><input type="text" data-field="spec-finger-size" value="6.5" /></div><div class="legacy-subfield"><label>Karat</label><input type="text" data-field="spec-karat" value="14K" /></div></div></div></div>
+              <div class="legacy-card"><h3>Head Style</h3><p class="detail-copy"><textarea data-field="card-specifications-0-value">${escapeHtml(editable.detail.tabs.specifications.cards[0].value)}</textarea></p></div>
+              <div class="legacy-card"><h3>Shank Style</h3><p class="detail-copy"><textarea data-field="card-specifications-1-value">${escapeHtml(editable.detail.tabs.specifications.cards[1].value)}</textarea></p></div>
+              <div class="legacy-card"><h3>Prong Type</h3><p class="detail-copy"><textarea data-field="card-specifications-2-value">${escapeHtml(editable.detail.tabs.specifications.cards[2].value)}</textarea></p></div>
+              <div class="legacy-card"><h3>Wedding Band Style</h3><div class="legacy-stack">${renderEditableList(editable.detail.tabs.specifications.notes)}</div></div>
             </div>
-            <div class="legacy-footer-actions"><button class="secondary" type="button">Cancel</button><button class="primary" type="button">Save Specifications</button></div>
+            <div class="legacy-footer-actions"><button class="secondary" type="button" data-action="cancel">Cancel</button><button class="primary" type="button" data-action="save">Save Specifications</button></div>
           </section>`,
         suppliers: `
           <section class="legacy-tab-panel ${state.activeTab === 'suppliers' ? 'active' : ''}" id="detail-suppliers" role="tabpanel">
-            <div class="legacy-panel-intro"><div><h3>Suppliers & Spec Sheets</h3><p class="detail-copy">Track each factory and vendor SKU, plus upload factory-specific spec sheets or supporting files in one place.</p></div><span class="pill">Tab 2 · Supplier Setup</span></div>
-            <div class="legacy-suppliers-layout"><aside class="legacy-supplier-list"><label class="legacy-section-label">Factories / Vendors</label><input type="search" value="${selected.supplier}" />${[selected.supplier,'PSX Factory','5@ Work','Kutez'].map((supplier, index)=>`<div class="legacy-supplier-row ${index===0?'active':''}"><h3>${supplier}</h3><p class="detail-copy">Vendor SKU: ${selected.id}-${index+1} · ${index===0?'Inline Program':'Review stage'}</p></div>`).join('')}</aside><section class="legacy-supplier-detail"><label class="legacy-section-label">Selected Supplier</label><h3>${selected.supplier}</h3><p class="detail-copy">Use this area to store the supplier-specific master data and a spec sheet upload for the selected factory and vendor SKU combination.</p><div class="legacy-factory-meta"><div><label class="legacy-section-label">Vendor SKU</label><input type="text" value="${selected.id}-${selected.supplier.slice(0,3).toUpperCase()}" /></div><div><label class="legacy-section-label">Factory Contact</label><input type="text" value="Production manager" /></div><div><label class="legacy-section-label">Region</label><select><option>Vietnam</option><option>China</option><option>India</option></select></div></div><div class="legacy-upload-row"><div class="legacy-upload-box"><strong>Factory Spec Sheet</strong><p class="detail-copy">Upload the primary technical spec sheet provided by the factory for this vendor SKU.</p><input type="file" /></div><div class="legacy-upload-box"><strong>Supporting Documents</strong><p class="detail-copy">Add BOMs, tolerance charts, testing reports, or material callout PDFs.</p><input type="file" multiple /></div></div><div class="template-tags" style="margin-top:16px;"><span class="pill">Last upload: ${selected.updatedLabel}</span><span class="pill">${selected.supplierCount} attachments</span><span class="pill">Status: ${selected.statusLabel}</span></div><div style="margin-top:20px;"><label class="legacy-section-label">Supplier Notes</label><textarea>${selected.detail.tabs.suppliers.notes.join(' ')}</textarea></div><div class="legacy-footer-actions"><button class="secondary" type="button">Add Supplier</button><button class="primary" type="button">Save Supplier Record</button></div></section></div>
+            <div class="legacy-panel-intro"><div><h3 contenteditable="true" data-field="supplier-title">Suppliers & Spec Sheets</h3><p class="detail-copy"><textarea data-field="supplier-copy">Track each factory and vendor SKU, plus upload factory-specific spec sheets or supporting files in one place.</textarea></p></div><span class="pill">Tab 2 · Supplier Setup</span></div>
+            <div class="legacy-suppliers-layout"><aside class="legacy-supplier-list"><label class="legacy-section-label">Factories / Vendors</label><input type="search" data-field="supplier-name" value="${escapeHtml(editable.supplier)}" />${[editable.supplier,'PSX Factory','5@ Work','Kutez'].map((supplier, index)=>`<div class="legacy-supplier-row ${index===0?'active':''}"><h3 contenteditable="true">${supplier}</h3><p class="detail-copy" contenteditable="true">Vendor SKU: ${editable.id}-${index+1} · ${index===0?'Inline Program':'Review stage'}</p></div>`).join('')}</aside><section class="legacy-supplier-detail"><label class="legacy-section-label">Selected Supplier</label><h3 contenteditable="true" data-field="supplier-name-heading">${editable.supplier}</h3><p class="detail-copy"><textarea data-field="supplier-detail-copy">Use this area to store the supplier-specific master data and a spec sheet upload for the selected factory and vendor SKU combination.</textarea></p><div class="legacy-factory-meta"><div><label class="legacy-section-label">Vendor SKU</label><input type="text" data-field="supplier-sku" value="${escapeHtml(editable.id)}-${escapeHtml(editable.supplier.slice(0,3).toUpperCase())}" /></div><div><label class="legacy-section-label">Factory Contact</label><input type="text" data-field="supplier-contact" value="Production manager" /></div><div><label class="legacy-section-label">Region</label><input type="text" data-field="supplier-region" value="Vietnam" /></div></div><div class="legacy-upload-row"><div class="legacy-upload-box"><strong contenteditable="true">Factory Spec Sheet</strong><p class="detail-copy" contenteditable="true">Upload the primary technical spec sheet provided by the factory for this vendor SKU.</p><input type="file" /></div><div class="legacy-upload-box"><strong contenteditable="true">Supporting Documents</strong><p class="detail-copy" contenteditable="true">Add BOMs, tolerance charts, testing reports, or material callout PDFs.</p><input type="file" multiple /></div></div><div class="template-tags" style="margin-top:16px;"><span class="pill">Last upload: ${editable.updatedLabel}</span><span class="pill">${editable.supplierCount} attachments</span><span class="pill">Status: ${editable.statusLabel}</span></div><div style="margin-top:20px;"><label class="legacy-section-label">Supplier Notes</label><textarea data-field="suppliers-notes">${escapeHtml(editable.detail.tabs.suppliers.notes.join(' '))}</textarea></div><div class="legacy-footer-actions"><button class="secondary" type="button">Add Supplier</button><button class="primary" type="button" data-action="save">Save Supplier Record</button></div></section></div>
           </section>`,
         history: `
           <section class="legacy-tab-panel ${state.activeTab === 'history' ? 'active' : ''}" id="detail-instructions" role="tabpanel">
-            <div class="legacy-panel-intro"><div><h3>Instructions</h3><p class="detail-copy">This tab mirrors the detailed workflow from the earlier layout, grouping production callouts and special info into clearer cards.</p></div><span class="pill">Tab 3 · Production Notes</span></div>
-            <div class="legacy-info-banner"><h3>Instruction Tab Mockup</h3><p>This section keeps room for long production notes and special info while making the content easier to scan in an overlay.</p></div>
-            <div class="legacy-instructions-grid"><div class="legacy-main-instructions legacy-card"><label class="legacy-section-label">Display message on Job Bag picture</label><input type="text" value="${selected.name} · ${selected.collection}" />${['BNZ','PSX','5 @ Work','Kutez','Special Info'].map((title, index)=>`<div class="legacy-instruction-box"><h3>${title}</h3><p class="detail-copy">${selected.detail.tabs.history.notes[index % selected.detail.tabs.history.notes.length] || selected.summary}</p></div>`).join('')}</div><aside class="legacy-side-column"><div class="legacy-side-card"><label class="legacy-section-label">Attachments</label><div class="legacy-upload-box" style="margin-top:0;"><strong>Reference Images / Head Style Files</strong><p class="detail-copy">Upload visuals or documents that should appear with the instruction package.</p><input type="file" multiple /></div></div><div class="legacy-side-card"><label class="legacy-section-label">Suggested Content</label><ul class="detail-list">${selected.detail.side.nextSteps.map((item)=>`<li>${item}</li>`).join('')}</ul></div></aside></div>
-            <div class="legacy-footer-actions"><button class="secondary" type="button">Cancel</button><button class="primary" type="button">Save Instructions</button></div>
+            <div class="legacy-panel-intro"><div><h3 contenteditable="true" data-field="history-title">Instructions</h3><p class="detail-copy"><textarea data-field="history-copy">This tab mirrors the detailed workflow from the earlier layout, grouping production callouts and special info into clearer cards.</textarea></p></div><span class="pill">Tab 3 · Production Notes</span></div>
+            <div class="legacy-info-banner"><h3 contenteditable="true" data-field="history-banner-title">Instruction Tab Mockup</h3><p contenteditable="true" data-field="history-banner-copy">This section keeps room for long production notes and special info while making the content easier to scan in an overlay.</p></div>
+            <div class="legacy-instructions-grid"><div class="legacy-main-instructions legacy-card"><label class="legacy-section-label">Display message on Job Bag picture</label><input type="text" data-field="job-bag-message" value="${escapeHtml(editable.name)} · ${escapeHtml(editable.collection)}" />${['BNZ','PSX','5 @ Work','Kutez','Special Info'].map((title, index)=>`<div class="legacy-instruction-box"><h3 contenteditable="true">${title}</h3><textarea data-field="history-note-${index}">${escapeHtml(editable.detail.tabs.history.notes[index % editable.detail.tabs.history.notes.length] || editable.summary)}</textarea></div>`).join('')}</div><aside class="legacy-side-column"><div class="legacy-side-card"><label class="legacy-section-label">Attachments</label><div class="legacy-upload-box" style="margin-top:0;"><strong contenteditable="true">Reference Images / Head Style Files</strong><p class="detail-copy" contenteditable="true">Upload visuals or documents that should appear with the instruction package.</p><input type="file" multiple /></div></div><div class="legacy-side-card"><label class="legacy-section-label">Suggested Content</label><div class="legacy-stack">${editable.detail.side.nextSteps.map((item, index)=>`<div class="legacy-subfield"><label>Suggested item ${index + 1}</label><input type="text" data-field="next-step-${index}" value="${escapeHtml(item)}" /></div>`).join('')}</div></div></aside></div>
+            <div class="legacy-footer-actions"><button class="secondary" type="button" data-action="cancel">Cancel</button><button class="primary" type="button" data-action="save">Save Instructions</button></div>
           </section>`
       };
 
       detailOverlay.hidden = false;
       detailOverlay.innerHTML = `
-        <div class="detail-modal glass" role="dialog" aria-modal="true" aria-label="${selected.name} detail overlay">
+        <div class="detail-modal glass" role="dialog" aria-modal="true" aria-label="${editable.name} detail overlay">
           <div class="detail-modal-header">
             <div class="detail-modal-copy">
-              <span class="eyebrow" style="margin-bottom:0;">Open master detail overlay</span>
-              <h2>${selected.name}</h2>
-              <p class="detail-copy">${selected.detail.subtitle}</p>
+              <span class="eyebrow" style="margin-bottom:0;" contenteditable="true">Open master detail overlay</span>
+              <h2 contenteditable="true" data-field="name">${editable.name}</h2>
+              <textarea class="detail-copy" data-field="detail-subtitle">${escapeHtml(editable.detail.subtitle)}</textarea>
               <div class="legacy-meta" style="margin-top:16px;">
-                <span class="status-badge ${selected.statusClass}">${selected.statusLabel}</span>
-                <span class="pill">${selected.id}</span>
-                <span class="pill">${selected.collection}</span>
-                <span class="pill">Updated ${selected.updatedLabel}</span>
+                <span class="status-badge ${editable.statusClass}" contenteditable="true" data-field="status-label">${editable.statusLabel}</span>
+                <span class="pill" contenteditable="true" data-field="id">${editable.id}</span>
+                <span class="pill" contenteditable="true" data-field="collection">${editable.collection}</span>
+                <span class="pill" contenteditable="true" data-field="updated-label">Updated ${editable.updatedLabel}</span>
               </div>
             </div>
             <button id="closeDetailOverlay" class="secondary" type="button" aria-label="Close detail overlay">Close</button>
@@ -1527,11 +1561,47 @@
         tabButton.addEventListener('click', () => {
           state.activeTab = tabButton.dataset.tab;
           detailView.hidden = true;
-      renderDetail(selected);
+          renderDetail(getSelectedMaster());
+        });
+      });
+      detailOverlay.querySelectorAll('[data-action="save"]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const draft = getEditableMaster(selected.id);
+          const nameField = detailOverlay.querySelector('[data-field="name"]');
+          const subtitleField = detailOverlay.querySelector('[data-field="detail-subtitle"]');
+          const supplierField = detailOverlay.querySelector('[data-field="supplier-name"]');
+          const supplierNotesField = detailOverlay.querySelector('[data-field="suppliers-notes"]');
+          const statusField = detailOverlay.querySelector('[data-field="status-label"]');
+          const collectionField = detailOverlay.querySelector('[data-field="collection"]');
+          const updatedField = detailOverlay.querySelector('[data-field="updated-label"]');
+          if (nameField) draft.name = nameField.textContent.trim() || draft.name;
+          if (subtitleField) draft.detail.subtitle = subtitleField.value.trim() || draft.detail.subtitle;
+          if (statusField) draft.statusLabel = statusField.textContent.trim() || draft.statusLabel;
+          if (collectionField) draft.collection = collectionField.textContent.trim() || draft.collection;
+          if (updatedField) draft.updatedLabel = updatedField.textContent.replace(/^Updated\s*/, '').trim() || draft.updatedLabel;
+          if (supplierField) draft.supplier = supplierField.value.trim() || draft.supplier;
+          if (supplierNotesField) draft.detail.tabs.suppliers.notes = [supplierNotesField.value.trim()].filter(Boolean);
+          draft.detail.tabs.specifications.cards.forEach((card, index) => {
+            const field = detailOverlay.querySelector(`[data-field="card-specifications-${index}-value"]`);
+            if (field) card.value = field.value.trim() || card.value;
+          });
+          draft.detail.tabs.specifications.notes = Array.from(detailOverlay.querySelectorAll('[data-field="list-item"]')).map((field) => field.value.trim()).filter(Boolean);
+          draft.detail.tabs.history.notes = Array.from(detailOverlay.querySelectorAll('[data-field^="history-note-"]')).map((field) => field.value.trim()).filter(Boolean);
+          draft.detail.side.nextSteps = Array.from(detailOverlay.querySelectorAll('[data-field^="next-step-"]')).map((field) => field.value.trim()).filter(Boolean);
+          const masterIndex = masters.findIndex((master) => master.id === selected.id);
+          if (masterIndex >= 0) {
+            masters[masterIndex] = structuredClone(draft);
+          }
+          renderApp();
+        });
+      });
+      detailOverlay.querySelectorAll('[data-action="cancel"]').forEach((button) => {
+        button.addEventListener('click', () => {
+          draftMasters.delete(selected.id);
+          renderDetail(getSelectedMaster());
         });
       });
     }
-
     function closeDetailOverlay() {
       state.isOverlayOpen = false;
       detailOverlay.hidden = true;
