@@ -919,47 +919,6 @@
           </div>
         </div>
 
-        <section class="featured-card glass">
-          <div class="featured-grid">
-            <div class="featured-visual">
-              <div class="template-mark">✦</div>
-              <div>
-                <span class="pill">Featured master</span>
-                <h2 id="featuredId" style="margin-top:12px; font-size: 30px; letter-spacing: -0.05em;">CUSTOM-001</h2>
-                <p id="featuredSummary" style="margin-top:8px; color: rgba(255,255,255,0.82);">Signature solitaire engagement template with halo-ready options and approved BNZ supplier spec sheet.</p>
-              </div>
-            </div>
-
-            <div class="featured-details">
-              <div class="title-row">
-                <div>
-                  <span class="eyebrow" style="margin-bottom:10px;">Detailed card preview</span>
-                  <h2 style="font-size: 28px; letter-spacing: -0.04em;">A single card now opens into the full production detail view.</h2>
-                </div>
-                <div class="status-row">
-                  <span id="featuredStatus" class="status-badge status-in-use">In Use</span>
-                  <span id="featuredUpdated" class="pill">Last updated Mar 18, 2026</span>
-                </div>
-              </div>
-
-              <p class="detail-copy">
-                The card grid now connects directly to the detailed master workspace below, so the team can jump from browse mode into
-                specifications, supplier notes, linked assets, and revision history without losing the current filters or search context.
-              </p>
-
-              <div id="featuredMeta" class="meta-row"></div>
-
-              <div id="featuredTags" class="template-tags"></div>
-
-              <div class="card-actions">
-                <button id="featuredOpenButton" class="primary" type="button">Open Master</button>
-                <button class="secondary" type="button">Duplicate</button>
-                <button class="text-button" type="button">View history</button>
-              </div>
-            </div>
-          </div>
-        </section>
-
         <div class="section-head">
           <div>
             <h2>Saved master cards</h2>
@@ -980,16 +939,6 @@
       </section>
 
       <aside class="sidebar">
-        <section class="sidebar-card glass">
-          <h3>Why this works better</h3>
-          <p class="meta-note">The module feels less like an admin table and more like a curated library. Important production signals stay visible without losing elegance.</p>
-          <ul>
-            <li>Cards can now be opened directly into the full master detail experience.</li>
-            <li>Status chips and search continue to control what is visible in the card library.</li>
-            <li>Specifications, assets, supplier notes, and history remain available as separate tabs.</li>
-          </ul>
-        </section>
-
         <section class="sidebar-card glass">
           <h3>Suggested next enhancements</h3>
           <ul class="suggestion-list">
@@ -1363,7 +1312,6 @@
     const searchInput = document.getElementById('searchInput');
     const sortButton = document.getElementById('sortButton');
     const statusFilters = document.getElementById('statusFilters');
-    const featuredOpenButton = document.getElementById('featuredOpenButton');
 
     function escapeHtml(value) {
       return String(value ?? '')
@@ -1415,27 +1363,6 @@
         state.selectedId = filtered[0]?.id || null;
         state.activeTab = 'specifications';
       }
-    }
-
-    function renderFeatured(master) {
-      document.getElementById('featuredId').textContent = master.id;
-      document.getElementById('featuredSummary').textContent = master.detail.subtitle;
-      document.getElementById('featuredStatus').className = `status-badge ${master.statusClass}`;
-      document.getElementById('featuredStatus').textContent = master.statusLabel;
-      document.getElementById('featuredUpdated').textContent = `Last updated ${master.updatedLabel}`;
-      document.getElementById('featuredMeta').innerHTML = master.meta.map((item) => `
-        <div class="meta-card">
-          <span class="meta-label">${item.label}</span>
-          <span class="meta-value">${item.value}</span>
-        </div>
-      `).join('');
-      document.getElementById('featuredTags').innerHTML = master.tags.map((tag) => `<span class="pill">${tag}</span>`).join('');
-      featuredOpenButton.onclick = () => {
-        state.selectedId = master.id;
-        state.activeTab = 'specifications';
-        state.isOverlayOpen = true;
-        renderApp();
-      };
     }
 
     function renderCards(filtered) {
@@ -1615,8 +1542,6 @@
       resultsSummary.textContent = `${filtered.length} shown of ${masters.length} total`;
       emptyState.hidden = filtered.length > 0;
       renderCards(filtered);
-      const featuredMaster = masters.find((master) => master.id === 'CUSTOM-001') || masters[0];
-      renderFeatured(featuredMaster);
       const selected = masters.find((master) => master.id === state.selectedId) || filtered[0] || null;
       detailView.hidden = true;
       renderDetail(selected);
