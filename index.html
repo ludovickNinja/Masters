@@ -935,6 +935,13 @@
       margin-top: 12px;
     }
 
+    .legacy-supplier-row {
+      display: block;
+      width: 100%;
+      text-align: left;
+      cursor: pointer;
+    }
+
     .legacy-supplier-row.active {
       border-color: var(--primary);
       background: var(--primary-soft);
@@ -1415,7 +1422,8 @@
       sort: 'recent',
       selectedId: masters[0].id,
       activeTab: 'specifications',
-      isOverlayOpen: false
+      isOverlayOpen: false,
+      selectedSupplierByMaster: {}
     };
 
     const categoryOptions = ['Engagement Ring', 'Wedding Band', 'Necklace', 'Bracelet', 'Earrings', 'Pendant', 'Custom'];
@@ -1464,6 +1472,16 @@
 
     function renderSelectOptions(options, selectedValue) {
       return options.map((option) => `<option value="${escapeHtml(option)}" ${option === selectedValue ? 'selected' : ''}>${escapeHtml(option)}</option>`).join('');
+    }
+
+    function getSupplierOptions(master) {
+      const staticSuppliers = ['PSX Factory', '5@ Work', 'Kutez'];
+      return Array.from(new Set([master.supplier, ...staticSuppliers])).filter(Boolean);
+    }
+
+    function getSupplierCode(name) {
+      const cleaned = String(name ?? '').toUpperCase().replace(/[^A-Z0-9]+/g, '');
+      return cleaned.slice(0, 3) || 'SUP';
     }
 
     function parseFeatureSelections(value) {
@@ -1606,6 +1624,9 @@
       }
 
       const editable = getEditableMaster(selected.id);
+      const supplierOptions = getSupplierOptions(editable);
+      const activeSupplier = state.selectedSupplierByMaster[selected.id] || editable.supplier || supplierOptions[0] || '';
+      const activeSupplierIndex = Math.max(0, supplierOptions.findIndex((supplier) => supplier === activeSupplier));
       const tabEntries = Object.entries(editable.detail.tabs);
       if (!editable.detail.tabs[state.activeTab]) {
         state.activeTab = tabEntries[0][0];
@@ -1636,7 +1657,7 @@
         suppliers: `
           <section class="legacy-tab-panel ${state.activeTab === 'suppliers' ? 'active' : ''}" id="detail-suppliers" role="tabpanel">
             <div class="legacy-panel-intro"><div><h3 contenteditable="true" data-field="supplier-title">Suppliers & Spec Sheets</h3></div><span class="pill">Tab 2 · Supplier Setup</span></div>
-            <div class="legacy-suppliers-layout"><aside class="legacy-supplier-list"><label class="legacy-section-label">Factories / Vendors</label><input type="search" data-field="supplier-name" value="${escapeHtml(editable.supplier)}" />${[editable.supplier,'PSX Factory','5@ Work','Kutez'].map((supplier, index)=>`<div class="legacy-supplier-row ${index===0?'active':''}"><h3>${supplier}</h3><p class="detail-copy">Vendor SKU: ${editable.id}-${index+1} · Vendor master updated ${editable.updatedLabel}</p></div>`).join('')}</aside><section class="legacy-supplier-detail"><label class="legacy-section-label">Selected Supplier</label><h3 contenteditable="true" data-field="supplier-name-heading">${editable.supplier}</h3><div class="legacy-factory-meta"><div><label class="legacy-section-label">Vendor SKU</label><input type="text" data-field="supplier-sku" value="${escapeHtml(editable.id)}-${escapeHtml(editable.supplier.slice(0,3).toUpperCase())}" /></div></div><div class="legacy-upload-row"><div class="legacy-upload-box"><strong contenteditable="true">Factory Spec Sheet</strong><p class="detail-copy" contenteditable="true">Upload the primary technical spec sheet provided by the factory for this vendor SKU.</p><input type="file" /></div><div class="legacy-upload-box"><strong contenteditable="true">Supporting Documents</strong><p class="detail-copy" contenteditable="true">Add BOMs, tolerance charts, testing reports, or material callout PDFs.</p><input type="file" multiple /></div></div><div class="template-tags" style="margin-top:16px;"><span class="pill">Last upload: ${editable.updatedLabel}</span><span class="pill">${editable.supplierCount} attachments</span></div><div style="margin-top:20px;"><label class="legacy-section-label">Supplier Notes</label><textarea data-field="suppliers-notes">${escapeHtml(editable.detail.tabs.suppliers.notes.join(' '))}</textarea></div><div class="legacy-footer-actions"><button class="secondary" type="button">Add Supplier</button><button class="primary" type="button" data-action="save">Save Supplier Record</button></div></section></div>
+            <div class="legacy-suppliers-layout"><aside class="legacy-supplier-list"><label class="legacy-section-label">Factories / Vendors</label><input type="search" data-field="supplier-filter" placeholder="Search supplier" value="${escapeHtml(activeSupplier)}" />${supplierOptions.map((supplier, index)=>`<button type="button" class="legacy-supplier-row ${supplier===activeSupplier?'active':''}" data-supplier-option="${escapeHtml(supplier)}"><h3>${supplier}</h3><p class="detail-copy">Vendor SKU: ${editable.id}-${index+1} · Vendor master updated ${editable.updatedLabel}</p></button>`).join('')}</aside><section class="legacy-supplier-detail"><label class="legacy-section-label">Selected Supplier</label><h3 contenteditable="true" data-field="supplier-name-heading">${activeSupplier}</h3><div class="legacy-factory-meta"><div><label class="legacy-section-label">Vendor SKU</label><input type="text" data-field="supplier-sku" value="${escapeHtml(editable.id)}-${escapeHtml(getSupplierCode(activeSupplier))}" /></div></div><div class="legacy-upload-row"><div class="legacy-upload-box"><strong contenteditable="true">Factory Spec Sheet</strong><p class="detail-copy" contenteditable="true">Upload the primary technical spec sheet provided by the factory for this vendor SKU.</p><input type="file" /></div><div class="legacy-upload-box"><strong contenteditable="true">Supporting Documents</strong><p class="detail-copy" contenteditable="true">Add BOMs, tolerance charts, testing reports, or material callout PDFs.</p><input type="file" multiple /></div></div><div class="template-tags" style="margin-top:16px;"><span class="pill">Last upload: ${editable.updatedLabel}</span><span class="pill">${Math.max(editable.supplierCount, activeSupplierIndex + 1)} attachments</span></div><div style="margin-top:20px;"><label class="legacy-section-label">Supplier Notes</label><textarea data-field="suppliers-notes">${escapeHtml(editable.detail.tabs.suppliers.notes.join(' '))}</textarea></div><div class="legacy-footer-actions"><button class="secondary" type="button">Add Supplier</button><button class="primary" type="button" data-action="save">Save Supplier Record</button></div></section></div>
           </section>`,
         history: `
           <section class="legacy-tab-panel ${state.activeTab === 'history' ? 'active' : ''}" id="detail-instructions" role="tabpanel">
@@ -1702,12 +1723,28 @@
           renderDetail(getSelectedMaster());
         });
       });
+      detailOverlay.querySelectorAll('[data-supplier-option]').forEach((supplierButton) => {
+        supplierButton.addEventListener('click', () => {
+          state.selectedSupplierByMaster[selected.id] = supplierButton.dataset.supplierOption;
+          renderDetail(getSelectedMaster());
+        });
+      });
+      const supplierFilterInput = detailOverlay.querySelector('[data-field="supplier-filter"]');
+      if (supplierFilterInput) {
+        supplierFilterInput.addEventListener('input', () => {
+          const query = supplierFilterInput.value.trim().toLowerCase();
+          detailOverlay.querySelectorAll('[data-supplier-option]').forEach((row) => {
+            const matches = row.dataset.supplierOption.toLowerCase().includes(query);
+            row.hidden = !matches;
+          });
+        });
+      }
       detailOverlay.querySelectorAll('[data-action="save"]').forEach((button) => {
         button.addEventListener('click', () => {
           const draft = getEditableMaster(selected.id);
           const nameField = detailOverlay.querySelector('[data-field="name"]');
           const subtitleField = detailOverlay.querySelector('[data-field="detail-subtitle"]');
-          const supplierField = detailOverlay.querySelector('[data-field="supplier-name"]');
+          const supplierHeadingField = detailOverlay.querySelector('[data-field="supplier-name-heading"]');
           const supplierNotesField = detailOverlay.querySelector('[data-field="suppliers-notes"]');
           const statusField = detailOverlay.querySelector('[data-field="status-label"]');
           const categoryField = detailOverlay.querySelector('[data-field="category"]');
@@ -1717,7 +1754,11 @@
           if (statusField) draft.statusLabel = statusField.textContent.trim() || draft.statusLabel;
           if (categoryField) draft.category = categoryField.value.trim() || draft.category;
           if (updatedField) draft.updatedLabel = updatedField.textContent.replace(/^Updated\s*/, '').trim() || draft.updatedLabel;
-          if (supplierField) draft.supplier = supplierField.value.trim() || draft.supplier;
+          const selectedSupplierName = supplierHeadingField?.textContent.trim()
+            || state.selectedSupplierByMaster[selected.id]
+            || draft.supplier;
+          draft.supplier = selectedSupplierName;
+          state.selectedSupplierByMaster[selected.id] = selectedSupplierName;
           if (supplierNotesField) draft.detail.tabs.suppliers.notes = [supplierNotesField.value.trim()].filter(Boolean);
           const specSelections = [
             getMultiSelectValues(detailOverlay, 'head-style'),
