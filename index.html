@@ -807,6 +807,27 @@
       margin: 0;
     }
 
+    .detail-description-field,
+    .detail-meta-stack {
+      display: grid;
+      gap: 8px;
+    }
+
+    .detail-description-field {
+      margin-top: 4px;
+    }
+
+    .detail-meta-stack {
+      align-items: start;
+    }
+
+    .detail-meta-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
     .legacy-pill-row,
     .legacy-checklist {
       display: grid;
@@ -1632,14 +1653,19 @@
             <div class="detail-modal-copy">
               <span class="eyebrow" style="margin-bottom:0;" contenteditable="true">Open master detail overlay</span>
               <h2 contenteditable="true" data-field="name">${editable.name}</h2>
-              <textarea class="detail-copy" data-field="detail-subtitle">${escapeHtml(editable.detail.subtitle)}</textarea>
-              <div class="legacy-meta" style="margin-top:16px;">
-                <span class="status-badge ${editable.statusClass}" contenteditable="true" data-field="status-label">${editable.statusLabel}</span>
+              <div class="detail-description-field">
+                <label class="legacy-section-label" for="detail-description">Description</label>
+                <textarea id="detail-description" class="detail-copy" data-field="detail-subtitle">${escapeHtml(editable.detail.subtitle)}</textarea>
+              </div>
+              <div class="detail-meta-stack" style="margin-top:16px;">
+                <div class="detail-meta-row">
+                  <span class="status-badge ${editable.statusClass}" contenteditable="true" data-field="status-label">${editable.statusLabel}</span>
+                  <span class="pill" contenteditable="true" data-field="updated-label">Updated ${editable.updatedLabel}</span>
+                </div>
                 <div class="legacy-meta-select">
                   <label class="legacy-section-label" for="detail-category">Category</label>
                   <select id="detail-category" class="legacy-chip-select" data-field="category">${renderSelectOptions(categoryOptions, editable.category || 'Engagement Ring')}</select>
                 </div>
-                <span class="pill" contenteditable="true" data-field="updated-label">Updated ${editable.updatedLabel}</span>
               </div>
             </div>
             <button id="closeDetailOverlay" class="secondary" type="button" aria-label="Close detail overlay">Close</button>
