@@ -955,6 +955,59 @@
 
     .legacy-info-banner p { color: rgba(255,255,255,0.84); }
 
+
+    .legacy-steps-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .legacy-steps-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .legacy-step-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+      border-radius: 14px;
+      padding: 12px;
+      border: 1px solid var(--border);
+      background: rgba(248, 250, 255, 0.88);
+    }
+
+    .legacy-step-row input {
+      margin: 0;
+    }
+
+    .legacy-step-actions {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .legacy-icon-btn {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+      min-width: 34px;
+      min-height: 34px;
+      padding: 0 8px;
+      cursor: pointer;
+      line-height: 1;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .legacy-icon-btn.danger {
+      color: #b42318;
+      border-color: rgba(180, 35, 24, 0.28);
+      background: rgba(254, 243, 242, 0.9);
+    }
+
     @media (max-width: 1040px) {
       .content-grid,
       .detail-layout { flex-direction: column; }
@@ -1620,6 +1673,30 @@
       });
     }
 
+
+    function renderProductionSteps(nextSteps) {
+      const steps = (nextSteps && nextSteps.length ? nextSteps : ['']).map((step, index, arr) => `
+        <div class="legacy-step-row">
+          <input type="text" data-field="next-step-${index}" value="${escapeHtml(step)}" placeholder="Enter production step" />
+          <div class="legacy-step-actions">
+            <button type="button" class="legacy-icon-btn" data-action="move-step-down" data-index="${index}" aria-label="Move step down" ${index === arr.length - 1 ? 'disabled' : ''}>▼</button>
+            <button type="button" class="legacy-icon-btn" data-action="move-step-up" data-index="${index}" aria-label="Move step up" ${index === 0 ? 'disabled' : ''}>▲</button>
+            <button type="button" class="legacy-icon-btn danger" data-action="delete-step" data-index="${index}" aria-label="Delete step">✕</button>
+          </div>
+        </div>
+      `).join('');
+
+      return `
+        <div class="legacy-side-card">
+          <div class="legacy-steps-header">
+            <label class="legacy-section-label" style="margin:0;">Steps</label>
+            <button type="button" class="legacy-icon-btn" data-action="add-step" aria-label="Add step">＋</button>
+          </div>
+          <div class="legacy-steps-list">${steps}</div>
+        </div>
+      `;
+    }
+
     function renderDetail(selected) {
       if (!selected || !state.isOverlayOpen) {
         detailOverlay.hidden = true;
@@ -1666,7 +1743,7 @@
         history: `
           <section class="legacy-tab-panel ${state.activeTab === 'history' ? 'active' : ''}" id="detail-instructions" role="tabpanel">
             <div class="legacy-panel-intro"><div><h3 contenteditable="true" data-field="history-title">Instructions</h3><p class="detail-copy" contenteditable="true" data-field="history-copy">Use this tab for production notes, supplier-specific callouts, and any special handling details that need to stay with the master.</p></div><span class="pill">Tab 3 · Production Notes</span></div>
-            <div class="legacy-instructions-grid"><div class="legacy-main-instructions legacy-card"><label class="legacy-section-label">Production Notes</label><div class="legacy-instruction-fields"><div class="legacy-subfield"><label>Factory 1</label><textarea data-field="history-note-0">${escapeHtml(editable.detail.tabs.history.notes[0] || '')}</textarea></div><div class="legacy-subfield"><label>Factory 2</label><textarea data-field="history-note-1">${escapeHtml(editable.detail.tabs.history.notes[1] || '')}</textarea></div><div class="legacy-subfield"><label>Factory 3</label><textarea data-field="history-note-2">${escapeHtml(editable.detail.tabs.history.notes[2] || '')}</textarea></div><div class="legacy-subfield"><label>Factory 4</label><textarea data-field="history-note-3">${escapeHtml(editable.detail.tabs.history.notes[3] || '')}</textarea></div><div class="legacy-subfield"><label>Special Info</label><textarea data-field="history-summary">${escapeHtml(editable.summary)}</textarea></div></div></div><aside class="legacy-side-column"><div class="legacy-side-card"><label class="legacy-section-label">Attachments</label><div class="legacy-stack"><p class="detail-copy">Upload visuals or documents that should appear with the instruction package.</p><input type="file" multiple /></div></div></aside></div>
+            <div class="legacy-instructions-grid"><div class="legacy-main-instructions legacy-card"><label class="legacy-section-label">Production Notes</label><div class="legacy-instruction-fields"><div class="legacy-subfield"><label>Factory 1</label><textarea data-field="history-note-0">${escapeHtml(editable.detail.tabs.history.notes[0] || '')}</textarea></div><div class="legacy-subfield"><label>Factory 2</label><textarea data-field="history-note-1">${escapeHtml(editable.detail.tabs.history.notes[1] || '')}</textarea></div><div class="legacy-subfield"><label>Factory 3</label><textarea data-field="history-note-2">${escapeHtml(editable.detail.tabs.history.notes[2] || '')}</textarea></div><div class="legacy-subfield"><label>Factory 4</label><textarea data-field="history-note-3">${escapeHtml(editable.detail.tabs.history.notes[3] || '')}</textarea></div><div class="legacy-subfield"><label>Special Info</label><textarea data-field="history-summary">${escapeHtml(editable.summary)}</textarea></div></div></div><aside class="legacy-side-column"><div class="legacy-side-card"><label class="legacy-section-label">Attachments</label><div class="legacy-stack"><p class="detail-copy">Upload visuals or documents that should appear with the instruction package.</p><input type="file" multiple /></div></div>${renderProductionSteps(editable.detail.side.nextSteps || [])}</aside></div>
             <div class="legacy-footer-actions"><button class="secondary" type="button" data-action="cancel">Cancel</button><button class="primary" type="button" data-action="save">Save Instructions</button></div>
           </section>`
       };
@@ -1743,6 +1820,34 @@
           });
         });
       }
+
+      const getCurrentSteps = () => Array.from(detailOverlay.querySelectorAll('[data-field^="next-step-"]')).map((field) => field.value.trim());
+      const persistAndRenderSteps = (steps) => {
+        const draft = getEditableMaster(selected.id);
+        draft.detail.side.nextSteps = steps.filter(Boolean);
+        renderDetail(getSelectedMaster());
+      };
+      detailOverlay.querySelectorAll('[data-action="add-step"]').forEach((button) => {
+        button.addEventListener('click', () => {
+          persistAndRenderSteps([...getCurrentSteps(), '']);
+        });
+      });
+      detailOverlay.querySelectorAll('[data-action="move-step-up"], [data-action="move-step-down"], [data-action="delete-step"]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const index = Number(button.dataset.index);
+          const steps = getCurrentSteps();
+          if (button.dataset.action === 'delete-step') {
+            steps.splice(index, 1);
+            persistAndRenderSteps(steps.length ? steps : ['']);
+            return;
+          }
+          const targetIndex = button.dataset.action === 'move-step-up' ? index - 1 : index + 1;
+          if (targetIndex < 0 || targetIndex >= steps.length) return;
+          [steps[index], steps[targetIndex]] = [steps[targetIndex], steps[index]];
+          persistAndRenderSteps(steps);
+        });
+      });
+
       detailOverlay.querySelectorAll('[data-action="save"]').forEach((button) => {
         button.addEventListener('click', () => {
           const draft = getEditableMaster(selected.id);
