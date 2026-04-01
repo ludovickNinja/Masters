@@ -1640,21 +1640,21 @@
 
     function renderCards(filtered) {
       masterGrid.innerHTML = filtered.map((master) => `
-        <button class="master-card glass" type="button" data-id="${master.id}" aria-pressed="${master.id === state.selectedId}">
+        <button class="master-card glass" type="button" data-id="${escapeHtml(master.id)}" aria-pressed="${master.id === state.selectedId}">
           <div class="card-header">
             <div>
-              <div class="card-id">Template ID · ${master.id}</div>
-              <h3>${master.name}</h3>
+              <div class="card-id">Template ID · ${escapeHtml(master.id)}</div>
+              <h3>${escapeHtml(master.name)}</h3>
             </div>
-            <span class="status-badge ${master.statusClass}">${master.statusLabel}</span>
+            <span class="status-badge ${escapeHtml(master.statusClass)}">${escapeHtml(master.statusLabel)}</span>
           </div>
-          <p>${master.summary}</p>
+          <p>${escapeHtml(master.summary)}</p>
           <div class="card-stats">
-            ${master.metrics.map((metric) => `<div class="stat-box"><strong>${metric.value}</strong><span>${metric.label}</span></div>`).join('')}
+            ${master.metrics.map((metric) => `<div class="stat-box"><strong>${escapeHtml(metric.value)}</strong><span>${escapeHtml(metric.label)}</span></div>`).join('')}
           </div>
           <div class="card-footer">
             <div class="template-tags">
-              ${master.tags.slice(0, 2).map((tag) => `<span class="pill">${tag}</span>`).join('')}
+              ${master.tags.slice(0, 2).map((tag) => `<span class="pill">${escapeHtml(tag)}</span>`).join('')}
             </div>
             <div class="card-actions">
               <span class="secondary" style="display:inline-flex; align-items:center;">Open detail</span>
@@ -1725,7 +1725,7 @@
             </div>
             <div class="legacy-spec-grid">
               <div class="legacy-card"><h3 contenteditable="true" data-field="spec-width-title">Width</h3><div class="legacy-stack"><div class="legacy-subfield"><label>Widest Visible Width (mm)</label><input type="number" step="0.01" data-field="stat-1-value" value="${escapeHtml(editable.detail.stats[1]?.value === '2' ? '2.20' : editable.detail.stats[1]?.value || '2.05')}" /></div><div class="legacy-subfield"><label>Bottom Width (mm)</label><input type="number" step="0.01" data-field="spec-bottom-width" value="2.00" /></div></div></div>
-              <div class="legacy-card"><h3 contenteditable="true" data-field="spec-thickness-title">Thickness</h3><div class="legacy-stack"><div class="legacy-subfield"><label>Top Thickness (mm)</label><input type="number" step="0.01" data-field="stat-0-value" value="${escapeHtml(editable.detail.stats[0]?.value || '1.82ct')}" /></div><div class="legacy-subfield"><label>Bottom Thickness (mm)</label><input type="number" step="0.01" data-field="spec-bottom-thickness" value="1.85" /></div></div></div>
+              <div class="legacy-card"><h3 contenteditable="true" data-field="spec-thickness-title">Thickness</h3><div class="legacy-stack"><div class="legacy-subfield"><label>Top Thickness (mm)</label><input type="number" step="0.01" data-field="stat-0-value" value="${escapeHtml(editable.detail.stats[0]?.value || '1.80')}" /></div><div class="legacy-subfield"><label>Bottom Thickness (mm)</label><input type="number" step="0.01" data-field="spec-bottom-thickness" value="1.85" /></div></div></div>
               <div class="legacy-card"><h3 contenteditable="true" data-field="spec-finish-title">Finishing</h3><select class="legacy-chip-select" data-field="spec-finishing">${renderSelectOptions(finishOptions, 'High polish')}</select></div>
               <div class="legacy-card"><h3 contenteditable="true" data-field="spec-weight-title">Weight</h3><div class="legacy-stack"><div class="legacy-inline"><div class="legacy-subfield"><label>Weight (g)</label><input type="number" step="0.01" data-field="spec-weight-value" value="5.80" /></div><div class="legacy-subfield"><label>Weight Type</label><select class="legacy-chip-select" data-field="spec-weight-type">${renderSelectOptions(weightTypeOptions, 'Confirmed Weight')}</select></div></div><div class="legacy-inline"><div class="legacy-subfield"><label>Finger Size</label><input type="text" data-field="spec-finger-size" value="6.5" /></div><div class="legacy-subfield"><label>Karat</label><input type="text" data-field="spec-karat" value="14K" /></div></div></div></div>
               <div class="legacy-card"><h3>Head Style</h3><div class="legacy-stack">${renderMultiSelect({ label: 'Head Style', field: 'head-style', options: featureOptions.headStyle, selectedValues: parseFeatureSelections(editable.detail.tabs.specifications.cards[0].value) })}</div></div>
