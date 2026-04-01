@@ -1134,361 +1134,22 @@
   </main>
 
   <script>
-    const masters = [
-      {
-        id: 'CUSTOM-001',
-        name: 'Signature Solitaire',
-        status: 'in-use',
-        statusLabel: 'In Use',
-        statusClass: 'status-in-use',
-        family: 'Engagement · Head Style',
-        collection: 'Signature Engagement',
-        category: 'Engagement Ring',
-        supplier: 'Factory 1',
-        supplierCount: 6,
-        revision: 'v12',
-        updatedLabel: 'Mar 18, 2026',
-        updatedSort: '2026-03-18',
-        summary: 'Core engagement template with hidden halo option, approved weights, and complete supplier documents.',
-        tags: ['Engagement', 'Factory 1', 'Halo compatible', 'Supplier-ready'],
-        metrics: [
-          { value: '6', label: 'Suppliers linked' },
-          { value: 'v12', label: 'Current revision' },
-          { value: 'Mar 18', label: 'Last updated' }
-        ],
-        meta: [
-          { label: 'Product Family', value: 'Engagement · Head Style' },
-          { label: 'Primary Supplier', value: 'Factory 1' },
-          { label: 'Revision', value: 'v12 · Approved' },
-          { label: 'Linked Assets', value: 'Spec sheet, BOM, images' }
-        ],
-        detail: {
-          subtitle: 'Signature solitaire engagement template with halo-ready options and approved Factory 1 supplier spec sheet.',
-          badges: ['Approved for production', 'Wedding band match', '14K / 18K'],
-          stats: [
-            { value: '1.82ct', label: 'Center stone guide' },
-            { value: '2.05mm', label: 'Shank width' },
-            { value: '6 days', label: 'Avg supplier lead time' }
-          ],
-          tabs: {
-            specifications: {
-              title: 'Specifications',
-              copy: 'Production-approved dimensions, tolerances, and finishing standards for the core solitaire master.',
-              cards: [
-                { label: 'Head options', value: '4-prong standard, hidden halo approved' },
-                { label: 'Metal support', value: '14K, 18K, platinum-ready' },
-                { label: 'Sizing rule', value: 'US 4–9 with quarter sizes' }
-              ],
-              notes: ['Minimum shoulder thickness: 1.85mm after polish.', 'Cathedral rise stays locked for matching band alignment.']
-            },
-            suppliers: {
-              title: 'Supplier notes',
-              copy: 'Primary supplier is fully approved and alternates have current CAD and BOM alignment.',
-              cards: [
-                { label: 'Primary', value: 'Factory 1 · approved' },
-                { label: 'Secondary', value: 'Factory 2 · casting backup' },
-                { label: 'Documents', value: 'BOM, QA imagery, tolerance sheet' }
-              ],
-              notes: ['Factory 1 approved revision v12 on March 18, 2026.', 'Backup supplier only needed for rush platinum orders.']
-            },
-            assets: {
-              title: 'Linked assets',
-              copy: 'All core production files are attached and ready for handoff.',
-              cards: [
-                { label: 'Spec sheet', value: 'Approved PDF' },
-                { label: 'CAD package', value: '3DM + STL' },
-                { label: 'Reference imagery', value: 'Studio + QC photos' }
-              ],
-              notes: ['Last asset sync completed 2 hours ago.', 'Image set includes halo and no-halo variants.']
-            },
-            history: {
-              title: 'Revision history',
-              copy: 'Recent revisions focused on halo tolerance and shoulder weight cleanup.',
-              cards: [
-                { label: 'v12', value: 'Approved hidden halo tolerances' },
-                { label: 'v11', value: 'Adjusted shoulder taper' },
-                { label: 'v10', value: 'Updated polish and finish notes' }
-              ],
-              notes: ['Revision owner: Mia Chen.', 'No open blockers on current release.']
-            }
-          },
-          side: {
-            readiness: ['Production ready', 'BOM confirmed', 'QC imagery attached'],
-            nextSteps: ['Duplicate for cathedral variation', 'Publish to engagement collection', 'Notify supplier success team']
-          }
-        }
-      },
-      {
-        id: 'CUSTOM-014',
-        name: 'Oval Halo Petite',
-        status: 'review',
-        statusLabel: 'Review',
-        statusClass: 'status-review',
-        family: 'Engagement · Halo',
-        collection: 'Petite Halo',
-        category: 'Engagement Ring',
-        supplier: 'Factory 1',
-        supplierCount: 2,
-        revision: 'v07',
-        updatedLabel: 'Mar 16, 2026',
-        updatedSort: '2026-03-16',
-        summary: 'Awaiting thickness confirmation from Factory 1 and final upload of the revised factory spec sheet.',
-        tags: ['Halo', 'Factory 1', 'Needs review', 'Oval'],
-        metrics: [
-          { value: '2', label: 'Suppliers linked' },
-          { value: 'v07', label: 'Current revision' },
-          { value: 'Mar 16', label: 'Last updated' }
-        ],
-        meta: [
-          { label: 'Product Family', value: 'Engagement · Halo' },
-          { label: 'Primary Supplier', value: 'Factory 1' },
-          { label: 'Revision', value: 'v07 · Pending review' },
-          { label: 'Linked Assets', value: 'Spec draft, CAD, images' }
-        ],
-        detail: {
-          subtitle: 'Oval halo template with petite shoulders and pending Factory 1 thickness signoff.',
-          badges: ['Review required', 'Center oval only', 'Wedding band pairing'],
-          stats: [
-            { value: '1.65mm', label: 'Current shoulder thickness' },
-            { value: '2', label: 'Suppliers engaged' },
-            { value: '1 blocker', label: 'Approval blockers' }
-          ],
-          tabs: {
-            specifications: {
-              title: 'Specifications',
-              copy: 'The petite halo master is nearly complete but still waiting on final manufacturing thickness confirmation.',
-              cards: [
-                { label: 'Center shape', value: 'Oval 7x5 and 8x6' },
-                { label: 'Halo style', value: 'Micro halo with shared prongs' },
-                { label: 'Sizing rule', value: 'US 4–8.5 standard' }
-              ],
-              notes: ['Factory 1 needs to confirm post-polish shoulder minimum of 1.7mm.', 'Gallery rail height already approved.']
-            },
-            suppliers: {
-              title: 'Supplier notes',
-              copy: 'Factory 1 is primary and requires one more technical review; alternate supplier already aligned.',
-              cards: [
-                { label: 'Primary', value: 'Factory 1 · awaiting thickness check' },
-                { label: 'Secondary', value: 'Factory 2 · reviewed CAD' },
-                { label: 'Escalation', value: 'Supplier engineering review' }
-              ],
-              notes: ['Factory 1 due date is March 21, 2026.', 'Factory 2 can start once final spec PDF is uploaded.']
-            },
-            assets: {
-              title: 'Linked assets',
-              copy: 'The draft packet is present, but the final supplier-ready specification file is still missing.',
-              cards: [
-                { label: 'Spec sheet', value: 'Draft only' },
-                { label: 'CAD package', value: 'Current review set' },
-                { label: 'Reference imagery', value: 'Render set approved' }
-              ],
-              notes: ['Upload final spec after Factory 1 confirms thickness.', 'Current renders are already customer-facing quality.']
-            },
-            history: {
-              title: 'Revision history',
-              copy: 'Recent changes tightened the halo seat and reduced gallery weight.',
-              cards: [
-                { label: 'v07', value: 'Pending thickness confirmation' },
-                { label: 'v06', value: 'Updated halo spacing' },
-                { label: 'v05', value: 'Reduced gallery weight' }
-              ],
-              notes: ['Owner: Ava Patel.', 'Review blockers limited to supplier confirmation.']
-            }
-          },
-          side: {
-            readiness: ['Waiting on supplier confirmation', 'Draft spec attached', 'Review workflow active'],
-            nextSteps: ['Collect Factory 1 signoff', 'Upload final PDF', 'Promote to in-use once approved']
-          }
-        }
-      },
-      {
-        id: 'CUSTOM-022',
-        name: 'Classic Comfort Band',
-        status: 'draft',
-        statusLabel: 'Draft',
-        statusClass: 'status-draft',
-        family: 'Wedding · Plain Band',
-        collection: 'Core Wedding',
-        category: 'Wedding Band',
-        supplier: 'Factory 1',
-        supplierCount: 1,
-        revision: 'v03',
-        updatedLabel: 'Mar 12, 2026',
-        updatedSort: '2026-03-12',
-        summary: 'Wedding band master in draft with sizing complete and finishing notes ready for costing alignment.',
-        tags: ['Wedding', 'Plain band', 'Draft', 'Comfort fit'],
-        metrics: [
-          { value: '1', label: 'Supplier linked' },
-          { value: 'v03', label: 'Current revision' },
-          { value: 'Mar 12', label: 'Last updated' }
-        ],
-        meta: [
-          { label: 'Product Family', value: 'Wedding · Plain Band' },
-          { label: 'Primary Supplier', value: 'Factory 1' },
-          { label: 'Revision', value: 'v03 · Draft' },
-          { label: 'Linked Assets', value: 'Sizing notes, finish chart' }
-        ],
-        detail: {
-          subtitle: 'Comfort-fit wedding band master still in drafting before supplier costing and release.',
-          badges: ['Draft only', 'Sizing complete', 'Awaiting costing'],
-          stats: [
-            { value: '4mm', label: 'Primary width' },
-            { value: '3 finishes', label: 'Supported finishes' },
-            { value: '2 tasks', label: 'Remaining setup tasks' }
-          ],
-          tabs: {
-            specifications: {
-              title: 'Specifications',
-              copy: 'The foundational comfort band setup is complete and ready for supplier costing and material mapping.',
-              cards: [
-                { label: 'Profile', value: 'Comfort fit half-round' },
-                { label: 'Widths', value: '3mm, 4mm, 5mm' },
-                { label: 'Finish options', value: 'High polish, satin, brushed' }
-              ],
-              notes: ['Need final inside-edge comfort radius confirmation.', 'Weight targets still need supplier benchmark.']
-            },
-            suppliers: {
-              title: 'Supplier notes',
-              copy: 'Supplier assignment has not moved past internal drafting yet.',
-              cards: [
-                { label: 'Primary', value: 'Factory 1 · internal prep' },
-                { label: 'Costing', value: 'Pending external quote' },
-                { label: 'Files ready', value: 'Sizing and finish notes' }
-              ],
-              notes: ['Assign final factory after costing review.', 'No external supplier documents shared yet.']
-            },
-            assets: {
-              title: 'Linked assets',
-              copy: 'Early-stage files exist for drafting and internal review.',
-              cards: [
-                { label: 'Sizing matrix', value: 'Complete' },
-                { label: 'Finish chart', value: 'Internal draft' },
-                { label: 'Costing worksheet', value: 'Needed' }
-              ],
-              notes: ['Add cost worksheet before sending to suppliers.', 'No photography is required at this stage.']
-            },
-            history: {
-              title: 'Revision history',
-              copy: 'Changes so far have focused on sizing and finish standardization.',
-              cards: [
-                { label: 'v03', value: 'Added finish chart' },
-                { label: 'v02', value: 'Completed size matrix' },
-                { label: 'v01', value: 'Initial comfort-fit base' }
-              ],
-              notes: ['Owner: Noah Evans.', 'Still pre-supplier workflow.']
-            }
-          },
-          side: {
-            readiness: ['Draft setup only', 'Awaiting costing worksheet', 'Not yet supplier-ready'],
-            nextSteps: ['Prepare costing worksheet', 'Assign external supplier', 'Finalize weight benchmarks']
-          }
-        }
-      },
-      {
-        id: 'CUSTOM-037',
-        name: 'Three Stone Cathedral',
-        status: 'in-use',
-        statusLabel: 'In Use',
-        statusClass: 'status-in-use',
-        family: 'Engagement · Three Stone',
-        collection: 'Cathedral Collection',
-        category: 'Engagement Ring',
-        supplier: 'Factory 1',
-        supplierCount: 7,
-        revision: 'v09',
-        updatedLabel: 'Mar 10, 2026',
-        updatedSort: '2026-03-10',
-        summary: 'Production-approved cathedral ring with matched wedding band guidance and uploaded QA imagery.',
-        tags: ['Three stone', 'Factory 1', 'Cathedral', 'Approved'],
-        metrics: [
-          { value: '7', label: 'Suppliers linked' },
-          { value: 'v09', label: 'Current revision' },
-          { value: 'Mar 10', label: 'Last updated' }
-        ],
-        meta: [
-          { label: 'Product Family', value: 'Engagement · Three Stone' },
-          { label: 'Primary Supplier', value: 'Factory 1' },
-          { label: 'Revision', value: 'v09 · Approved' },
-          { label: 'Linked Assets', value: 'QA images, BOM, CAD' }
-        ],
-        detail: {
-          subtitle: 'Cathedral three-stone master with production-approved QA imagery and matched band guidance.',
-          badges: ['Production ready', 'Three-stone', 'QA locked'],
-          stats: [
-            { value: '4.8mm', label: 'Head spread' },
-            { value: '7', label: 'Suppliers linked' },
-            { value: '0 blockers', label: 'Approval blockers' }
-          ],
-          tabs: {
-            specifications: {
-              title: 'Specifications',
-              copy: 'This master is fully approved with dimensions and wedding band fit standards already confirmed.',
-              cards: [
-                { label: 'Stone layout', value: 'Round center with tapered side stones' },
-                { label: 'Band fit', value: 'Matched flush band guidance included' },
-                { label: 'Metal support', value: '14K, 18K, platinum' }
-              ],
-              notes: ['Shoulder rise locked for cathedral symmetry.', 'Band match tolerance approved in QA.']
-            },
-            suppliers: {
-              title: 'Supplier notes',
-              copy: 'Factory 1 is the primary supplier and alternates have the same approved BOM packet.',
-              cards: [
-                { label: 'Primary', value: 'Factory 1 · approved' },
-                { label: 'Alternates', value: '6 additional backups' },
-                { label: 'Documents', value: 'BOM, QA imagery, assembly notes' }
-              ],
-              notes: ['Rush orders can rotate to backup suppliers without CAD changes.', 'All suppliers aligned to revision v09.']
-            },
-            assets: {
-              title: 'Linked assets',
-              copy: 'The template includes complete QA, production, and sales-support assets.',
-              cards: [
-                { label: 'QA imagery', value: 'Uploaded and approved' },
-                { label: 'CAD package', value: 'Current production set' },
-                { label: 'Reference guide', value: 'Wedding band fit PDF' }
-              ],
-              notes: ['Asset set covers customer-facing and manufacturing needs.', 'No missing files detected.']
-            },
-            history: {
-              title: 'Revision history',
-              copy: 'Recent updates focused on side-stone seat cleanup and supplier packet consistency.',
-              cards: [
-                { label: 'v09', value: 'Aligned all supplier packets' },
-                { label: 'v08', value: 'Updated side-stone seats' },
-                { label: 'v07', value: 'Added band-fit guide' }
-              ],
-              notes: ['Owner: Elise Warren.', 'Stable production release.']
-            }
-          },
-          side: {
-            readiness: ['Supplier-ready', 'QA complete', 'Band guide attached'],
-            nextSteps: ['Monitor high-volume orders', 'Duplicate for cushion variant', 'Audit backups monthly']
-          }
-        }
-      }
-    ];
+    let masters = [];
 
     const state = {
       filter: 'all',
       search: '',
       sort: 'recent',
-      selectedId: masters[0].id,
+      selectedId: null,
       activeTab: 'specifications',
       isOverlayOpen: false,
       selectedSupplierByMaster: {}
     };
 
-    const categoryOptions = ['Engagement Ring', 'Wedding Band', 'Necklace', 'Bracelet', 'Earrings', 'Pendant', 'Custom'];
-    const finishOptions = ['High polish', 'Satin', 'Brushed', 'Matte', 'Hammered'];
-    const weightTypeOptions = ['Confirmed Weight', 'Estimated Weight', 'Target Weight', 'Sample Weight'];
-
-    const featureOptions = {
-      headStyle: ['None', 'Bezel', 'Cluster', 'Cushion Halo', 'Diamond Crown', 'Diamond Gallery', 'Double Prong', 'Four Prong', 'Halo', 'Hidden Halo', 'Kite Set', 'Milgrain', 'N/A', 'Six Prong', 'Three Stone'],
-      shankStyle: ['None', 'Beaded', 'Bezel', 'Channel', 'Chevron', 'Diamond', 'Engraved', 'Fitted', 'Floral', 'Knife Edge', 'Milgrain', 'Pavé', 'Plain', 'Prong', 'Scallop', 'Split', 'Thin', 'Twist'],
-      prongType: ['None', 'Bezel', 'Diamond Tip', 'Eagle Claw', 'Milgrain', 'Prong', 'Round', 'V-Tip'],
-      weddingBandStyle: ['None', 'Bezel', 'Channel', 'Chevron', 'Engraved', 'Fitted', 'Floral', 'Knife Edge', 'Milgrain', 'Pavé', 'Plain', 'Prong', 'Scallop', 'Twist']
-    };
+    let categoryOptions = [];
+    let finishOptions = [];
+    let weightTypeOptions = [];
+    let featureOptions = {};
 
     const draftMasters = new Map();
 
@@ -1939,7 +1600,25 @@
       }
     });
 
-    renderApp();
+    async function init() {
+      try {
+        const response = await fetch('masters.json');
+        if (!response.ok) throw new Error(`Failed to load masters.json: ${response.status}`);
+        const data = await response.json();
+        masters = data.masters;
+        categoryOptions = data.options.category;
+        finishOptions = data.options.finish;
+        weightTypeOptions = data.options.weightType;
+        featureOptions = data.options.features;
+        state.selectedId = masters[0].id;
+        renderApp();
+      } catch (err) {
+        console.error(err);
+        masterGrid.innerHTML = `<p style="padding:1rem;color:#c0392b;">Failed to load masters data. Please ensure masters.json is accessible.</p>`;
+      }
+    }
+
+    init();
   </script>
 </body>
 </html>
