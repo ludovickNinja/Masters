@@ -492,6 +492,47 @@
       align-items: center;
     }
 
+    .product-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      min-height: 52px;
+      align-items: flex-start;
+      align-content: flex-start;
+    }
+
+    .product-thumb {
+      display: block;
+      width: 52px;
+      height: 52px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1.5px solid var(--border);
+      flex-shrink: 0;
+      text-decoration: none;
+      transition: transform 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+    }
+
+    .product-thumb:hover {
+      transform: scale(1.1);
+      border-color: rgba(31, 111, 255, 0.5);
+      box-shadow: 0 4px 12px rgba(31, 111, 255, 0.18);
+      z-index: 1;
+    }
+
+    .product-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .product-links-empty {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 52px;
+    }
+
     .card-actions button {
       padding: 10px 14px;
       border-radius: 14px;
@@ -1309,7 +1350,18 @@
             </div>
             <span class="status-badge ${escapeHtml(master.statusClass)}">${escapeHtml(master.statusLabel)}</span>
           </div>
-          <p>${escapeHtml(master.summary)}</p>
+          <div class="product-links" aria-label="Linked products">
+            ${(master.products || []).slice(0, 12).map((product) => `
+              <a
+                class="product-thumb"
+                href="${escapeHtml(product.url)}"
+                title="${escapeHtml(product.brand)} · ${escapeHtml(product.sku)}"
+                aria-label="${escapeHtml(product.name)}"
+                data-product-link
+              ><img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name)}" loading="lazy" /></a>
+            `).join('')}
+            ${!(master.products && master.products.length) ? `<span class="product-links-empty">No linked products</span>` : ''}
+          </div>
           <div class="card-stats">
             ${master.metrics.map((metric) => `<div class="stat-box"><strong>${escapeHtml(metric.value)}</strong><span>${escapeHtml(metric.label)}</span></div>`).join('')}
           </div>
@@ -1323,6 +1375,10 @@
           </div>
         </button>
       `).join('');
+
+      masterGrid.querySelectorAll('[data-product-link]').forEach((link) => {
+        link.addEventListener('click', (e) => e.stopPropagation());
+      });
 
       masterGrid.querySelectorAll('.master-card').forEach((card) => {
         card.addEventListener('click', () => {

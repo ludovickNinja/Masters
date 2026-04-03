@@ -15,6 +15,14 @@
       "updatedLabel": "Mar 18, 2026",
       "updatedSort": "2026-03-18",
       "summary": "Core engagement template with hidden halo option, approved weights, and complete supplier documents.",
+      "products": [
+        { "sku": "LUM-001-14K-YG", "brand": "Lumière", "name": "Solitaire Ring 14K Yellow Gold", "image": "https://picsum.photos/seed/LUM001YG/64/64", "url": "#" },
+        { "sku": "LUM-001-18K-WG", "brand": "Lumière", "name": "Solitaire Ring 18K White Gold", "image": "https://picsum.photos/seed/LUM001WG/64/64", "url": "#" },
+        { "sku": "VJW-001-14K-WG", "brand": "Vera Jewels", "name": "Signature Solitaire 14K White Gold", "image": "https://picsum.photos/seed/VJW001WG/64/64", "url": "#" },
+        { "sku": "VJW-001-PLT", "brand": "Vera Jewels", "name": "Signature Solitaire Platinum", "image": "https://picsum.photos/seed/VJW001PT/64/64", "url": "#" },
+        { "sku": "AUG-001-14K-RG", "brand": "AuraGold", "name": "Solitaire Ring 14K Rose Gold", "image": "https://picsum.photos/seed/AUG001RG/64/64", "url": "#" },
+        { "sku": "PTC-001-14K-WG", "brand": "Petite & Co", "name": "Petite Solitaire 14K White Gold", "image": "https://picsum.photos/seed/PTC001WG/64/64", "url": "#" }
+      ],
       "tags": ["Engagement", "Factory 1", "Halo compatible", "Supplier-ready"],
       "metrics": [
         { "value": "6", "label": "Suppliers linked" },
@@ -98,6 +106,10 @@
       "updatedLabel": "Mar 16, 2026",
       "updatedSort": "2026-03-16",
       "summary": "Awaiting thickness confirmation from Factory 1 and final upload of the revised factory spec sheet.",
+      "products": [
+        { "sku": "VJW-014-14K-WG", "brand": "Vera Jewels", "name": "Petite Halo Ring 14K White Gold", "image": "https://picsum.photos/seed/VJW014WG/64/64", "url": "#" },
+        { "sku": "MRS-014-14K-RG", "brand": "Maison Rose", "name": "Petite Halo Ring 14K Rose Gold", "image": "https://picsum.photos/seed/MRS014RG/64/64", "url": "#" }
+      ],
       "tags": ["Halo", "Factory 1", "Needs review", "Oval"],
       "metrics": [
         { "value": "2", "label": "Suppliers linked" },
@@ -181,6 +193,9 @@
       "updatedLabel": "Mar 12, 2026",
       "updatedSort": "2026-03-12",
       "summary": "Wedding band master in draft with sizing complete and finishing notes ready for costing alignment.",
+      "products": [
+        { "sku": "LUM-022-14K-YG", "brand": "Lumière", "name": "Comfort Band 14K Yellow Gold", "image": "https://picsum.photos/seed/LUM022YG/64/64", "url": "#" }
+      ],
       "tags": ["Wedding", "Plain band", "Draft", "Comfort fit"],
       "metrics": [
         { "value": "1", "label": "Supplier linked" },
@@ -264,6 +279,15 @@
       "updatedLabel": "Mar 10, 2026",
       "updatedSort": "2026-03-10",
       "summary": "Production-approved cathedral ring with matched wedding band guidance and uploaded QA imagery.",
+      "products": [
+        { "sku": "LUM-037-18K-WG", "brand": "Lumière", "name": "Cathedral Three Stone 18K White Gold", "image": "https://picsum.photos/seed/LUM037WG/64/64", "url": "#" },
+        { "sku": "LUM-037-PLT", "brand": "Lumière", "name": "Cathedral Three Stone Platinum", "image": "https://picsum.photos/seed/LUM037PT/64/64", "url": "#" },
+        { "sku": "VJW-037-14K-WG", "brand": "Vera Jewels", "name": "Three Stone Ring 14K White Gold", "image": "https://picsum.photos/seed/VJW037WG/64/64", "url": "#" },
+        { "sku": "VJW-037-14K-YG", "brand": "Vera Jewels", "name": "Three Stone Ring 14K Yellow Gold", "image": "https://picsum.photos/seed/VJW037YG/64/64", "url": "#" },
+        { "sku": "AUG-037-14K-RG", "brand": "AuraGold", "name": "Three Stone Ring 14K Rose Gold", "image": "https://picsum.photos/seed/AUG037RG/64/64", "url": "#" },
+        { "sku": "PTC-037-14K-WG", "brand": "Petite & Co", "name": "Petite Three Stone 14K White Gold", "image": "https://picsum.photos/seed/PTC037WG/64/64", "url": "#" },
+        { "sku": "ATL-037-PLT", "brand": "Atlas Fine", "name": "Three Stone Ring Platinum", "image": "https://picsum.photos/seed/ATL037PT/64/64", "url": "#" }
+      ],
       "tags": ["Three stone", "Factory 1", "Cathedral", "Approved"],
       "metrics": [
         { "value": "7", "label": "Suppliers linked" },
@@ -347,6 +371,12 @@
       "updatedLabel": "Mar 20, 2026",
       "updatedSort": "2026-03-20",
       "summary": "Cushion halo engagement template with double halo option and platinum-approved tolerances.",
+      "products": [
+        { "sku": "VJW-045-14K-WG", "brand": "Vera Jewels", "name": "Cushion Halo Ring 14K White Gold", "image": "https://picsum.photos/seed/VJW045WG/64/64", "url": "#" },
+        { "sku": "VJW-045-PLT", "brand": "Vera Jewels", "name": "Cushion Halo Ring Platinum", "image": "https://picsum.photos/seed/VJW045PT/64/64", "url": "#" },
+        { "sku": "MRS-045-14K-RG", "brand": "Maison Rose", "name": "Cushion Halo Ring 14K Rose Gold", "image": "https://picsum.photos/seed/MRS045RG/64/64", "url": "#" },
+        { "sku": "AUG-045-14K-WG", "brand": "AuraGold", "name": "Cushion Halo Ring 14K White Gold", "image": "https://picsum.photos/seed/AUG045WG/64/64", "url": "#" }
+      ],
       "tags": ["Engagement", "Factory 2", "Cushion", "Halo", "Approved"],
       "metrics": [
         { "value": "4", "label": "Suppliers linked" },
@@ -430,6 +460,11 @@
       "updatedLabel": "Mar 22, 2026",
       "updatedSort": "2026-03-22",
       "summary": "Full bezel round solitaire in review with prong-free construction and partial supplier alignment.",
+      "products": [
+        { "sku": "AUG-051-14K-WG", "brand": "AuraGold", "name": "Modern Bezel Ring 14K White Gold", "image": "https://picsum.photos/seed/AUG051WG/64/64", "url": "#" },
+        { "sku": "LUM-051-18K-WG", "brand": "Lumière", "name": "Bezel Solitaire 18K White Gold", "image": "https://picsum.photos/seed/LUM051WG/64/64", "url": "#" },
+        { "sku": "VJW-051-14K-YG", "brand": "Vera Jewels", "name": "Bezel Ring 14K Yellow Gold", "image": "https://picsum.photos/seed/VJW051YG/64/64", "url": "#" }
+      ],
       "tags": ["Engagement", "Factory 1", "Bezel", "Needs review"],
       "metrics": [
         { "value": "3", "label": "Suppliers linked" },
@@ -513,6 +548,11 @@
       "updatedLabel": "Mar 14, 2026",
       "updatedSort": "2026-03-14",
       "summary": "Full-pavé wedding band master with confirmed stone count, approved setting tolerances, and active supplier set.",
+      "products": [
+        { "sku": "LUM-063-14K-WG", "brand": "Lumière", "name": "Pavé Band 14K White Gold", "image": "https://picsum.photos/seed/LUM063WG/64/64", "url": "#" },
+        { "sku": "VJW-063-14K-WG", "brand": "Vera Jewels", "name": "Pavé Wedding Band 14K White Gold", "image": "https://picsum.photos/seed/VJW063WG/64/64", "url": "#" },
+        { "sku": "MRS-063-14K-RG", "brand": "Maison Rose", "name": "Pavé Band 14K Rose Gold", "image": "https://picsum.photos/seed/MRS063RG/64/64", "url": "#" }
+      ],
       "tags": ["Wedding", "Pavé", "Factory 1", "Approved"],
       "metrics": [
         { "value": "3", "label": "Suppliers linked" },
@@ -596,6 +636,9 @@
       "updatedLabel": "Mar 25, 2026",
       "updatedSort": "2026-03-25",
       "summary": "Milgrain-edge wedding band in early draft with profile established and detail work pending supplier review.",
+      "products": [
+        { "sku": "ATL-078-14K-YG", "brand": "Atlas Fine", "name": "Milgrain Band 14K Yellow Gold", "image": "https://picsum.photos/seed/ATL078YG/64/64", "url": "#" }
+      ],
       "tags": ["Wedding", "Milgrain", "Factory 2", "Draft"],
       "metrics": [
         { "value": "1", "label": "Supplier linked" },
