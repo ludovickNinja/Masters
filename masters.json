@@ -2,7 +2,7 @@
   "masters": [
     {
       "id": "CUSTOM-001",
-      "name": "Signature Solitaire",
+      "name": "CUSTOM-001",
       "status": "in-use",
       "statusLabel": "In Use",
       "statusClass": "status-in-use",
@@ -79,13 +79,13 @@
         },
         "side": {
           "readiness": ["Production ready", "BOM confirmed", "QC imagery attached"],
-          "nextSteps": ["Duplicate for cathedral variation", "Publish to engagement collection", "Notify supplier success team"]
+          "nextSteps": ["CAD", "Casting", "Jewellers", "Setters", "Polishing", "Stamp"]
         }
       }
     },
     {
       "id": "CUSTOM-014",
-      "name": "Oval Halo Petite",
+      "name": "CUSTOM-014",
       "status": "review",
       "statusLabel": "Review",
       "statusClass": "status-review",
@@ -162,13 +162,13 @@
         },
         "side": {
           "readiness": ["Waiting on supplier confirmation", "Draft spec attached", "Review workflow active"],
-          "nextSteps": ["Collect Factory 1 signoff", "Upload final PDF", "Promote to in-use once approved"]
+          "nextSteps": ["CAD", "Casting", "Jewellers", "Setters", "Polishing", "Stamp"]
         }
       }
     },
     {
       "id": "CUSTOM-022",
-      "name": "Classic Comfort Band",
+      "name": "CUSTOM-022",
       "status": "draft",
       "statusLabel": "Draft",
       "statusClass": "status-draft",
@@ -245,13 +245,13 @@
         },
         "side": {
           "readiness": ["Draft setup only", "Awaiting costing worksheet", "Not yet supplier-ready"],
-          "nextSteps": ["Prepare costing worksheet", "Assign external supplier", "Finalize weight benchmarks"]
+          "nextSteps": ["Inventory/Blanks", "Kutez", "Polishing", "Stamp"]
         }
       }
     },
     {
       "id": "CUSTOM-037",
-      "name": "Three Stone Cathedral",
+      "name": "CUSTOM-037",
       "status": "in-use",
       "statusLabel": "In Use",
       "statusClass": "status-in-use",
@@ -327,8 +327,339 @@
           }
         },
         "side": {
-          "readiness": ["Supplier-ready", "QA complete", "Band guide attached"],
-          "nextSteps": ["Monitor high-volume orders", "Duplicate for cushion variant", "Audit backups monthly"]
+          "readiness": ["Supplier-ready", "QC complete", "Band guide attached"],
+          "nextSteps": ["CAD", "Casting", "Jewellers", "Setters", "Polishing", "Stamp"]
+        }
+      }
+    },
+    {
+      "id": "CUSTOM-045",
+      "name": "CUSTOM-045",
+      "status": "in-use",
+      "statusLabel": "In Use",
+      "statusClass": "status-in-use",
+      "family": "Engagement · Halo",
+      "collection": "Cushion Halo",
+      "category": "Engagement Ring",
+      "supplier": "Factory 2",
+      "supplierCount": 4,
+      "revision": "v06",
+      "updatedLabel": "Mar 20, 2026",
+      "updatedSort": "2026-03-20",
+      "summary": "Cushion halo engagement template with double halo option and platinum-approved tolerances.",
+      "tags": ["Engagement", "Factory 2", "Cushion", "Halo", "Approved"],
+      "metrics": [
+        { "value": "4", "label": "Suppliers linked" },
+        { "value": "v06", "label": "Current revision" },
+        { "value": "Mar 20", "label": "Last updated" }
+      ],
+      "meta": [
+        { "label": "Product Family", "value": "Engagement · Halo" },
+        { "label": "Primary Supplier", "value": "Factory 2" },
+        { "label": "Revision", "value": "v06 · Approved" },
+        { "label": "Linked Assets", "value": "Spec sheet, BOM, renders" }
+      ],
+      "detail": {
+        "subtitle": "Cushion halo engagement template with double halo option and platinum-ready construction.",
+        "badges": ["Production ready", "Platinum approved", "14K / 18K"],
+        "stats": [
+          { "value": "2.10ct", "label": "Center stone guide" },
+          { "value": "2.30mm", "label": "Shank width" },
+          { "value": "5 days", "label": "Avg supplier lead time" }
+        ],
+        "tabs": {
+          "specifications": {
+            "title": "Specifications",
+            "copy": "Approved cushion halo master with double halo variant and confirmed platinum tolerances.",
+            "cards": [
+              { "label": "Center shape", "value": "Cushion 8x8 and 9x9" },
+              { "label": "Halo style", "value": "Single and double halo approved" },
+              { "label": "Sizing rule", "value": "US 4–9 with half sizes" }
+            ],
+            "notes": ["Double halo requires 0.2mm additional depth allowance.", "Platinum casting adds 5% weight to BOM targets."]
+          },
+          "suppliers": {
+            "title": "Supplier notes",
+            "copy": "Factory 2 is primary with three alternates holding current production files.",
+            "cards": [
+              { "label": "Primary", "value": "Factory 2 · approved" },
+              { "label": "Alternates", "value": "3 backup suppliers" },
+              { "label": "Documents", "value": "BOM, QA imagery, spec sheet" }
+            ],
+            "notes": ["All suppliers have revision v06 spec packets.", "Platinum orders routed to Factory 2 only."]
+          },
+          "assets": {
+            "title": "Linked assets",
+            "copy": "Full production asset set including platinum-specific dimension callouts.",
+            "cards": [
+              { "label": "Spec sheet", "value": "Approved PDF" },
+              { "label": "CAD package", "value": "3DM + STL" },
+              { "label": "Renders", "value": "Customer-facing set" }
+            ],
+            "notes": ["Renders approved for marketing use.", "CAD includes both single and double halo variants."]
+          },
+          "history": {
+            "title": "Revision history",
+            "copy": "Recent revisions confirmed platinum tolerances and double halo spacing.",
+            "cards": [
+              { "label": "v06", "value": "Platinum tolerance approval" },
+              { "label": "v05", "value": "Added double halo variant" },
+              { "label": "v04", "value": "Revised cushion seat depth" }
+            ],
+            "notes": ["Owner: Mia Chen.", "Stable release with no open blockers."]
+          }
+        },
+        "side": {
+          "readiness": ["Production ready", "BOM confirmed", "Platinum approved"],
+          "nextSteps": ["CAD", "Casting", "Jewellers", "Setters", "Polishing", "Stamp"]
+        }
+      }
+    },
+    {
+      "id": "CUSTOM-051",
+      "name": "CUSTOM-051",
+      "status": "review",
+      "statusLabel": "Review",
+      "statusClass": "status-review",
+      "family": "Engagement · Bezel",
+      "collection": "Modern Bezel",
+      "category": "Engagement Ring",
+      "supplier": "Factory 1",
+      "supplierCount": 3,
+      "revision": "v04",
+      "updatedLabel": "Mar 22, 2026",
+      "updatedSort": "2026-03-22",
+      "summary": "Full bezel round solitaire in review with prong-free construction and partial supplier alignment.",
+      "tags": ["Engagement", "Factory 1", "Bezel", "Needs review"],
+      "metrics": [
+        { "value": "3", "label": "Suppliers linked" },
+        { "value": "v04", "label": "Current revision" },
+        { "value": "Mar 22", "label": "Last updated" }
+      ],
+      "meta": [
+        { "label": "Product Family", "value": "Engagement · Bezel" },
+        { "label": "Primary Supplier", "value": "Factory 1" },
+        { "label": "Revision", "value": "v04 · Pending review" },
+        { "label": "Linked Assets", "value": "Draft spec, CAD" }
+      ],
+      "detail": {
+        "subtitle": "Full bezel solitaire template with contemporary profile pending final supplier sign-off.",
+        "badges": ["Review required", "Prong-free", "Round center"],
+        "stats": [
+          { "value": "1.50ct", "label": "Center stone guide" },
+          { "value": "2.00mm", "label": "Shank width" },
+          { "value": "2 blockers", "label": "Approval blockers" }
+        ],
+        "tabs": {
+          "specifications": {
+            "title": "Specifications",
+            "copy": "Bezel construction master pending wall thickness confirmation from Factory 1.",
+            "cards": [
+              { "label": "Setting style", "value": "Full bezel, flush profile" },
+              { "label": "Metal support", "value": "14K, 18K" },
+              { "label": "Sizing rule", "value": "US 4–9 with half sizes" }
+            ],
+            "notes": ["Bezel wall thickness minimum 0.9mm post-polish required.", "Inside profile curvature to be confirmed by Factory 1."]
+          },
+          "suppliers": {
+            "title": "Supplier notes",
+            "copy": "Factory 1 is reviewing bezel wall tolerances; two alternates are on standby.",
+            "cards": [
+              { "label": "Primary", "value": "Factory 1 · technical review" },
+              { "label": "Alternates", "value": "2 suppliers on standby" },
+              { "label": "Blockers", "value": "Wall thickness + inner curve" }
+            ],
+            "notes": ["Factory 1 feedback expected March 28, 2026.", "Alternates will not be briefed until primary approval."]
+          },
+          "assets": {
+            "title": "Linked assets",
+            "copy": "Draft spec and current CAD files are uploaded; final versions pending review outcome.",
+            "cards": [
+              { "label": "Spec sheet", "value": "Draft" },
+              { "label": "CAD package", "value": "Review set" },
+              { "label": "Reference imagery", "value": "Not yet required" }
+            ],
+            "notes": ["Final spec to be issued once Factory 1 confirms tolerances.", "Renders to follow after approval."]
+          },
+          "history": {
+            "title": "Revision history",
+            "copy": "Early-stage revisions refining bezel profile and shank proportions.",
+            "cards": [
+              { "label": "v04", "value": "Submitted for supplier review" },
+              { "label": "v03", "value": "Adjusted shank taper" },
+              { "label": "v02", "value": "Refined bezel wall angle" }
+            ],
+            "notes": ["Owner: Ava Patel.", "Review expected to close within one week."]
+          }
+        },
+        "side": {
+          "readiness": ["Review in progress", "Draft spec attached", "Awaiting supplier feedback"],
+          "nextSteps": ["CAD", "Casting", "Jewellers", "Setters", "Polishing", "Stamp"]
+        }
+      }
+    },
+    {
+      "id": "CUSTOM-063",
+      "name": "CUSTOM-063",
+      "status": "in-use",
+      "statusLabel": "In Use",
+      "statusClass": "status-in-use",
+      "family": "Wedding · Pavé Band",
+      "collection": "Pavé Wedding",
+      "category": "Wedding Band",
+      "supplier": "Factory 1",
+      "supplierCount": 3,
+      "revision": "v08",
+      "updatedLabel": "Mar 14, 2026",
+      "updatedSort": "2026-03-14",
+      "summary": "Full-pavé wedding band master with confirmed stone count, approved setting tolerances, and active supplier set.",
+      "tags": ["Wedding", "Pavé", "Factory 1", "Approved"],
+      "metrics": [
+        { "value": "3", "label": "Suppliers linked" },
+        { "value": "v08", "label": "Current revision" },
+        { "value": "Mar 14", "label": "Last updated" }
+      ],
+      "meta": [
+        { "label": "Product Family", "value": "Wedding · Pavé Band" },
+        { "label": "Primary Supplier", "value": "Factory 1" },
+        { "label": "Revision", "value": "v08 · Approved" },
+        { "label": "Linked Assets", "value": "Spec sheet, stone count chart, QA images" }
+      ],
+      "detail": {
+        "subtitle": "Full-pavé wedding band template with approved stone counts and Factory 1 production clearance.",
+        "badges": ["Production ready", "Stone count confirmed", "14K / 18K"],
+        "stats": [
+          { "value": "36 stones", "label": "Standard stone count" },
+          { "value": "1.80mm", "label": "Stone diameter" },
+          { "value": "0 blockers", "label": "Approval blockers" }
+        ],
+        "tabs": {
+          "specifications": {
+            "title": "Specifications",
+            "copy": "Pavé band master is approved with locked stone count, seat depth, and claw height.",
+            "cards": [
+              { "label": "Setting style", "value": "Full pavé, shared claw" },
+              { "label": "Widths", "value": "2mm, 2.5mm, 3mm" },
+              { "label": "Stone count", "value": "30–40 depending on width" }
+            ],
+            "notes": ["Claw height maximum 0.3mm above stone girdle.", "Stone seat depth confirmed at 0.85mm."]
+          },
+          "suppliers": {
+            "title": "Supplier notes",
+            "copy": "Factory 1 is the approved primary with two confirmed alternates.",
+            "cards": [
+              { "label": "Primary", "value": "Factory 1 · approved" },
+              { "label": "Alternates", "value": "2 confirmed suppliers" },
+              { "label": "Documents", "value": "Spec sheet, stone chart, QA images" }
+            ],
+            "notes": ["All suppliers use identical stone chart per width.", "Rush orders can use any of the three suppliers."]
+          },
+          "assets": {
+            "title": "Linked assets",
+            "copy": "Complete production asset set with stone count charts per width option.",
+            "cards": [
+              { "label": "Spec sheet", "value": "Approved PDF" },
+              { "label": "Stone count chart", "value": "Per-width breakdown" },
+              { "label": "QA images", "value": "Setting and finish approved" }
+            ],
+            "notes": ["Stone chart updated for 3mm width addition in v08.", "QA imagery covers all three width options."]
+          },
+          "history": {
+            "title": "Revision history",
+            "copy": "Recent revisions expanded width options and locked final claw heights.",
+            "cards": [
+              { "label": "v08", "value": "Added 3mm width option" },
+              { "label": "v07", "value": "Locked claw height spec" },
+              { "label": "v06", "value": "Confirmed stone seat depth" }
+            ],
+            "notes": ["Owner: Elise Warren.", "Stable and production-cleared."]
+          }
+        },
+        "side": {
+          "readiness": ["Production ready", "Stone count confirmed", "QA complete"],
+          "nextSteps": ["Inventory/Blanks", "Kutez", "Polishing", "Stamp"]
+        }
+      }
+    },
+    {
+      "id": "CUSTOM-078",
+      "name": "CUSTOM-078",
+      "status": "draft",
+      "statusLabel": "Draft",
+      "statusClass": "status-draft",
+      "family": "Wedding · Milgrain Band",
+      "collection": "Heritage Wedding",
+      "category": "Wedding Band",
+      "supplier": "Factory 2",
+      "supplierCount": 1,
+      "revision": "v02",
+      "updatedLabel": "Mar 25, 2026",
+      "updatedSort": "2026-03-25",
+      "summary": "Milgrain-edge wedding band in early draft with profile established and detail work pending supplier review.",
+      "tags": ["Wedding", "Milgrain", "Factory 2", "Draft"],
+      "metrics": [
+        { "value": "1", "label": "Supplier linked" },
+        { "value": "v02", "label": "Current revision" },
+        { "value": "Mar 25", "label": "Last updated" }
+      ],
+      "meta": [
+        { "label": "Product Family", "value": "Wedding · Milgrain Band" },
+        { "label": "Primary Supplier", "value": "Factory 2" },
+        { "label": "Revision", "value": "v02 · Draft" },
+        { "label": "Linked Assets", "value": "Profile sketch, draft notes" }
+      ],
+      "detail": {
+        "subtitle": "Heritage milgrain band template in early draft phase with edge detail work still to be confirmed.",
+        "badges": ["Draft only", "Milgrain edge", "Awaiting review"],
+        "stats": [
+          { "value": "3mm", "label": "Primary width" },
+          { "value": "0.25mm", "label": "Milgrain bead size" },
+          { "value": "3 tasks", "label": "Remaining setup tasks" }
+        ],
+        "tabs": {
+          "specifications": {
+            "title": "Specifications",
+            "copy": "Early draft with milgrain profile and width range established; bead consistency pending.",
+            "cards": [
+              { "label": "Profile", "value": "Flat court with milgrain edge" },
+              { "label": "Widths", "value": "2.5mm, 3mm, 4mm" },
+              { "label": "Finish options", "value": "High polish with milgrain contrast" }
+            ],
+            "notes": ["Milgrain bead spacing must be consistent within 0.05mm.", "Edge depth to be confirmed with Factory 2."]
+          },
+          "suppliers": {
+            "title": "Supplier notes",
+            "copy": "Factory 2 assigned as draft supplier; no technical review initiated yet.",
+            "cards": [
+              { "label": "Primary", "value": "Factory 2 · draft assigned" },
+              { "label": "Status", "value": "Pre-technical review" },
+              { "label": "Files shared", "value": "Profile sketch only" }
+            ],
+            "notes": ["Factory 2 briefing scheduled for April 2026.", "Spec sheet to be prepared before briefing."]
+          },
+          "assets": {
+            "title": "Linked assets",
+            "copy": "Minimal files in place; spec and CAD work to begin after profile confirmation.",
+            "cards": [
+              { "label": "Profile sketch", "value": "Internal draft" },
+              { "label": "CAD package", "value": "Not started" },
+              { "label": "Spec sheet", "value": "Needed" }
+            ],
+            "notes": ["Begin CAD once Factory 2 confirms milgrain depth.", "Spec to follow CAD approval."]
+          },
+          "history": {
+            "title": "Revision history",
+            "copy": "Only two early revisions capturing initial design intent.",
+            "cards": [
+              { "label": "v02", "value": "Established width range" },
+              { "label": "v01", "value": "Initial milgrain profile" }
+            ],
+            "notes": ["Owner: Noah Evans.", "Early draft — no supplier workflow active."]
+          }
+        },
+        "side": {
+          "readiness": ["Draft only", "No supplier workflow", "CAD not started"],
+          "nextSteps": ["Inventory/Blanks", "Kutez", "Polishing", "Stamp"]
         }
       }
     }
